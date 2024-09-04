@@ -3,7 +3,6 @@ package webProgramming.lab1;
 public class Main {
     public static void main(String[] args) {
         Solve sl = new Solve();
-        sl.readNumbers();
-        sl.displayHappyNumbers();
+        sl.run();
     }
 }

@@ -2,7 +2,7 @@ package webProgramming.lab1;
 
 import java.util.Arrays;
 
-public class Solve {
+public class Solve implements Runnable{
     private int[] data;
     private final InputOutputTool iot;
 
@@ -10,11 +10,16 @@ public class Solve {
         iot = new InputOutputTool();
     }
 
-    public void readNumbers() {
+    public void run(){
+        readNumbers();
+        displayHappyNumbers();
+    }
+
+    private void readNumbers() {
         data = iot.readNumbers();
     }
 
-    public void displayHappyNumbers() {
+    private void displayHappyNumbers() {
         int[] temp = new int[data.length];
         int tempInd = 0;
         for (int i : data) {
