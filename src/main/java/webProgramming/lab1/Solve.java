@@ -2,7 +2,7 @@ package webProgramming.lab1;
 
 import java.util.Arrays;
 
-public class Solve implements Runnable{
+public class Solve{
     private int[] data;
     private final InputOutputTool iot;
 
@@ -41,7 +41,7 @@ public class Solve implements Runnable{
             sum += currFigure * currFigure;
             copyOfNumber /= 10;
         }
-        return (sum % 4 == 0);
+        return (sum % 4 == 0 && number != 0);
     }
 
 }
