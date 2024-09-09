@@ -9,19 +9,44 @@ public class InputOutputTool {
         reader = new Scanner(System.in);
     }
 
-    public int[] readNumbers() {
-        int n = reader.nextInt();
-        int[] buff = new int[n];
-        for (int i = 0; i < n; i++) {
-            buff[i] = reader.nextInt();
+    public int[] readNumbers(){
+        try {
+            showMessage("Введите количество чисел: ");
+            int n = Integer.parseInt(reader.nextLine());
+            if(n <= 0){
+                throw new NumberFormatException();
+            }
+            int[] buff = new int[n];
+            showMessage("Введите числа: ");
+            int indexCounter = 0;
+            for(String i: reader.nextLine().split(" ")){
+                buff[indexCounter++] = Integer.parseInt(i);
+            }
+            if(indexCounter != n){
+                throw new IndexOutOfBoundsException();
+            }
+            return buff;
+        }catch(NumberFormatException e){
+            throw new NumberFormatException("Ожидаются только целые положительные числа!");
+
+        }catch (IndexOutOfBoundsException e){
+            throw new IndexOutOfBoundsException("Неверное количество чисел! Введите n чисел в строку!");
+        }catch (Exception e){
+            throw new RuntimeException("Неизвестная ошибка!");
         }
-        return buff;
     }
 
     public void showNumbers(int[] buff) {
-        for (int i : buff) {
-            System.out.print(i + " ");
+        showMessage("Результат: ");
+        if(buff.length == 0){
+            showMessage("счастливых чисел нет");
         }
-        System.out.println();
+        for (int i : buff) {
+            showMessage(i + " ");
+        }
+    }
+
+    public void showMessage(String message){
+        System.out.print(message);
     }
 }

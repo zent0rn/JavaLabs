@@ -11,11 +11,18 @@ public class Solve{
     }
 
     public void run(){
-        readNumbers();
-        displayHappyNumbers();
+        try {
+            readNumbers();
+            displayHappyNumbers();
+        }catch(IndexOutOfBoundsException | NumberFormatException e){
+            iot.showMessage(e.getMessage() + " Повторите ввод!\n");
+            run();
+        }catch (Exception e){
+            iot.showMessage(e.getMessage() + " Фатальная ошибка!\n");
+        }
     }
 
-    private void readNumbers() {
+    private void readNumbers(){
         data = iot.readNumbers();
     }
 
