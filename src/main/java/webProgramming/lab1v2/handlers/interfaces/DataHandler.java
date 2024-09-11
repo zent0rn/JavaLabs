@@ -1,6 +1,7 @@
 package webProgramming.lab1v2.handlers.interfaces;
 
-public interface DataHandler {
-    String read();
-    void write(String string);
+import webProgramming.lab1v2.supportEntities.Number;
+
+public interface DataHandler{
+    Number[] handle(String[] strings);
 }

@@ -1,10 +1,10 @@
 package webProgramming.lab1v2.handlers.entities;
 
-import webProgramming.lab1v2.handlers.interfaces.DataHandler;
+import webProgramming.lab1v2.handlers.interfaces.IOHandler;
 
 import java.util.Scanner;
 
-public class ConsoleHandler implements DataHandler {
+public class ConsoleHandler implements IOHandler {
     Scanner _scanner;
     public ConsoleHandler(){
         _scanner = new Scanner(System.in);
