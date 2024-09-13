@@ -11,12 +11,21 @@ public class HappyNumbersService implements Service {
     private final ConsoleHandler _consoleHandler;
     private final NumbersHandler _numbersHandler;
 
+    /*
+   конструктор по умолчанию класса HappyNumbersService
+   @ param -
+   @ return -
+    */
     public HappyNumbersService(){
         _consoleHandler = new ConsoleHandler();
         _numbersHandler = new NumbersHandler();
     }
 
-
+    /*
+   метод run отвечает за пользовательский интерфейс
+   @ param -
+   @ return -
+    */
     public void run(){
         try {
             _consoleHandler.write("Введите количество чисел: ");
