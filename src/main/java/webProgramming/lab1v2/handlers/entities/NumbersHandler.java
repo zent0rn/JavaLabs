@@ -7,13 +7,14 @@ import java.util.Arrays;
 
 public class NumbersHandler implements DataHandler {
 
-    /*
-   метод handle создает массив объектов Number из входных данных
-   в виде строк, затем обрабатывает числа и получает массив счастливых чисел
-   @ param - String[] buff - массив чисел типа String
-   @ return - Arrays.copyOf(happyNumbers, countHappyNumbers) - копия массива happyNumbers
-   длинной countHappyNumbers
-    */
+
+    /**
+     * метод handle создает массив объектов Number из входных данных
+     * в виде строк, затем обрабатывает числа и получает массив счастливых чисел
+     * @param buff массив чисел, которые вводил пользователь типа String
+     * @return - Arrays.copyOf(happyNumbers, countHappyNumbers) - копия
+     * массива happyNumber длиной countHappyNumbers
+     */
     @Override
     public Number[] handle(String[] buff) {
         Number[] numbers = new Number[buff.length];
