@@ -5,7 +5,7 @@ import webProgramming.lab1v2.handlers.interfaces.IOHandler;
 import java.util.Scanner;
 
 public class ConsoleHandler implements IOHandler {
-    Scanner _scanner;
+    private final Scanner _scanner;
 
     /**
      * метод создаёт объект типа Scanner
