@@ -33,7 +33,7 @@ public class HappyNumbersService implements Service {
             //если количество записанных объектов не равно
             // изначально заданному количеству чисел
             if (buff.length != countNumbers) {
-                throw new RuntimeException();
+                throw new RuntimeException("неверное количество чисел!");
             }
 
             Number[] happyNumbers = _numbersHandler.handle(buff);
@@ -45,7 +45,7 @@ public class HappyNumbersService implements Service {
             }
 
         } catch (Exception e) {
-            _consoleHandler.write("Некорректные входные данные! Повторите попытку!\n");
+            _consoleHandler.write("Некорректные входные данные!" + e.getMessage() + "Повторите попытку!\n");
             run();
         }
     }
