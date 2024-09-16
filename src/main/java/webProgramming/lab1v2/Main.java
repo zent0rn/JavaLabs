@@ -4,8 +4,9 @@ import webProgramming.lab1v2.services.entities.HappyNumbersService;
 
 public class Main {
     /**
-     * метод main является точкой входа
-     * @param args
+     * точка входа
+     *
+     * @param args параметры командной строки
      */
     public static void main(String[] args) {
         HappyNumbersService happyNumbersService = new HappyNumbersService();

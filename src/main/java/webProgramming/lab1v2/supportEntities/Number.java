@@ -4,41 +4,46 @@ public class Number {
     private int _value;
     private static final int HAPPINESS_CONDITION = 4;
 
-
     /**
-     * конструктор по умолчанию класса Number
+     * конструктор по умолчанию
      */
-    public Number(){
+    public Number() {
         _value = 0;
     }
 
     /**
-     * конструктор с параметром класса Number
-     * @param number некоторое число типа int
+     * конструктор с аргументом типа Number
+     *
+     * @param number некоторое число типа int, которое определяет
+     * значение переменной _value
      */
-    public Number(int number){
+    public Number(int number) {
         _value = number;
     }
 
     /**
-     *  конструктор с параметром класса Number
-     * @param number - некоторое число типа String
+     * конструктор с аргументом типа Number
+     *
+     * @param number - некоторое число в виде типа String, которое определяет
+     * значение переменной _value
      */
-    public Number(String number){
+    public Number(String number) {
         _value = Integer.parseInt(number);
     }
 
 
     /**
-     * геттер класса Number
-     * @return _value - поле класса Number, некоторое число
+     * метод-"геттер" класса Number
+     *
+     * @return _value - поле типа Number, некоторое число
      */
     public int getValue() {
         return _value;
     }
 
     /**
-     * сеттер класса Number
+     * метод-"сеттер" класса Number
+     *
      * @param value - некоторое число типа int
      */
     public void setValue(int value) {
@@ -46,13 +51,11 @@ public class Number {
     }
 
     /**
-     *  метод проверяет, является ли число счастливым, а именно,
-     *  кратна ли сумма его цифр значению HAPPINESS_CONDITION
-     * @return (sum % HAPPINESS_CONDITION == 0 && _value != 0) - проверка, кратна ли
-     *  сумма цифр числа значению HAPPINESS_CONDITION
-     *  и не равно ли значение поля _value 0
+     * метод для проверки числа на "счастливость"
+     *
+     * @return значение типа boolean - результат проверки числа
      */
-    public boolean checkHappiness(){
+    public boolean checkHappiness() {
         /*
         Число называется счастливым, если сумма квадратов его цифр кратна HAPPINESS_CONDITION
          */
@@ -67,9 +70,10 @@ public class Number {
     }
 
     /**
-     * метод является перегрузкой стандаратного метода, так как со стандартным методом
-     * не работает вывод, возвращает строковое представление объекта класса
-     * @return Integer.toString(_value) - строковое представление объекта класса
+     * представление объекта типа Number в виде объекта типа String для
+     * корректного вывода в консоли
+     *
+     * @return строковое представление объекта класса Number
      */
     @Override
     public String toString() {

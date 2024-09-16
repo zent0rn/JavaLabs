@@ -8,15 +8,16 @@ public class ConsoleHandler implements IOHandler {
     private final Scanner _scanner;
 
     /**
-     * метод создаёт объект типа Scanner
+     * конструктор по умолчанию
      */
-    public ConsoleHandler(){
+    public ConsoleHandler() {
         _scanner = new Scanner(System.in);
     }
 
     /**
-     * метод считывает строчку с помощью созданного объекта типа Scanner
-     * @return _scanner.nextLine() - строчка, введённая пользователем
+     * метод для чтения пользовательского ввода
+     *
+     * @return объект типа String - строка, введённая пользователем
      */
     @Override
     public String read() {
@@ -24,11 +25,12 @@ public class ConsoleHandler implements IOHandler {
     }
 
     /**
-     * метод выводит на консоль строчку
-     * @param string - некоторая строка типа String
+     * метод для вывода данных
+     *
+     * @param string сообщение, которое необхоодимо вывести на консоль
      */
     @Override
-    public void write(String string){
+    public void write(String string) {
         System.out.print(string);
     }
 }

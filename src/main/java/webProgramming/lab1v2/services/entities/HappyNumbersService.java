@@ -6,24 +6,23 @@ import webProgramming.lab1v2.services.interfaces.Service;
 import webProgramming.lab1v2.supportEntities.Number;
 
 
-
 public class HappyNumbersService implements Service {
     private final ConsoleHandler _consoleHandler;
     private final NumbersHandler _numbersHandler;
 
-
     /**
-     * конструктор по умолчанию класса HappyNumbersService
+     * конструктор по умолчанию
      */
-    public HappyNumbersService(){
+    public HappyNumbersService() {
         _consoleHandler = new ConsoleHandler();
         _numbersHandler = new NumbersHandler();
     }
 
     /**
-     * метод run отвечает за пользовательский интерфейс
+     * единственный метод класса, запускает HappyNumbersService для взаимодействия с пользователем,
+     * содержит обработку некорректного ввода
      */
-    public void run(){
+    public void run() {
         try {
             _consoleHandler.write("Введите количество чисел: ");
             int countNumbers = Integer.parseInt(_consoleHandler.read());
@@ -33,7 +32,7 @@ public class HappyNumbersService implements Service {
 
             //если количество записанных объектов не равно
             // изначально заданному количеству чисел
-            if(buff.length != countNumbers){
+            if (buff.length != countNumbers) {
                 throw new RuntimeException();
             }
 
@@ -41,7 +40,7 @@ public class HappyNumbersService implements Service {
 
             //вывод на консоль счастливых чисел
             _consoleHandler.write("Счастливые числа: ");
-            for(Number happyNumber: happyNumbers){
+            for (Number happyNumber : happyNumbers) {
                 _consoleHandler.write(happyNumber + " ");
             }
 
