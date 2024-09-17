@@ -27,6 +27,10 @@ public class HappyNumbersService implements Service {
             _consoleHandler.write("Введите количество чисел: ");
             int countNumbers = Integer.parseInt(_consoleHandler.read());
 
+            if(countNumbers < 1){
+                throw new RuntimeException("неверное количество чисел!");
+            }
+
             _consoleHandler.write("Введите числа: ");
             String[] buff = _consoleHandler.read().split(" ");
 
