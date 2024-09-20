@@ -1,7 +1,7 @@
 package webProgramming.lab2v1.userInterface.entities;
 
-import webProgramming.lab1v2.handlers.entities.ConsoleHandler;
-import webProgramming.lab1v2.handlers.interfaces.IOHandler;
+import webProgramming.lab2v1.handlers.entities.ConsoleHandler;
+import webProgramming.lab2v1.handlers.interfaces.IOHandler;
 import webProgramming.lab2v1.services.entities.GUIDMatcherService;
 import webProgramming.lab2v1.userInterface.interfaces.UserInteface;
 
@@ -9,11 +9,17 @@ public class GUIDMatcherUI implements UserInteface {
     private final GUIDMatcherService _GUIDMatcherService;
     private final IOHandler _ioHandler;
 
+    /**
+     * конструктор по умолчаниюя
+     */
     public GUIDMatcherUI(){
         _GUIDMatcherService = new GUIDMatcherService();
         _ioHandler = new ConsoleHandler();
     }
 
+    /**
+     * метод запускает GUIDMatcherUI для взаимодействия с пользователем
+     */
     public void run(){
         _ioHandler.write("Введите строку: ");
         String[] guidsAsStrings = _ioHandler.read().split(" ");

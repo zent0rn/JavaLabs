@@ -15,6 +15,11 @@ x56a4180-h5aa-42ec-a945-5fd21dec0538
  */
 
 public class Main {
+    /**
+     * точка входа
+     *
+     * @param args параметры командной строки
+     */
     public static void main(String[] args) {
         UserInteface userInteface = new GUIDMatcherUI();
         userInteface.run();
