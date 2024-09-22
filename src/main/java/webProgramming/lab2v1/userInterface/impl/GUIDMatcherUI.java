@@ -1,8 +1,8 @@
-package webProgramming.lab2v1.userInterface.entities;
+package webProgramming.lab2v1.userInterface.impl;
 
-import webProgramming.lab2v1.handlers.entities.ConsoleHandler;
+import webProgramming.lab2v1.handlers.impl.ConsoleHandler;
 import webProgramming.lab2v1.handlers.IOHandler;
-import webProgramming.lab2v1.services.entities.GUIDMatcherService;
+import webProgramming.lab2v1.services.impl.GUIDMatcherService;
 import webProgramming.lab2v1.userInterface.UserInterface;
 
 /**

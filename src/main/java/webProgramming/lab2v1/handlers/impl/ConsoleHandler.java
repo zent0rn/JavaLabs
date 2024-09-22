@@ -1,4 +1,4 @@
-package webProgramming.lab2v1.handlers.entities;
+package webProgramming.lab2v1.handlers.impl;
 
 import webProgramming.lab2v1.handlers.IOHandler;
 

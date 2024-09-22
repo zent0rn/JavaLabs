@@ -1,4 +1,4 @@
-package webProgramming.lab2v1.services.entities;
+package webProgramming.lab2v1.services.impl;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;

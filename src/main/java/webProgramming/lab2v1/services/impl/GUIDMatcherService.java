@@ -1,4 +1,4 @@
-package webProgramming.lab2v1.services.entities;
+package webProgramming.lab2v1.services.impl;
 
 import webProgramming.lab2v1.services.MatcherService;
 

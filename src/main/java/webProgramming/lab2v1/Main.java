@@ -1,6 +1,6 @@
 package webProgramming.lab2v1;
 
-import webProgramming.lab2v1.userInterface.entities.GUIDMatcherUI;
+import webProgramming.lab2v1.userInterface.impl.GUIDMatcherUI;
 import webProgramming.lab2v1.userInterface.UserInterface;
 
 /*
