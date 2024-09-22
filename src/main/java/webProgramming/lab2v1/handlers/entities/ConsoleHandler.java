@@ -14,21 +14,12 @@ public class ConsoleHandler implements IOHandler {
         _scanner = new Scanner(System.in);
     }
 
-    /**
-     * метод для чтения пользовательского ввода
-     *
-     * @return объект типа String - строка, введённая пользователем
-     */
+
     @Override
     public String read() {
         return _scanner.nextLine();
     }
 
-    /**
-     * метод для вывода данных
-     *
-     * @param string сообщение, которое необхоодимо вывести на консоль
-     */
     @Override
     public void write(String string) {
         System.out.print(string);

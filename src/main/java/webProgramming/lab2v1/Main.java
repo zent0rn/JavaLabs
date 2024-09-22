@@ -1,7 +1,7 @@
 package webProgramming.lab2v1;
 
 import webProgramming.lab2v1.userInterface.entities.GUIDMatcherUI;
-import webProgramming.lab2v1.userInterface.interfaces.UserInteface;
+import webProgramming.lab2v1.userInterface.interfaces.UserInterface;
 
 /*
 Valid GUIDs:
@@ -21,7 +21,7 @@ public class Main {
      * @param args параметры командной строки
      */
     public static void main(String[] args) {
-        UserInteface userInteface = new GUIDMatcherUI();
-        userInteface.run();
+        UserInterface userInterface = new GUIDMatcherUI();
+        userInterface.run();
     }
 }
