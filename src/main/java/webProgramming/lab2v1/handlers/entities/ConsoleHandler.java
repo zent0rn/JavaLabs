@@ -1,6 +1,6 @@
 package webProgramming.lab2v1.handlers.entities;
 
-import webProgramming.lab2v1.handlers.interfaces.IOHandler;
+import webProgramming.lab2v1.handlers.IOHandler;
 
 import java.util.Scanner;
 

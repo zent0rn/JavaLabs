@@ -1,4 +1,4 @@
-package webProgramming.lab2v1.handlers.interfaces;
+package webProgramming.lab2v1.handlers;
 
 public interface IOHandler {
     /**

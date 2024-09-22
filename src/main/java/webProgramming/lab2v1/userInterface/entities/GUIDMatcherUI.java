@@ -1,9 +1,9 @@
 package webProgramming.lab2v1.userInterface.entities;
 
 import webProgramming.lab2v1.handlers.entities.ConsoleHandler;
-import webProgramming.lab2v1.handlers.interfaces.IOHandler;
+import webProgramming.lab2v1.handlers.IOHandler;
 import webProgramming.lab2v1.services.entities.GUIDMatcherService;
-import webProgramming.lab2v1.userInterface.interfaces.UserInterface;
+import webProgramming.lab2v1.userInterface.UserInterface;
 
 /**
  * Класс GUIDMatcherUI позволяет

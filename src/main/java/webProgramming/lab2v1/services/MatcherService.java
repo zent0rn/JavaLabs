@@ -1,4 +1,4 @@
-package webProgramming.lab2v1.services.interfaces;
+package webProgramming.lab2v1.services;
 
 /**
  * Интерфейс MatcherService предоставляет метод match,

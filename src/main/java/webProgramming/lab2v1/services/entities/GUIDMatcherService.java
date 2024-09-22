@@ -1,6 +1,6 @@
 package webProgramming.lab2v1.services.entities;
 
-import webProgramming.lab2v1.services.interfaces.MatcherService;
+import webProgramming.lab2v1.services.MatcherService;
 
 import java.util.List;
 import java.util.regex.Matcher;

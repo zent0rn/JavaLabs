@@ -1,4 +1,4 @@
-package webProgramming.lab2v1.userInterface.interfaces;
+package webProgramming.lab2v1.userInterface;
 
 /**
  * Интерфейс UserInterface предоставляет метод run
