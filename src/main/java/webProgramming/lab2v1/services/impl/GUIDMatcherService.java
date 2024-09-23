@@ -11,17 +11,17 @@ import java.util.regex.Pattern;
  * на соответствие GUID (является ли переданная строка GUID)
  */
 public class GUIDMatcherService implements MatcherService {
-    private List<Pattern> _patternList;
+    private final List<Pattern> _patternList = List.of(
+            Pattern.compile("^[{][a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}[}]$"),
+            Pattern.compile("^[(][a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}[)]$"),
+            Pattern.compile("^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$")
+    );
+
 
     /**
      * конструктор по умолчанию
      */
     public GUIDMatcherService() {
-        _patternList = List.of(
-                Pattern.compile("^[{][a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}[}]$"),
-                Pattern.compile("^[(][a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}[)]$"),
-                Pattern.compile("^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$")
-        );
     }
 
     public boolean match(String stringToParse) {
@@ -33,23 +33,5 @@ public class GUIDMatcherService implements MatcherService {
             }
         }
         return false;
-    }
-
-    /**
-     * метод добавляет регулярное выражение в список
-     *
-     * @param regEx - строка регулярного выражения
-     */
-    public void addGUIDPattern(String regEx) {
-        _patternList.add(Pattern.compile(regEx));
-    }
-
-    /**
-     * метод удаляет регулярное выражение из списка
-     *
-     * @param index - индекс регулярного выражения, который нужно удалить
-     */
-    public void deleteGUIDPatternByIndex(int index) {
-        _patternList.remove(index);
     }
 }
