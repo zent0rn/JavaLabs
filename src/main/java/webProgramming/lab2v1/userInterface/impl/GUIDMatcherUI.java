@@ -29,8 +29,8 @@ public class GUIDMatcherUI implements UserInterface {
             if (guid.isBlank()) {
                 continue;
             }
-            boolean matchResult = _GUIDMatcherService.match(guid);
-            if (matchResult) {
+
+            if (_GUIDMatcherService.match(guid)) {
                 _ioHandler.write(guid + " удовлетворяет шаблону (является GUID)\n");
             } else {
                 _ioHandler.write(guid + " НЕ удовлетворяет шаблону (НЕ является GUID)\n");
