@@ -2,6 +2,7 @@ package webProgramming.lab2v1.userInterface.impl;
 
 import webProgramming.lab2v1.handlers.impl.ConsoleHandler;
 import webProgramming.lab2v1.handlers.IOHandler;
+import webProgramming.lab2v1.services.MatcherService;
 import webProgramming.lab2v1.services.impl.GUIDMatcherService;
 import webProgramming.lab2v1.userInterface.UserInterface;
 
@@ -11,7 +12,7 @@ import webProgramming.lab2v1.userInterface.UserInterface;
  * на соответствие GUID
  */
 public class GUIDMatcherUI implements UserInterface {
-    private final GUIDMatcherService _GUIDMatcherService;
+    private final MatcherService _GUIDMatcherService;
     private final IOHandler _ioHandler;
 
     /**
