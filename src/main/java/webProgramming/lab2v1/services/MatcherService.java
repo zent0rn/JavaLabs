@@ -11,5 +11,7 @@ public interface MatcherService {
      * @param stringToParse - проверяемая строка
      * @return true, если соответствует, false в обратном случае
      */
-    boolean match(String stringToParse);
+    static boolean match(String stringToParse) {
+        return false;
+    }
 }

@@ -11,20 +11,14 @@ import java.util.regex.Pattern;
  * на соответствие GUID (является ли переданная строка GUID)
  */
 public class GUIDMatcherService implements MatcherService {
-    private final List<Pattern> _patternList = List.of(
+    private static final List<Pattern> _patternList = List.of(
             Pattern.compile("^[{][a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}[}]$"),
             Pattern.compile("^[(][a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}[)]$"),
             Pattern.compile("^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$")
     );
 
 
-    /**
-     * конструктор по умолчанию
-     */
-    public GUIDMatcherService() {
-    }
-
-    public boolean match(String stringToParse) {
+    public static boolean match(String stringToParse) {
         Matcher matcher;
         for (Pattern pattern : _patternList) {
             matcher = pattern.matcher(stringToParse);
