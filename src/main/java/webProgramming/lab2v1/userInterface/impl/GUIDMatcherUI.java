@@ -24,11 +24,7 @@ public class GUIDMatcherUI implements UserInterface {
         _ioHandler.write("Введите строки: ");
         GUID[] guids = GUID.stringToArrayGUIDs(_ioHandler.read());
         for (GUID guid : guids) {
-            if (guid.isGUID()) {
-                _ioHandler.write(guid + " удовлетворяет шаблону (является GUID)\n");
-            } else {
-                _ioHandler.write(guid + " НЕ удовлетворяет шаблону (НЕ является GUID)\n");
-            }
+            _ioHandler.write(guid.isGUID());
         }
     }
 }
