@@ -12,7 +12,6 @@ import webProgramming.lab2v1.userInterface.UserInterface;
  */
 public class GUIDMatcherUI implements UserInterface {
     private final IOHandler _ioHandler;
-
     /**
      * конструктор по умолчанию
      */
@@ -22,9 +21,14 @@ public class GUIDMatcherUI implements UserInterface {
 
     public void run() {
         _ioHandler.write("Введите строки: ");
-        GUID[] guids = GUID.stringToArrayGUIDs(_ioHandler.read());
-        for (GUID guid : guids) {
-            _ioHandler.write(guid.isGUID());
+        try {
+            GUID[] guids = GUID.stringToArrayGUIDs(_ioHandler.read());
+            for (GUID guid : guids) {
+                _ioHandler.write(guid.isGUID());
+            }
+        }
+        catch(IllegalArgumentException e){
+            _ioHandler.write(e.getMessage());
         }
     }
 }

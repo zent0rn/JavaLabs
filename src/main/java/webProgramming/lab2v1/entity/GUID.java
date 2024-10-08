@@ -33,7 +33,7 @@ public class GUID {
      * метод используется для вывода данных о поле
      * _isGUID конкретного объекта класса GUID
      * @return - строка объекта класса GUID + пояснение:
-     * является ли данная строка GUID'ом
+     * является ли данная строка GUID
      */
     public String isGUID() {
         if (_isGUID) {
@@ -50,7 +50,10 @@ public class GUID {
      * @return guids - массив объектов класса GUID
      */
     public static GUID[] stringToArrayGUIDs(String input) {
-        String[] guidsAsStrings = input.split(" ");
+        String[] guidsAsStrings = input.replaceAll("\\s{2,}", " ").trim().split(" ");
+        if(guidsAsStrings.length == 1 && guidsAsStrings[0].isBlank()){
+            throw new IllegalArgumentException("Пустой ввод!");
+        }
         GUID[] guids = new GUID[guidsAsStrings.length];
         for (int i = 0; i < guidsAsStrings.length; i++) {
             guids[i] = new GUID(guidsAsStrings[i]);
