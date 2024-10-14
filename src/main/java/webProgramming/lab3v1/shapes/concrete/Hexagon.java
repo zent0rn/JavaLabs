@@ -3,18 +3,20 @@ package webProgramming.lab3v1.shapes.concrete;
 import webProgramming.lab3v1.shapes.Shape;
 
 public class Hexagon extends Shape {
-    public Hexagon(String nameOfShape, double square, double perimeter, double[] lengthOfSides) {
-        super(nameOfShape, square, perimeter, 6, lengthOfSides);
+    public Hexagon(String nameOfShape, double square, double perimeter, double[] lengthOfSides, double height) {
+        super(nameOfShape, square, perimeter, 6, lengthOfSides, -1);
     }
 
     @Override
     public double calculateSquare(Shape shape) {
-        return 0;
+        double square = 6 * Math.pow(_lengthOfSides[0], 2) * Math.sqrt(3) / 4;
+        return square;
     }
 
     @Override
     public double calculatePerimeter(Shape shape) {
-        return 0;
+        double perimeter = _lengthOfSides[0] * 6;
+        return perimeter;
     }
 
     @Override
@@ -22,18 +24,4 @@ public class Hexagon extends Shape {
         return new double[0];
     }
 
-    @Override
-    public double[] getAveragePerimeterOfPolygon() {
-        return new double[0];
-    }
-
-    @Override
-    public Shape[] sortShapesBySquare(Shape[] shapes) {
-        return new Shape[0];
-    }
-
-    @Override
-    public Shape findShapeByName(Shape[] shapes) {
-        return null;
-    }
 }

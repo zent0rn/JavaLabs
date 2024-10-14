@@ -1,21 +1,28 @@
 package webProgramming.lab3v1.shapes.concrete;
 
 import webProgramming.lab3v1.shapes.Shape;
-
 public class Triangle extends Shape {
 
-    public Triangle(String nameOfShape, double square, double perimeter, double[] lengthOfSides) {
-        super(nameOfShape, square, perimeter, 3, lengthOfSides);
+    public Triangle(String nameOfShape, double square, double perimeter, double[] lengthOfSides, double height) {
+        super(nameOfShape, square, perimeter, 3, lengthOfSides, height);
     }
 
+    /**
+     * метод считает площадь (считаем, что _lengthOfSides[3] - это именно основание треугольника)
+     *
+     * @param shape
+     * @return
+     */
     @Override
     public double calculateSquare(Shape shape) {
-        return 0;
+        double square = (_height * _lengthOfSides[3]) / 2;
+        return square;
     }
 
     @Override
     public double calculatePerimeter(Shape shape) {
-        return 0;
+        double perimeter = (_lengthOfSides[1] + _lengthOfSides[2] + _lengthOfSides[3]);
+        return perimeter;
     }
 
     @Override
@@ -23,18 +30,4 @@ public class Triangle extends Shape {
         return new double[0];
     }
 
-    @Override
-    public double[] getAveragePerimeterOfPolygon() {
-        return new double[0];
-    }
-
-    @Override
-    public Shape[] sortShapesBySquare(Shape[] shapes) {
-        return new Shape[0];
-    }
-
-    @Override
-    public Shape findShapeByName(Shape[] shapes) {
-        return null;
-    }
 }
