@@ -1,33 +1,45 @@
 package webProgramming.lab3v1.shapes.concrete;
 
 import webProgramming.lab3v1.shapes.Shape;
+
 public class Triangle extends Shape {
+    private final boolean _isEquilateral;
+    private final boolean _isIsosceles;
 
-    public Triangle(String nameOfShape, double square, double perimeter, double[] lengthOfSides, double height) {
-        super(nameOfShape, square, perimeter, 3, lengthOfSides, height);
+    private Triangle(String nameOfShape, double[] lengthOfSides, boolean isIsosceles, boolean isEquilateral) {
+        super(nameOfShape, lengthOfSides);
+        _isIsosceles = isIsosceles;
+        _isEquilateral = isEquilateral;
     }
 
-    /**
-     * метод считает площадь (считаем, что _lengthOfSides[3] - это именно основание треугольника)
-     *
-     * @param shape
-     * @return
-     */
-    @Override
-    public double calculateSquare(Shape shape) {
-        double square = (_height * _lengthOfSides[3]) / 2;
-        return square;
+    public static Triangle of(String nameTriangle, double[] lengthOfSides) {
+        if (lengthOfSides.length != 3) {
+            throw new IllegalArgumentException("Размер массива с длинами сторон треугольника должен быть равен 3!");
+        }
+
+        boolean isIsosceles = false;
+        boolean isEquilateral = false;
+        if(lengthOfSides[0] == lengthOfSides[1]
+                || lengthOfSides[1] == lengthOfSides[2] || lengthOfSides[0] == lengthOfSides[2]){
+            isIsosceles = true;
+        }
+        if (lengthOfSides[0] == lengthOfSides[1]
+                && lengthOfSides[1] == lengthOfSides[2] && lengthOfSides[0] == lengthOfSides[2]) {
+            isEquilateral = true;
+        }
+
+        return new Triangle(nameTriangle, lengthOfSides, isIsosceles, isEquilateral);
     }
 
     @Override
-    public double calculatePerimeter(Shape shape) {
-        double perimeter = (_lengthOfSides[1] + _lengthOfSides[2] + _lengthOfSides[3]);
-        return perimeter;
-    }
+    public double calculateSquare() {
+        double a = _lengthOfSides[0];
+        double b = _lengthOfSides[1];
+        double c = _lengthOfSides[2];
 
-    @Override
-    public double[] getSquares(Shape[] shapes) {
-        return new double[0];
+        double p = (a + b + c) / 2;
+
+        return Math.sqrt(p * (p - a) * (p - b) * (p - c));
     }
 
 }
