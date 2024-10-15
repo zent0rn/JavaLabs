@@ -6,16 +6,19 @@ import java.util.Arrays;
 
 public class Rectangle extends Shape {
     private static final int COUNT_SIDES = 4;
+
     public Rectangle(String nameOfShape, double[] lengthOfSides) {
         super(nameOfShape, COUNT_SIDES, lengthOfSides);
     }
 
-    public static Rectangle of(String nameRectangle, double[] lengthOfSides) {
-        if (lengthOfSides.length != COUNT_SIDES) {
-            throw new IllegalArgumentException("Размер массива с длинами сторон прямоугольника должен быть равен 2!");
+    public static Rectangle of(String nameRectangle, double height, double width) {
+        if (nameRectangle.isBlank()) {
+            throw new IllegalArgumentException("Название не может быть пустым!");
         }
-
-        return new Rectangle(nameRectangle, lengthOfSides);
+        if (height <= 0 || width <= 0) {
+            throw new IllegalArgumentException("Длина и ширина прямоугольника должны быть положительными!");
+        }
+        return new Rectangle(nameRectangle, new double[]{height, width, height, width});
     }
 
     @Override
