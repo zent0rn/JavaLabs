@@ -20,17 +20,17 @@ public abstract class Shape {
 
     public abstract double calculateSquare();
 
-    public double calculatePerimeter(){
+    public double calculatePerimeter() {
         double perimeter = 0;
-        for(double currentSideLength: _lengthOfSides){
+        for (double currentSideLength : _lengthOfSides) {
             perimeter += currentSideLength;
         }
         return perimeter;
     }
 
-    public static double[] getSquares(Shape[] shapes){
+    public static double[] getSquares(Shape[] shapes) {
         double[] squares = new double[shapes.length];
-        for(int i = 0; i < shapes.length; i++){
+        for (int i = 0; i < shapes.length; i++) {
             squares[i] = shapes[i]._square;
         }
         return squares;
@@ -70,4 +70,24 @@ public abstract class Shape {
     }
 
     public abstract String toString();
+
+    public String getNameOfShape() {
+        return _nameOfShape;
+    }
+
+    public double getSquare() {
+        return _square;
+    }
+
+    public double getPerimeter() {
+        return _perimeter;
+    }
+
+    public int getCountOfSides() {
+        return _countOfSides;
+    }
+
+    public double[] getLengthOfSides() {
+        return _lengthOfSides;
+    }
 }

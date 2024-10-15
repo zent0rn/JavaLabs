@@ -21,8 +21,8 @@ public class Triangle extends Shape {
 
         boolean isIsosceles = false;
         boolean isEquilateral = false;
-        if(lengthOfSides[0] == lengthOfSides[1]
-                || lengthOfSides[1] == lengthOfSides[2] || lengthOfSides[0] == lengthOfSides[2]){
+        if (lengthOfSides[0] == lengthOfSides[1]
+                || lengthOfSides[1] == lengthOfSides[2] || lengthOfSides[0] == lengthOfSides[2]) {
             isIsosceles = true;
         }
         if (lengthOfSides[0] == lengthOfSides[1]

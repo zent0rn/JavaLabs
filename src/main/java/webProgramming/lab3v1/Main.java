@@ -1,14 +1,10 @@
 package webProgramming.lab3v1;
 
-import webProgramming.lab3v1.shapes.Shape;
-import webProgramming.lab3v1.shapes.concrete.Rectangle;
-import webProgramming.lab3v1.shapes.concrete.Triangle;
+import webProgramming.lab3v1.userInterface.impl.ShapesUI;
 
 public class Main {
     public static void main(String[] args) {
-        Shape tr = Triangle.of("Мой треуг", new double[]{3, 4, 5});
-        System.out.println(tr);
-        Shape rect = Rectangle.of("Прямоугольник1", new double[]{2, 5, 2, 5});
-        System.out.println(rect);
+        ShapesUI shapesUI = new ShapesUI();
+        shapesUI.run();
     }
 }

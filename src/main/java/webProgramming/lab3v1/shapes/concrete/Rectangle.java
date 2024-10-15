@@ -1,6 +1,5 @@
 package webProgramming.lab3v1.shapes.concrete;
 
-import org.w3c.dom.css.Rect;
 import webProgramming.lab3v1.shapes.Shape;
 
 import java.util.Arrays;
@@ -12,8 +11,8 @@ public class Rectangle extends Shape {
     }
 
     public static Rectangle of(String nameRectangle, double[] lengthOfSides) {
-        if (lengthOfSides.length != 4) {
-            throw new IllegalArgumentException("Размер массива с длинами сторон прямоугольника должен быть равен 4!");
+        if (lengthOfSides.length != 2) {
+            throw new IllegalArgumentException("Размер массива с длинами сторон прямоугольника должен быть равен 2!");
         }
 
         return new Rectangle(nameRectangle, lengthOfSides);
