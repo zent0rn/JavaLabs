@@ -9,10 +9,11 @@ public abstract class Shape {
 
     public Shape(
             String nameOfShape,
+            int countOfSides,
             double[] lengthOfSides
     ) {
         _nameOfShape = nameOfShape;
-        _countOfSides = lengthOfSides.length;
+        _countOfSides = countOfSides;
         _lengthOfSides = lengthOfSides;
         _square = this.calculateSquare();
         _perimeter = this.calculatePerimeter();
@@ -69,7 +70,7 @@ public abstract class Shape {
         return null;
     }
 
-    public abstract String toString();
+    public abstract String getInfo();
 
     public String getNameOfShape() {
         return _nameOfShape;
