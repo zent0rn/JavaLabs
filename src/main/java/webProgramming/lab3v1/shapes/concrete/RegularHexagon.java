@@ -5,8 +5,9 @@ import webProgramming.lab3v1.shapes.Shape;
 import java.util.Arrays;
 
 public class RegularHexagon extends Shape {
+    private static final int COUNT_SIDES = 6;
     public RegularHexagon(String nameOfShape, double[] lengthOfSides) {
-        super(nameOfShape, lengthOfSides);
+        super(nameOfShape, COUNT_SIDES, lengthOfSides);
     }
 
     public static RegularHexagon of(String nameRegularHexagon, double[] lengthOfSides) {
@@ -23,7 +24,7 @@ public class RegularHexagon extends Shape {
     }
 
     @Override
-    public String toString() {
+    public String getInfo() {
         StringBuilder repr = new StringBuilder();
         repr.append("RegularHexagon{_nameOfShape='").append(_nameOfShape).append('\'').append(", _square=")
                 .append(_square).append(", _perimeter=").append(_perimeter).append(", _countOfSides=")
