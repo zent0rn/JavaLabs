@@ -7,6 +7,8 @@ import webProgramming.lab3v1.shapes.concrete.Triangle;
 public class Main {
     public static void main(String[] args) {
         Shape tr = Triangle.of("Мой треуг", new double[]{3, 4, 5});
-        Shape rect = Rectangle.of("Прямоугольник1", new double[]{2, 3, 4});
+        System.out.println(tr);
+        Shape rect = Rectangle.of("Прямоугольник1", new double[]{2, 5, 2, 5});
+        System.out.println(rect);
     }
 }

@@ -2,6 +2,8 @@ package webProgramming.lab3v1.shapes.concrete;
 
 import webProgramming.lab3v1.shapes.Shape;
 
+import java.util.Arrays;
+
 public class Triangle extends Shape {
     private final boolean _isEquilateral;
     private final boolean _isIsosceles;
@@ -42,4 +44,13 @@ public class Triangle extends Shape {
         return Math.sqrt(p * (p - a) * (p - b) * (p - c));
     }
 
+    @Override
+    public String toString() {
+        StringBuilder repr = new StringBuilder();
+        repr.append("Triangle{_isEquilateral=").append(_isEquilateral).append(", _isIsosceles=").append(_isIsosceles)
+                .append(", _nameOfShape='").append(_nameOfShape).append('\'').append(", _square=").append(_square)
+                .append(", _perimeter=").append(_perimeter).append(", _countOfSides=").append(_countOfSides)
+                .append(", _lengthOfSides=").append(Arrays.toString(_lengthOfSides)).append('}');
+        return repr.toString();
+    }
 }

@@ -2,11 +2,12 @@ package webProgramming.lab3v1.shapes.concrete;
 
 import webProgramming.lab3v1.shapes.Shape;
 
+import java.util.Arrays;
+
 public class RegularHexagon extends Shape {
     public RegularHexagon(String nameOfShape, double[] lengthOfSides) {
         super(nameOfShape, lengthOfSides);
     }
-
 
     public static RegularHexagon of(String nameRegularHexagon, double[] lengthOfSides) {
         if (lengthOfSides.length != 6) {
@@ -21,4 +22,12 @@ public class RegularHexagon extends Shape {
         return (3 * Math.pow(_lengthOfSides[0], 2) * Math.sqrt(3) / 2);
     }
 
+    @Override
+    public String toString() {
+        StringBuilder repr = new StringBuilder();
+        repr.append("RegularHexagon{_nameOfShape='").append(_nameOfShape).append('\'').append(", _square=")
+                .append(_square).append(", _perimeter=").append(_perimeter).append(", _countOfSides=")
+                .append(_countOfSides).append(", _lengthOfSides=").append(Arrays.toString(_lengthOfSides)).append('}');
+        return repr.toString();
+    }
 }

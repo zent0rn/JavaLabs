@@ -3,6 +3,8 @@ package webProgramming.lab3v1.shapes.concrete;
 import org.w3c.dom.css.Rect;
 import webProgramming.lab3v1.shapes.Shape;
 
+import java.util.Arrays;
+
 public class Rectangle extends Shape {
 
     public Rectangle(String nameOfShape, double[] lengthOfSides) {
@@ -22,4 +24,12 @@ public class Rectangle extends Shape {
         return _lengthOfSides[0] * _lengthOfSides[1];
     }
 
+    @Override
+    public String toString() {
+        StringBuilder repr = new StringBuilder();
+        repr.append("Rectangle{_nameOfShape='").append(_nameOfShape).append('\'').append(", _square=").append(_square)
+                .append(", _perimeter=").append(_perimeter).append(", _countOfSides=").append(_countOfSides)
+                .append(", _lengthOfSides=").append(Arrays.toString(_lengthOfSides)).append('}');
+        return repr.toString();
+    }
 }

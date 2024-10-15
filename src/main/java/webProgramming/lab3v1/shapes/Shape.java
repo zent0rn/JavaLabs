@@ -69,5 +69,5 @@ public abstract class Shape {
         return null;
     }
 
-
+    public abstract String toString();
 }
