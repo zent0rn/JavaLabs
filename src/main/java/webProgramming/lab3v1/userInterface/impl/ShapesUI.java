@@ -1,7 +1,7 @@
 package webProgramming.lab3v1.userInterface.impl;
 
-import webProgramming.lab2v1.handlers.IOHandler;
-import webProgramming.lab2v1.handlers.impl.ConsoleHandler;
+import webProgramming.lab3v1.handlers.IOHandler;
+import webProgramming.lab3v1.handlers.impl.ConsoleHandler;
 import webProgramming.lab3v1.shapes.Shape;
 import webProgramming.lab3v1.shapes.concrete.Rectangle;
 import webProgramming.lab3v1.shapes.concrete.RegularHexagon;
@@ -23,10 +23,10 @@ public class ShapesUI implements UserInterface {
     }
 
     public void run() {
-        Shape triangle = Triangle.of("MyTria", new double[]{3,4,5});
-        Shape rectangle = Rectangle.of("MyRect", new double[]{2, 5});
-        Shape hexagon = RegularHexagon.of("MyHex", new double[]{6,6,6,6,6,6});
-        Shape hexagon2 = RegularHexagon.of("MyHex2", new double[]{4,4,4,4,4,4});
+        Shape triangle = Triangle.of("MyTria", 3,4,5);
+        Shape rectangle = Rectangle.of("MyRect", 2, 5);
+        Shape hexagon = RegularHexagon.of("MyHex", 6);
+        Shape hexagon2 = RegularHexagon.of("MyHex2", 4);
 
         //Определить площади фигур
         _ioHandler.write("Площади фигур\n");

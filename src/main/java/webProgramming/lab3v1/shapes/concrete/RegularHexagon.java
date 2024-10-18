@@ -10,12 +10,12 @@ public class RegularHexagon extends Shape {
         super(nameOfShape, COUNT_SIDES, lengthOfSides);
     }
 
-    public static RegularHexagon of(String nameRegularHexagon, double[] lengthOfSides) {
-        if (lengthOfSides.length != COUNT_SIDES) {
-            throw new IllegalArgumentException("Размер массива с длинами сторон шестиугольника должен быть равен 6!");
+    public static RegularHexagon of(String nameRegularHexagon, int side) {
+        if (nameRegularHexagon.isBlank()) {
+            throw new IllegalArgumentException("Название не может быть пустым!");
         }
 
-        return new RegularHexagon(nameRegularHexagon, lengthOfSides);
+        return new RegularHexagon(nameRegularHexagon, new double[]{side, side, side, side, side, side});
     }
 
     @Override
