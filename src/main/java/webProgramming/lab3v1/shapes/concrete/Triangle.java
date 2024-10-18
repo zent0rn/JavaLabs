@@ -2,20 +2,20 @@ package webProgramming.lab3v1.shapes.concrete;
 
 import webProgramming.lab3v1.shapes.Shape;
 
-import java.util.Arrays;
+import java.util.List;
 
 public class Triangle extends Shape {
     private static final int COUNT_SIDES = 3;
     private final boolean _isEquilateral;
     private final boolean _isIsosceles;
 
-    private Triangle(String nameOfShape, double[] lengthOfSides, boolean isIsosceles, boolean isEquilateral) {
+    private Triangle(String nameOfShape, List<Double> lengthOfSides, boolean isIsosceles, boolean isEquilateral) {
         super(nameOfShape, COUNT_SIDES, lengthOfSides);
         _isIsosceles = isIsosceles;
         _isEquilateral = isEquilateral;
     }
 
-    public static Triangle of(String nameTriangle, int a, int b, int c) {
+    public static Triangle of(String nameTriangle, double a, double b, double c) {
         if (nameTriangle.isBlank()) {
             throw new IllegalArgumentException("Название не может быть пустым!");
         }
@@ -38,14 +38,14 @@ public class Triangle extends Shape {
             isEquilateral = true;
         }
 
-        return new Triangle(nameTriangle, new double[]{a, b, c}, isIsosceles, isEquilateral);
+        return new Triangle(nameTriangle, List.of(a, b, c), isIsosceles, isEquilateral);
     }
 
     @Override
     public double calculateSquare() {
-        double a = _lengthOfSides[0];
-        double b = _lengthOfSides[1];
-        double c = _lengthOfSides[2];
+        double a = _lengthOfSides.get(0);
+        double b = _lengthOfSides.get(1);
+        double c = _lengthOfSides.get(2);
 
         double p = (a + b + c) / 2;
 
@@ -58,7 +58,7 @@ public class Triangle extends Shape {
         repr.append("Triangle{_isEquilateral=").append(_isEquilateral).append(", _isIsosceles=").append(_isIsosceles)
                 .append(", _nameOfShape='").append(_nameOfShape).append('\'').append(", _square=").append(_square)
                 .append(", _perimeter=").append(_perimeter).append(", _countOfSides=").append(_countOfSides)
-                .append(", _lengthOfSides=").append(Arrays.toString(_lengthOfSides)).append('}');
+                .append(", _lengthOfSides=").append(_lengthOfSides.toString()).append('}');
         return repr.toString();
     }
 }
