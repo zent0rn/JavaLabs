@@ -3,11 +3,12 @@ package webProgramming.lab3v1.shapes.concrete;
 import webProgramming.lab3v1.shapes.Shape;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class Rectangle extends Shape {
     private static final int COUNT_SIDES = 4;
 
-    public Rectangle(String nameOfShape, double[] lengthOfSides) {
+    public Rectangle(String nameOfShape, List<Double> lengthOfSides) {
         super(nameOfShape, COUNT_SIDES, lengthOfSides);
     }
 
@@ -18,12 +19,12 @@ public class Rectangle extends Shape {
         if (height <= 0 || width <= 0) {
             throw new IllegalArgumentException("Длина и ширина прямоугольника должны быть положительными!");
         }
-        return new Rectangle(nameRectangle, new double[]{height, width, height, width});
+        return new Rectangle(nameRectangle, List.of(height, width, height, width));
     }
 
     @Override
     public double calculateSquare() {
-        return _lengthOfSides[0] * _lengthOfSides[1];
+        return _lengthOfSides.get(0) * _lengthOfSides.get(1);
     }
 
     @Override
@@ -31,7 +32,7 @@ public class Rectangle extends Shape {
         StringBuilder repr = new StringBuilder();
         repr.append("Rectangle{_nameOfShape='").append(_nameOfShape).append('\'').append(", _square=").append(_square)
                 .append(", _perimeter=").append(_perimeter).append(", _countOfSides=").append(_countOfSides)
-                .append(", _lengthOfSides=").append(Arrays.toString(_lengthOfSides)).append('}');
+                .append(", _lengthOfSides=").append(_lengthOfSides.toString()).append('}');
         return repr.toString();
     }
 }
