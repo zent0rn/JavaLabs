@@ -17,6 +17,7 @@ public class MainState implements State {
             }
             case '2' -> {
                 shapesUI.setMenu(new GetInfoMenu());
+                shapesUI.setState(new GetInfoState());
             }
             case '3' -> {
                 shapesUI.getIoHandler().write("Средний периметр фигур с количеством сторон больше 5: " +

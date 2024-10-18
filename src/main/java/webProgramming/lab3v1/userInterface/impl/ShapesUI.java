@@ -65,10 +65,10 @@ public class ShapesUI implements UserInterface {
             if(command == 'q'){
                 break;
             }
+
             _state.handleState(this, command);
         }while(true);
         _ioHandler.write("Работа завершена!");
-        System.out.println(_shapeStorage.getStorage());
     }
 
     public void setMenu(Menu menu) {
