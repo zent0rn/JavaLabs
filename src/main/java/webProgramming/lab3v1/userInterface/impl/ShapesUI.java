@@ -8,6 +8,8 @@ import webProgramming.lab3v1.shapes.concrete.RegularHexagon;
 import webProgramming.lab3v1.shapes.concrete.Triangle;
 import webProgramming.lab3v1.userInterface.UserInterface;
 
+import java.util.List;
+
 /**
  * Класс ShapesUI позволяет
  * взаимодействовать с пользователем для работы с
@@ -36,7 +38,7 @@ public class ShapesUI implements UserInterface {
         _ioHandler.write(hexagon2.getNameOfShape() + ": " + hexagon2.getSquare() + "\n");
 
         //Определить средний размер периметра для фигур с количеством сторон больше 5
-        Shape[] shapes = new Shape[]{triangle, rectangle, hexagon, hexagon2};
+        List<Shape> shapes = List.of(triangle, rectangle, hexagon, hexagon2);
         _ioHandler.write("Средний периметр: " + Shape.getAveragePerimeterOfPolygon(shapes) + "\n");
 
         //Упорядочить массив по возрастанию площади
