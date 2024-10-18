@@ -15,10 +15,18 @@ public class Triangle extends Shape {
         _isEquilateral = isEquilateral;
     }
 
-    public static Triangle of(String nameTriangle, double a, double b, double c) {
+    public static Triangle of(String nameTriangle, List<Double> sides) {
         if (nameTriangle.isBlank()) {
             throw new IllegalArgumentException("Название не может быть пустым!");
         }
+        if (sides.size() != 3) {
+            throw new IllegalArgumentException("Для треугольника необходимы длины 3-х сторон");
+        }
+
+        double a = sides.get(0);
+        double b = sides.get(1);
+        double c = sides.get(2);
+
         double sum1 = a + b;
         double sum2 = a + c;
         double sum3 = b + c;

@@ -11,11 +11,14 @@ public class RegularHexagon extends Shape {
         super(nameOfShape, COUNT_SIDES, lengthOfSides);
     }
 
-    public static RegularHexagon of(String nameRegularHexagon, double side) {
+    public static RegularHexagon of(String nameRegularHexagon, List<Double> sides) {
         if (nameRegularHexagon.isBlank()) {
             throw new IllegalArgumentException("Название не может быть пустым!");
         }
-
+        if(sides.size() != 1){
+            throw new IllegalArgumentException("Для правильного пятиугольника необходима длина только одной стороны!");
+        }
+        double side = sides.getFirst();
         return new RegularHexagon(nameRegularHexagon, List.of(side, side, side, side, side, side));
     }
 

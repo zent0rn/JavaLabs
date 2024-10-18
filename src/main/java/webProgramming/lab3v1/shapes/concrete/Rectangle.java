@@ -12,10 +12,18 @@ public class Rectangle extends Shape {
         super(nameOfShape, COUNT_SIDES, lengthOfSides);
     }
 
-    public static Rectangle of(String nameRectangle, double height, double width) {
+    public static Rectangle of(String nameRectangle, List<Double> sides) {
         if (nameRectangle.isBlank()) {
             throw new IllegalArgumentException("Название не может быть пустым!");
         }
+
+        if (sides.size() != 2) {
+            throw new IllegalArgumentException("Для прямоугольника необходимо ввести высоту и ширину");
+        }
+
+        double height = sides.get(0);
+        double width = sides.get(1);
+
         if (height <= 0 || width <= 0) {
             throw new IllegalArgumentException("Длина и ширина прямоугольника должны быть положительными!");
         }
