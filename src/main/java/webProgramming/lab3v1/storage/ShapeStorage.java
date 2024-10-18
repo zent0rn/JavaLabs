@@ -27,4 +27,8 @@ public class ShapeStorage {
     public void removeShapeByObject(Shape shape) {
         storage.remove(shape);
     }
+
+    public List<Shape> getStorage(){
+        return storage;
+    }
 }

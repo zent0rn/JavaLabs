@@ -2,14 +2,32 @@ package webProgramming.lab3v1.userInterface.impl;
 
 import webProgramming.lab3v1.handlers.IOHandler;
 import webProgramming.lab3v1.handlers.impl.ConsoleHandler;
+import webProgramming.lab3v1.menus.Menu;
+import webProgramming.lab3v1.menus.impl.MainMenu;
 import webProgramming.lab3v1.shapes.Shape;
-import webProgramming.lab3v1.shapes.concrete.Rectangle;
-import webProgramming.lab3v1.shapes.concrete.RegularHexagon;
-import webProgramming.lab3v1.shapes.concrete.Triangle;
+import webProgramming.lab3v1.state.State;
+import webProgramming.lab3v1.state.impl.MainState;
+import webProgramming.lab3v1.storage.ShapeStorage;
 import webProgramming.lab3v1.userInterface.UserInterface;
-
-import java.util.List;
-
+/*
+[1] Создать фигуру
+    [1.1] Создать треугольник
+    [1.2] Создать прямоугольник
+    [1.3] Создать правильный шестиугольник
+        [1.3.1] Введите название
+        [1.3.2] Введите длину стороны
+[2] Вывести информацию
+    [2.1] Вывести информацию о фигуре
+        [2.1.1] Введите индекс фигуры
+        [2.1.2] Введите название фигуры
+    [2.2] Вывести информацию о площадях фигур
+    [2.3] Вывести всю информацию о всех фигурах
+[3] Определить средний размер периметра фигур с количеством сторон больше 5
+[4] Упорядочить массив по возрастанию площади
+[5] Изменить свойство фигуры
+    [5.1] Изменить название фигуры
+[q] Выход
+ */
 /**
  * Класс ShapesUI позволяет
  * взаимодействовать с пользователем для работы с
@@ -17,41 +35,60 @@ import java.util.List;
  */
 public class ShapesUI implements UserInterface {
     private final IOHandler _ioHandler;
+
+    private final ShapeStorage _shapeStorage;
+
+    private Menu _menu;
+
+    private State _state;
+
+    private Shape _currentShape;
+
     /**
      * конструктор по умолчанию
      */
     public ShapesUI() {
         _ioHandler = new ConsoleHandler();
+        _shapeStorage = new ShapeStorage();
+        _menu = new MainMenu();
+        _state = new MainState();
+        _currentShape = null;
     }
 
     public void run() {
-        Shape triangle = Triangle.of("MyTria", 3,4,5);
-        Shape rectangle = Rectangle.of("MyRect", 2, 5);
-        Shape hexagon = RegularHexagon.of("MyHex", 6);
-        Shape hexagon2 = RegularHexagon.of("MyHex2", 4);
+        char command;
+        do{
+            _ioHandler.write(_menu.getMenu());
 
-        //Определить площади фигур
-        _ioHandler.write("Площади фигур\n");
-        _ioHandler.write(triangle.getNameOfShape() + ": " + triangle.getSquare() + "\n");
-        _ioHandler.write(rectangle.getNameOfShape() + ": " + rectangle.getSquare() + "\n");
-        _ioHandler.write(hexagon.getNameOfShape() + ": " + hexagon.getSquare() + "\n");
-        _ioHandler.write(hexagon2.getNameOfShape() + ": " + hexagon2.getSquare() + "\n");
-
-        //Определить средний размер периметра для фигур с количеством сторон больше 5
-        List<Shape> shapes = List.of(triangle, rectangle, hexagon, hexagon2);
-        _ioHandler.write("Средний периметр: " + Shape.getAveragePerimeterOfPolygon(shapes) + "\n");
-
-        //Упорядочить массив по возрастанию площади
-        Shape.sortShapesBySquare(shapes);
-        _ioHandler.write("Отсортированный по возрастанию площади массив: \n");
-        for(Shape shape: shapes){
-            _ioHandler.write(shape.getNameOfShape() + "\n");
-        }
-
-        //Организовать поиск по названию фигуры
-        String nameToFind = "MyRect";
-        Shape foundShape = Shape.findShapeByName(shapes, nameToFind);
-        _ioHandler.write(foundShape != null ? foundShape.toString() : "Not found");
-
+            _ioHandler.write("Введите команду: ");
+            command = _ioHandler.read().charAt(0);
+            if(command == 'q'){
+                break;
+            }
+            _state.handleState(this, command);
+        }while(true);
+        _ioHandler.write("Работа завершена!");
+        System.out.println(_shapeStorage.getStorage());
     }
+
+    public void setMenu(Menu menu) {
+        this._menu = menu;
+    }
+
+    public ShapeStorage getShapeStorage() {
+        return _shapeStorage;
+    }
+
+    public IOHandler getIoHandler() {
+        return _ioHandler;
+    }
+
+    public void setCurrentShape(Shape currentShape) {
+        this._currentShape = currentShape;
+    }
+
+    public void setState(State state) {
+        this._state = state;
+    }
+
 }

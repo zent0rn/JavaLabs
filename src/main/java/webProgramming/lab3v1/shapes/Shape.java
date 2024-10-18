@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Shape {
-    protected final String _nameOfShape;
+    protected String _nameOfShape;
     protected final double _square;
     protected final double _perimeter;
     protected final int _countOfSides;
@@ -73,6 +73,14 @@ public abstract class Shape {
         return null;
     }
 
+    public static String getAllShapesInfo(List<Shape> storage) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Shape shape : storage) {
+            stringBuilder.append(shape.getInfo()).append('\n');
+        }
+        return stringBuilder.toString();
+    }
+
     public abstract String getInfo();
 
     public String getNameOfShape() {
@@ -93,5 +101,9 @@ public abstract class Shape {
 
     public List<Double> getLengthOfSides() {
         return _lengthOfSides;
+    }
+
+    public void setNameOfShape(String _nameOfShape) {
+        this._nameOfShape = _nameOfShape;
     }
 }
