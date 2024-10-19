@@ -5,8 +5,6 @@ import webProgramming.lab3v1.handlers.impl.ConsoleHandler;
 import webProgramming.lab3v1.menus.Menu;
 import webProgramming.lab3v1.menus.impl.MainMenu;
 import webProgramming.lab3v1.shapes.Shape;
-import webProgramming.lab3v1.state.State;
-import webProgramming.lab3v1.state.impl.MainState;
 import webProgramming.lab3v1.userInterface.UserInterface;
 
 import java.util.ArrayList;
@@ -20,7 +18,6 @@ import java.util.List;
         [1.3.2] Введите длину стороны
 [2] Вывести информацию
     [2.1] Вывести информацию о фигуре
-        [2.1.1] Введите индекс фигуры
         [2.1.2] Введите название фигуры
     [2.2] Вывести информацию о площадях фигур
     [2.3] Вывести всю информацию о всех фигурах
@@ -30,6 +27,7 @@ import java.util.List;
     [5.1] Изменить название фигуры
 [q] Выход
  */
+
 /**
  * Класс ShapesUI позволяет
  * взаимодействовать с пользователем для работы с
@@ -42,8 +40,6 @@ public class ShapesUI implements UserInterface {
 
     private Menu _menu;
 
-    private State _state;
-
     private Shape _currentShape;
 
     /**
@@ -53,23 +49,22 @@ public class ShapesUI implements UserInterface {
         _ioHandler = new ConsoleHandler();
         _shapeStorage = new ArrayList<>();
         _menu = new MainMenu();
-        _state = new MainState();
         _currentShape = null;
     }
 
     public void run() {
         char command;
-        do{
+        do {
             _ioHandler.write(_menu.getMenu());
 
             _ioHandler.write("Введите команду: ");
             command = _ioHandler.read().charAt(0);
-            if(command == 'q'){
+            if (command == 'q') {
                 break;
             }
 
-            _state.handleState(this, command);
-        }while(true);
+            _menu.handleMenu(this, command);
+        } while (true);
         _ioHandler.write("Работа завершена!");
     }
 
@@ -87,10 +82,6 @@ public class ShapesUI implements UserInterface {
 
     public void setCurrentShape(Shape currentShape) {
         this._currentShape = currentShape;
-    }
-
-    public void setState(State state) {
-        this._state = state;
     }
 
 }

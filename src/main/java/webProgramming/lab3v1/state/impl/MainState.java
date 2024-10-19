@@ -11,14 +11,10 @@ public class MainState implements State {
     @Override
     public void handleState(ShapesUI shapesUI, char command) {
         switch (command) {
-            case '1' -> {
-                shapesUI.setMenu(new CreateShapeMenu());
-                shapesUI.setState(new CreateShapeState());
-            }
-            case '2' -> {
-                shapesUI.setMenu(new GetInfoMenu());
-                shapesUI.setState(new GetInfoState());
-            }
+            case '1' -> shapesUI.setMenu(new CreateShapeMenu());
+
+            case '2' -> shapesUI.setMenu(new GetInfoMenu());
+
             case '3' ->
                 shapesUI.getIoHandler().write("Средний периметр фигур с количеством сторон больше 5: " +
                         Shape.getAveragePerimeterOfPolygon(shapesUI.getShapeStorage())

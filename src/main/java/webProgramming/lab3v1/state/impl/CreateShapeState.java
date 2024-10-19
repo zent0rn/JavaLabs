@@ -28,13 +28,11 @@ public class CreateShapeState implements State {
             if (Shape.findShapeByName(shapesUI.getShapeStorage(), shapeName) == null) {
                 shapesUI.getShapeStorage().add(shape);
                 shapesUI.setMenu(new MainMenu());
-                shapesUI.setState(new MainState());
             } else {
                 throw new IllegalArgumentException("Фигура с таким именем уже существует!");
             }
         } else if (command == 'n') {
             shapesUI.setMenu(new MainMenu());
-            shapesUI.setState(new MainState());
         } else {
             throw new IllegalArgumentException("Некорректный ввод!");
         }

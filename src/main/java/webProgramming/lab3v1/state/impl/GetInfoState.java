@@ -25,10 +25,8 @@ public class GetInfoState implements State {
                 }
             }case '3' ->
                 shapesUI.getIoHandler().write(Shape.getAllShapesInfo(shapesUI.getShapeStorage()));
-            case 'n' -> {
-                shapesUI.setMenu(new MainMenu());
-                shapesUI.setState(new MainState());
-            }default ->
+            case 'n' -> shapesUI.setMenu(new MainMenu());
+            default ->
                 throw new IllegalArgumentException("Некорректный ввод!");
 
         }
