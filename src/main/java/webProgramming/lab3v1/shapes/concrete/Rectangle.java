@@ -2,21 +2,22 @@ package webProgramming.lab3v1.shapes.concrete;
 
 import webProgramming.lab3v1.shapes.Shape;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class Rectangle extends Shape {
     private static final int COUNT_SIDES = 4;
 
-    public Rectangle(String nameOfShape, List<Double> lengthOfSides) {
-        super(nameOfShape, COUNT_SIDES, lengthOfSides);
+    public Rectangle(String nameOfShape, String color, List<Double> lengthOfSides) {
+        super(nameOfShape, color, COUNT_SIDES, lengthOfSides);
     }
 
-    public static Rectangle of(String nameRectangle, List<Double> sides) {
+    public static Rectangle of(String nameRectangle, String color, List<Double> sides) {
         if (nameRectangle.isBlank()) {
             throw new IllegalArgumentException("Название не может быть пустым!");
         }
-
+        if(color.isBlank()){
+            throw new IllegalArgumentException("Цвет не может быть пустым!");
+        }
         if (sides.size() != 2) {
             throw new IllegalArgumentException("Для прямоугольника необходимо ввести высоту и ширину");
         }
@@ -27,7 +28,7 @@ public class Rectangle extends Shape {
         if (height <= 0 || width <= 0) {
             throw new IllegalArgumentException("Длина и ширина прямоугольника должны быть положительными!");
         }
-        return new Rectangle(nameRectangle, List.of(height, width, height, width));
+        return new Rectangle(nameRectangle, color, List.of(height, width, height, width));
     }
 
     @Override

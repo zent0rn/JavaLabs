@@ -5,6 +5,7 @@ import java.util.List;
 
 public abstract class Shape {
     protected String _nameOfShape;
+    protected String _color;
     protected final double _square;
     protected final double _perimeter;
     protected final int _countOfSides;
@@ -12,10 +13,12 @@ public abstract class Shape {
 
     public Shape(
             String nameOfShape,
+            String color,
             int countOfSides,
             List<Double> lengthOfSides
     ) {
         _nameOfShape = nameOfShape;
+        _color = color;
         _countOfSides = countOfSides;
         _lengthOfSides = lengthOfSides;
         _square = this.calculateSquare();

@@ -1,4 +1,4 @@
-package webProgramming.lab3v1.state;
+package state;
 
 import webProgramming.lab3v1.userInterface.impl.ShapesUI;
 

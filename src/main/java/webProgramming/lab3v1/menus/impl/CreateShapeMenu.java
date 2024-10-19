@@ -28,12 +28,14 @@ public class CreateShapeMenu implements Menu {
             Shape shape = null;
             shapesUI.getIoHandler().write("Введите название фигуры: ");
             String shapeName = shapesUI.getIoHandler().read();
+            shapesUI.getIoHandler().write("Введите цвет фигуры: ");
+            String shapeColor = shapesUI.getIoHandler().read();
             shapesUI.getIoHandler().write("Введите длины фигуры: ");
             List<Double> sides = Arrays.stream(shapesUI.getIoHandler().read().split(" ")).map(Double::parseDouble).toList();
             switch (command) {
-                case '1' -> shape = Triangle.of(shapeName, sides);
-                case '2' -> shape = Rectangle.of(shapeName, sides);
-                case '3' -> shape = RegularHexagon.of(shapeName, sides);
+                case '1' -> shape = Triangle.of(shapeName, shapeColor, sides);
+                case '2' -> shape = Rectangle.of(shapeName, shapeColor, sides);
+                case '3' -> shape = RegularHexagon.of(shapeName, shapeColor, sides);
             }
             if (Shape.findShapeByName(shapesUI.getShapeStorage(), shapeName) == null) {
                 shapesUI.getShapeStorage().add(shape);

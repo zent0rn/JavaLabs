@@ -1,4 +1,4 @@
-package webProgramming.lab3v1.state.impl;
+package state.impl;
 
 import webProgramming.lab3v1.menus.impl.CreateShapeMenu;
 import webProgramming.lab3v1.menus.impl.EditShapeMenu;

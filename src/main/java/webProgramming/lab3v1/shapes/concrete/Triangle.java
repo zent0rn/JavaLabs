@@ -9,15 +9,18 @@ public class Triangle extends Shape {
     private final boolean _isEquilateral;
     private final boolean _isIsosceles;
 
-    private Triangle(String nameOfShape, List<Double> lengthOfSides, boolean isIsosceles, boolean isEquilateral) {
-        super(nameOfShape, COUNT_SIDES, lengthOfSides);
+    private Triangle(String nameOfShape, String color, List<Double> lengthOfSides, boolean isIsosceles, boolean isEquilateral) {
+        super(nameOfShape, color, COUNT_SIDES, lengthOfSides);
         _isIsosceles = isIsosceles;
         _isEquilateral = isEquilateral;
     }
 
-    public static Triangle of(String nameTriangle, List<Double> sides) {
+    public static Triangle of(String nameTriangle, String color, List<Double> sides) {
         if (nameTriangle.isBlank()) {
             throw new IllegalArgumentException("Название не может быть пустым!");
+        }
+        if(color.isBlank()){
+            throw new IllegalArgumentException("Цвет не может быть пустым!");
         }
         if (sides.size() != 3) {
             throw new IllegalArgumentException("Для треугольника необходимы длины 3-х сторон");
@@ -46,7 +49,7 @@ public class Triangle extends Shape {
             isEquilateral = true;
         }
 
-        return new Triangle(nameTriangle, List.of(a, b, c), isIsosceles, isEquilateral);
+        return new Triangle(nameTriangle, color, List.of(a, b, c), isIsosceles, isEquilateral);
     }
 
     @Override
