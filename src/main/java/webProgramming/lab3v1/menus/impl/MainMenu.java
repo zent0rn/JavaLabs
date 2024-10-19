@@ -12,7 +12,7 @@ public class MainMenu implements Menu {
                 [2] Вывести информацию
                 [3] Определить средний размер периметра фигур с количеством сторон больше 5
                 [4] Упорядочить массив по возрастанию площади
-                [5] Найти фигуру по названию
+                [5] Изменить цвет фигуры
                 [q] Выход
                 """;
     }
@@ -33,10 +33,12 @@ public class MainMenu implements Menu {
                 shapesUI.getIoHandler().write("Введите название фигуры: ");
                 String shapeName = shapesUI.getIoHandler().read();
                 Shape foundShape = Shape.findShapeByName(shapesUI.getShapeStorage(), shapeName);
-                if (foundShape != null) {
-                    shapesUI.setCurrentShape(foundShape);
-                    shapesUI.setMenu(new EditShapeMenu());
+                if(foundShape == null){
+                    throw new IllegalArgumentException("Фигура " + shapeName + " не найдена!");
                 }
+                shapesUI.getIoHandler().write("Введите новый цвет: ");
+                String newColor = shapesUI.getIoHandler().read();
+                foundShape.setColor(newColor);
             }
             case 'q' -> {
             }
