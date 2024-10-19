@@ -94,23 +94,17 @@ public abstract class Shape {
         return _square;
     }
 
-    public double getPerimeter() {
-        return _perimeter;
-    }
-
-    public int getCountOfSides() {
-        return _countOfSides;
-    }
-
-    public List<Double> getLengthOfSides() {
-        return _lengthOfSides;
-    }
-
-    public void setNameOfShape(String _nameOfShape) {
-        this._nameOfShape = _nameOfShape;
-    }
-
     public void setColor(String color) {
         this._color = color;
+    }
+
+    public static Shape editColor(List<Shape> shapeStorage, String shapeName, String newColor){
+        Shape foundShape = Shape.findShapeByName(shapeStorage, shapeName);
+        if(foundShape == null){
+            throw new IllegalArgumentException("Фигура " + shapeName + " не найдена!");
+        }
+        foundShape.setColor(newColor);
+        return foundShape;
+
     }
 }
