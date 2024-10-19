@@ -14,4 +14,6 @@ public interface IOHandler {
      * @param string сообщение, которое необходимо вывести на консоль
      */
     void write(String string);
+
+    void writeLine(String string);
 }
