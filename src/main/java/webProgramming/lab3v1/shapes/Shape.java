@@ -109,4 +109,8 @@ public abstract class Shape {
     public void setNameOfShape(String _nameOfShape) {
         this._nameOfShape = _nameOfShape;
     }
+
+    public void setColor(String color) {
+        this._color = color;
+    }
 }
