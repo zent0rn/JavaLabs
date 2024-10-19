@@ -11,24 +11,6 @@ import webProgramming.lab3v1.userInterface.UserInterface;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-/*
-[1] Создать фигуру
-    [1.1] Создать треугольник
-    [1.2] Создать прямоугольник
-    [1.3] Создать правильный шестиугольник
-        [1.3.1] Введите название
-        [1.3.2] Введите длину стороны
-[2] Вывести информацию
-    [2.1] Вывести информацию о фигуре
-        [2.1.2] Введите название фигуры
-    [2.2] Вывести информацию о площадях фигур
-    [2.3] Вывести всю информацию о всех фигурах
-[3] Определить средний размер периметра фигур с количеством сторон больше 5
-[4] Упорядочить массив по возрастанию площади
-[5] Изменить свойство фигуры
-    [5.1] Изменить название фигуры
-[q] Выход
- */
 
 /**
  * Класс ShapesUI позволяет
@@ -67,11 +49,11 @@ public class ShapesUI implements UserInterface {
             switch (command) {
                 case '1' -> manageShapeCreating();
                 case '2' -> manageDataShowing();
-                case '3' -> _ioHandler.write("Средний периметр фигур с количеством сторон больше 5: "
+                case '3' -> _ioHandler.writeLine("Средний периметр фигур с количеством сторон больше 5: "
                         + Shape.getAveragePerimeterOfPolygon(_shapeStorage));
                 case '4' -> {
                     Shape.sortShapesBySquare(_shapeStorage);
-                    _ioHandler.write(Shape.getAllShapesInfo(_shapeStorage));
+                    _ioHandler.writeLine(Shape.getAllShapesInfo(_shapeStorage));
                 }
                 case '5' -> {
                     _ioHandler.write("Введите название фигуры: ");
