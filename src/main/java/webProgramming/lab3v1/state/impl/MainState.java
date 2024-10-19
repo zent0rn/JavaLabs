@@ -19,18 +19,17 @@ public class MainState implements State {
                 shapesUI.setMenu(new GetInfoMenu());
                 shapesUI.setState(new GetInfoState());
             }
-            case '3' -> {
+            case '3' ->
                 shapesUI.getIoHandler().write("Средний периметр фигур с количеством сторон больше 5: " +
-                        Shape.getAveragePerimeterOfPolygon(shapesUI.getShapeStorage().getStorage())
+                        Shape.getAveragePerimeterOfPolygon(shapesUI.getShapeStorage())
                 );
-            }
-            case '4' -> {
-                Shape.sortShapesBySquare(shapesUI.getShapeStorage().getStorage());
-            }
+
+            case '4' ->
+                Shape.sortShapesBySquare(shapesUI.getShapeStorage());
             case '5' -> {
                 shapesUI.getIoHandler().write("Введите название фигуры: ");
                 String shapeName = shapesUI.getIoHandler().read();
-                Shape foundShape = Shape.findShapeByName(shapesUI.getShapeStorage().getStorage(), shapeName);
+                Shape foundShape = Shape.findShapeByName(shapesUI.getShapeStorage(), shapeName);
                 if (foundShape != null) {
                     shapesUI.setCurrentShape(foundShape);
                     shapesUI.setMenu(new EditShapeMenu());
@@ -38,9 +37,8 @@ public class MainState implements State {
             }
             case 'q' -> {
             }
-            default -> {
+            default ->
                 throw new IllegalArgumentException("Некорректный ввод!");
-            }
         }
     }
 }

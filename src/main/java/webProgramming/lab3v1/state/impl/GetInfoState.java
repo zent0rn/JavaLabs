@@ -14,23 +14,23 @@ public class GetInfoState implements State {
             case '1' -> {
                 shapesUI.getIoHandler().write("Введите название фигуры: ");
                 String name = shapesUI.getIoHandler().read();
-                Shape foundShape = Shape.findShapeByName(shapesUI.getShapeStorage().getStorage(), name);
+                Shape foundShape = Shape.findShapeByName(shapesUI.getShapeStorage(), name);
                 if (foundShape != null){
                     shapesUI.getIoHandler().write(foundShape.getInfo());
                 }
             }case '2' ->{
-                List<Shape> shapes = shapesUI.getShapeStorage().getStorage();
+                List<Shape> shapes = shapesUI.getShapeStorage();
                 for(Shape shape : shapes){
                     shapesUI.getIoHandler().write(shape.getNameOfShape() + ": " + shape.getSquare());
                 }
-            }case '3' -> {
-                shapesUI.getIoHandler().write(Shape.getAllShapesInfo(shapesUI.getShapeStorage().getStorage()));
-            }case 'n' -> {
+            }case '3' ->
+                shapesUI.getIoHandler().write(Shape.getAllShapesInfo(shapesUI.getShapeStorage()));
+            case 'n' -> {
                 shapesUI.setMenu(new MainMenu());
                 shapesUI.setState(new MainState());
-            }default -> {
+            }default ->
                 throw new IllegalArgumentException("Некорректный ввод!");
-            }
+
         }
     }
 }

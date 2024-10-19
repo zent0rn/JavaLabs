@@ -25,8 +25,8 @@ public class CreateShapeState implements State {
                 case '2' -> shape = Rectangle.of(shapeName, sides);
                 case '3' -> shape = RegularHexagon.of(shapeName, sides);
             }
-            if (Shape.findShapeByName(shapesUI.getShapeStorage().getStorage(), shapeName) == null) {
-                shapesUI.getShapeStorage().addShape(shape);
+            if (Shape.findShapeByName(shapesUI.getShapeStorage(), shapeName) == null) {
+                shapesUI.getShapeStorage().add(shape);
                 shapesUI.setMenu(new MainMenu());
                 shapesUI.setState(new MainState());
             } else {

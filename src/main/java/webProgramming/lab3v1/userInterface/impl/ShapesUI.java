@@ -7,8 +7,10 @@ import webProgramming.lab3v1.menus.impl.MainMenu;
 import webProgramming.lab3v1.shapes.Shape;
 import webProgramming.lab3v1.state.State;
 import webProgramming.lab3v1.state.impl.MainState;
-import webProgramming.lab3v1.storage.ShapeStorage;
 import webProgramming.lab3v1.userInterface.UserInterface;
+
+import java.util.ArrayList;
+import java.util.List;
 /*
 [1] Создать фигуру
     [1.1] Создать треугольник
@@ -36,7 +38,7 @@ import webProgramming.lab3v1.userInterface.UserInterface;
 public class ShapesUI implements UserInterface {
     private final IOHandler _ioHandler;
 
-    private final ShapeStorage _shapeStorage;
+    private List<Shape> _shapeStorage;
 
     private Menu _menu;
 
@@ -49,7 +51,7 @@ public class ShapesUI implements UserInterface {
      */
     public ShapesUI() {
         _ioHandler = new ConsoleHandler();
-        _shapeStorage = new ShapeStorage();
+        _shapeStorage = new ArrayList<>();
         _menu = new MainMenu();
         _state = new MainState();
         _currentShape = null;
@@ -75,7 +77,7 @@ public class ShapesUI implements UserInterface {
         this._menu = menu;
     }
 
-    public ShapeStorage getShapeStorage() {
+    public List<Shape> getShapeStorage() {
         return _shapeStorage;
     }
 
