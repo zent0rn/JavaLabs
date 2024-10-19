@@ -27,15 +27,18 @@ public class RegularHexagon extends Shape {
 
     @Override
     public double calculateSquare() {
-        return (3 * Math.pow(_lengthOfSides.get(0), 2) * Math.sqrt(3) / 2);
+        return (3 * Math.pow(_lengthOfSides.getFirst(), 2) * Math.sqrt(3) / 2);
     }
 
     @Override
     public String getInfo() {
-        StringBuilder repr = new StringBuilder();
-        repr.append("RegularHexagon{_nameOfShape='").append(_nameOfShape).append('\'').append(", _square=")
-                .append(_square).append(", _perimeter=").append(_perimeter).append(", _countOfSides=")
-                .append(_countOfSides).append(", _lengthOfSides=").append(_lengthOfSides.toString()).append('}');
-        return repr.toString();
+        return "RegularHexagon{" +
+                "_nameOfShape='" + _nameOfShape + '\'' +
+                ", _color='" + _color + '\'' +
+                ", _square=" + _square +
+                ", _perimeter=" + _perimeter +
+                ", _countOfSides=" + _countOfSides +
+                ", _lengthOfSides=" + _lengthOfSides +
+                '}';
     }
 }

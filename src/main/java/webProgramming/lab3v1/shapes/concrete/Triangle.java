@@ -65,11 +65,15 @@ public class Triangle extends Shape {
 
     @Override
     public String getInfo() {
-        StringBuilder repr = new StringBuilder();
-        repr.append("Triangle{_isEquilateral=").append(_isEquilateral).append(", _isIsosceles=").append(_isIsosceles)
-                .append(", _nameOfShape='").append(_nameOfShape).append('\'').append(", _square=").append(_square)
-                .append(", _perimeter=").append(_perimeter).append(", _countOfSides=").append(_countOfSides)
-                .append(", _lengthOfSides=").append(_lengthOfSides.toString()).append('}');
-        return repr.toString();
+        return "Triangle{" +
+                "_isEquilateral=" + _isEquilateral +
+                ", _isIsosceles=" + _isIsosceles +
+                ", _nameOfShape='" + _nameOfShape + '\'' +
+                ", _color='" + _color + '\'' +
+                ", _square=" + _square +
+                ", _perimeter=" + _perimeter +
+                ", _countOfSides=" + _countOfSides +
+                ", _lengthOfSides=" + _lengthOfSides +
+                '}';
     }
 }
