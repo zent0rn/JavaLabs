@@ -55,6 +55,8 @@ public class ShapesUI implements UserInterface {
     public void run() {
         char command;
         do {
+            _ioHandler.write("Фигуры: \n");
+            _ioHandler.write(Shape.getAllShapesInfo(_shapeStorage));
             _ioHandler.write(_menu.getMenu());
 
             _ioHandler.write("Введите команду: ");
