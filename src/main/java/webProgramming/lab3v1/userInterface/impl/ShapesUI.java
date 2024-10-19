@@ -78,10 +78,7 @@ public class ShapesUI implements UserInterface {
                     String shapeName = _ioHandler.read();
                     _ioHandler.write("Введите новый цвет: ");
                     String newColor = _ioHandler.read();
-
-                    Shape editedShape = Shape.editColor(_shapeStorage, shapeName, newColor);
-
-                    _ioHandler.writeLine("Фигура изменена: " + editedShape.getInfo());
+                    _ioHandler.writeLine(Shape.editColor(_shapeStorage, shapeName, newColor));
                 }
             }
         } while (true);

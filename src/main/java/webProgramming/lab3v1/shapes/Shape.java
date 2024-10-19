@@ -98,13 +98,13 @@ public abstract class Shape {
         this._color = color;
     }
 
-    public static Shape editColor(List<Shape> shapeStorage, String shapeName, String newColor){
+    public static String editColor(List<Shape> shapeStorage, String shapeName, String newColor){
         Shape foundShape = Shape.findShapeByName(shapeStorage, shapeName);
         if(foundShape == null){
             throw new IllegalArgumentException("Фигура " + shapeName + " не найдена!");
         }
         foundShape.setColor(newColor);
-        return foundShape;
+        return "Фигура изменена: " + foundShape.getInfo();
 
     }
 }
