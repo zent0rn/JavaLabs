@@ -18,8 +18,10 @@ import java.util.List;
  * классами геометрических фигур
  */
 public class ShapesUI implements UserInterface {
+    /** объект класса IOHandler */
     private final IOHandler _ioHandler;
 
+    /** Список фигур */
     private List<Shape> _shapeStorage;
 
     /**
@@ -30,43 +32,56 @@ public class ShapesUI implements UserInterface {
         _shapeStorage = new ArrayList<>();
     }
 
+    /**
+     * метод запускает пользовательский интерфейс:
+     * выводит на консоль возможные команды и обрабатывает их
+     */
     public void run() {
         char command;
         do {
-            _ioHandler.write("""
-                    [1] Создать фигуру
-                    [2] Вывести информацию
-                    [3] Определить средний размер периметра фигур с количеством сторон больше 5
-                    [4] Упорядочить массив по возрастанию площади
-                    [5] Изменить цвет фигуры
-                    [q] Выход
-                    """);
-            _ioHandler.write("Выберите команду: ");
-            command = _ioHandler.read().charAt(0);
-            if (command == 'q') {
-                break;
+            try {
+                _ioHandler.write("""
+                        [1] Создать фигуру
+                        [2] Вывести информацию
+                        [3] Определить средний размер периметра фигур с количеством сторон больше 5
+                        [4] Упорядочить массив по возрастанию площади
+                        [5] Изменить цвет фигуры
+                        [q] Выход
+                        """);
+                _ioHandler.write("Выберите команду: ");
+                command = _ioHandler.read().charAt(0);
+                if (command == 'q') {
+                    break;
+                }
+                switch (command) {
+                    case '1' -> manageShapeCreating();
+                    case '2' -> manageDataShowing();
+                    case '3' -> _ioHandler.writeLine("Средний периметр фигур с количеством сторон больше 5: "
+                            + Shape.getAveragePerimeterOfPolygon(_shapeStorage) + "\n");
+                    case '4' -> {
+                        Shape.sortShapesBySquare(_shapeStorage);
+                        _ioHandler.writeLine(Shape.getAllShapesInfo(_shapeStorage));
+                    }
+                    case '5' -> {
+                        _ioHandler.write("Введите название фигуры: ");
+                        String shapeName = _ioHandler.read();
+                        _ioHandler.write("Введите новый цвет: ");
+                        String newColor = _ioHandler.read();
+                        _ioHandler.writeLine(Shape.editColor(_shapeStorage, shapeName, newColor));
+                    }
+                }
             }
-            switch (command) {
-                case '1' -> manageShapeCreating();
-                case '2' -> manageDataShowing();
-                case '3' -> _ioHandler.writeLine("Средний периметр фигур с количеством сторон больше 5: "
-                        + Shape.getAveragePerimeterOfPolygon(_shapeStorage));
-                case '4' -> {
-                    Shape.sortShapesBySquare(_shapeStorage);
-                    _ioHandler.writeLine(Shape.getAllShapesInfo(_shapeStorage));
-                }
-                case '5' -> {
-                    _ioHandler.write("Введите название фигуры: ");
-                    String shapeName = _ioHandler.read();
-                    _ioHandler.write("Введите новый цвет: ");
-                    String newColor = _ioHandler.read();
-                    _ioHandler.writeLine(Shape.editColor(_shapeStorage, shapeName, newColor));
-                }
+            catch (Exception e) {
+                _ioHandler.write(e.getMessage());
             }
         } while (true);
         _ioHandler.write("Работа завершена!");
     }
 
+    /**
+     * метод выводит на консоль возможные команды,
+     * связанные с созданием фигур и обрабатывает их
+     */
     private void manageShapeCreating() {
         _ioHandler.write(
                 """
@@ -93,13 +108,17 @@ public class ShapesUI implements UserInterface {
             if (Shape.findShapeByName(_shapeStorage, shapeName) == null) {
                 _shapeStorage.add(shape);
             } else {
-                throw new IllegalArgumentException("Фигура с таким именем уже существует!");
+                throw new IllegalArgumentException("Фигура с таким именем уже существует!\n");
             }
         } else {
-            throw new IllegalArgumentException("Некорректный ввод");
+            throw new IllegalArgumentException("Некорректный ввод!\n");
         }
     }
 
+    /**
+     * метод выводит на консоль возможные команды,
+     * связанные с выводимой на экран информацией и обрабатывает их
+     */
     private void manageDataShowing() {
         _ioHandler.write(
                 """
@@ -127,7 +146,7 @@ public class ShapesUI implements UserInterface {
                 }
             }
             case '3' -> _ioHandler.write(Shape.getAllShapesInfo(_shapeStorage));
-            default -> throw new IllegalArgumentException("Некорректный ввод!");
+            default -> throw new IllegalArgumentException("Некорректный ввод!\n");
 
         }
     }
