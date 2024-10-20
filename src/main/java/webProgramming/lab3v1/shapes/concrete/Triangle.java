@@ -43,13 +43,13 @@ public class Triangle extends Shape {
      */
     public static Triangle of(String nameTriangle, String color, List<Double> sides) {
         if (nameTriangle.isBlank()) {
-            throw new IllegalArgumentException("Название не может быть пустым!");
+            throw new IllegalArgumentException("Название не может быть пустым!\n");
         }
         if(color.isBlank()){
-            throw new IllegalArgumentException("Цвет не может быть пустым!");
+            throw new IllegalArgumentException("Цвет не может быть пустым!\n");
         }
         if (sides.size() != 3) {
-            throw new IllegalArgumentException("Для треугольника необходимы длины 3-х сторон");
+            throw new IllegalArgumentException("Для треугольника необходимы длины 3-х сторон!\n");
         }
 
         double a = sides.get(0);
@@ -60,10 +60,10 @@ public class Triangle extends Shape {
         double sum2 = a + c;
         double sum3 = b + c;
         if (sum1 + sum2 <= sum3 || sum2 + sum3 <= sum1 || sum1 + sum3 <= sum2) {
-            throw new IllegalArgumentException("Сумма длин любых двух сторон должна быть больше длины третьей!");
+            throw new IllegalArgumentException("Сумма длин любых двух сторон должна быть больше длины третьей!\n");
         }
         if (a <= 0 || b <= 0 || c <= 0) {
-            throw new IllegalArgumentException("Длина стороны должна быть положительной!");
+            throw new IllegalArgumentException("Длина стороны должна быть положительной!\n");
         }
 
         boolean isIsosceles = false;

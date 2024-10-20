@@ -41,6 +41,9 @@ public class GetInfoMenu implements Menu {
                 if (foundShape != null) {
                     shapesUI.getIoHandler().write(foundShape.getInfo() + "\n");
                 }
+                else {
+                    throw new IllegalArgumentException("Некорректный ввод!\n");
+                }
             }
             case '2' -> {
                 List<Shape> shapes = shapesUI.getShapeStorage();
@@ -51,7 +54,7 @@ public class GetInfoMenu implements Menu {
             case '3' -> shapesUI.getIoHandler().write(Shape.getAllShapesInfo(shapesUI.getShapeStorage()));
             case 'n' -> shapesUI.setMenu(new MainMenu());
 
-            default -> throw new IllegalArgumentException("Некорректный ввод!");
+            default -> throw new IllegalArgumentException("Некорректный ввод!\n");
 
         }
     }

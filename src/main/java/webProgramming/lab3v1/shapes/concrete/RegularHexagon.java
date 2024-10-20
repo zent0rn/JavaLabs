@@ -33,13 +33,13 @@ public class RegularHexagon extends Shape {
      */
     public static RegularHexagon of(String nameRegularHexagon, String color, List<Double> sides) {
         if (nameRegularHexagon.isBlank()) {
-            throw new IllegalArgumentException("Название не может быть пустым!");
+            throw new IllegalArgumentException("Название не может быть пустым!\n");
         }
         if(color.isBlank()){
-            throw new IllegalArgumentException("Цвет не может быть пустым!");
+            throw new IllegalArgumentException("Цвет не может быть пустым!\n");
         }
         if(sides.size() != 1){
-            throw new IllegalArgumentException("Для правильного пятиугольника необходима длина только одной стороны!");
+            throw new IllegalArgumentException("Для правильного пятиугольника необходима длина только одной стороны!\n");
         }
         double side = sides.getFirst();
         return new RegularHexagon(nameRegularHexagon, color, List.of(side, side, side, side, side, side));

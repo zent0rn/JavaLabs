@@ -47,7 +47,7 @@ public class MainMenu implements Menu {
                 String shapeName = shapesUI.getIoHandler().read();
                 Shape foundShape = Shape.findShapeByName(shapesUI.getShapeStorage(), shapeName);
                 if (foundShape == null) {
-                    throw new IllegalArgumentException("Фигура " + shapeName + " не найдена!");
+                    throw new IllegalArgumentException("Фигура " + shapeName + " не найдена!\n");
                 }
                 shapesUI.getIoHandler().write("Введите новый цвет: ");
                 String newColor = shapesUI.getIoHandler().read();
@@ -55,7 +55,7 @@ public class MainMenu implements Menu {
             }
             case 'q' -> {
             }
-            default -> throw new IllegalArgumentException("Некорректный ввод!");
+            default -> throw new IllegalArgumentException("Некорректный ввод!\n");
         }
     }
 }

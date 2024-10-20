@@ -60,17 +60,21 @@ public class ShapesUI implements UserInterface {
     public void run() {
         char command;
         do {
-            _ioHandler.write("Фигуры: \n");
-            _ioHandler.write(Shape.getAllShapesInfo(_shapeStorage));
-            _ioHandler.write(_menu.getMenu());
+            try {
+                _ioHandler.write("Фигуры: \n");
+                _ioHandler.write(Shape.getAllShapesInfo(_shapeStorage));
+                _ioHandler.write(_menu.getMenu());
 
-            _ioHandler.write("Введите команду: ");
-            command = _ioHandler.read().charAt(0);
-            if (command == 'q') {
-                break;
+                _ioHandler.write("Введите команду: ");
+                command = _ioHandler.read().charAt(0);
+                if (command == 'q') {
+                    break;
+                }
+                _menu.handleMenu(this, command);
             }
-
-            _menu.handleMenu(this, command);
+            catch (Exception e) {
+                _ioHandler.write(e.getMessage());
+            }
         } while (true);
         _ioHandler.write("Работа завершена!");
     }

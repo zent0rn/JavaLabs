@@ -44,7 +44,13 @@ public class CreateShapeMenu implements Menu {
             shapesUI.getIoHandler().write("Введите цвет фигуры: ");
             String shapeColor = shapesUI.getIoHandler().read();
             shapesUI.getIoHandler().write("Введите длины фигуры (через пробел): ");
-            List<Double> sides = Arrays.stream(shapesUI.getIoHandler().read().split(" ")).map(Double::parseDouble).toList();
+            List<Double> sides;
+            if (!shapesUI.getIoHandler().read().isBlank()) {
+                sides = Arrays.stream(shapesUI.getIoHandler().read().split(" ")).map(Double::parseDouble).toList();
+            }
+            else {
+                throw new IllegalArgumentException("Некорретный ввод!\n");
+            }
             switch (command) {
                 case '1' -> shape = Triangle.of(shapeName, shapeColor, sides);
                 case '2' -> shape = Rectangle.of(shapeName, shapeColor, sides);
@@ -54,12 +60,12 @@ public class CreateShapeMenu implements Menu {
                 shapesUI.getShapeStorage().add(shape);
                 shapesUI.setMenu(new MainMenu());
             } else {
-                throw new IllegalArgumentException("Фигура с таким именем уже существует!");
+                throw new IllegalArgumentException("Фигура с таким именем уже существует!\n");
             }
         } else if (command == 'n') {
             shapesUI.setMenu(new MainMenu());
         } else {
-            throw new IllegalArgumentException("Некорректный ввод!");
+            throw new IllegalArgumentException("Некорректный ввод!\n");
         }
     }
 }
