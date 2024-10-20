@@ -4,6 +4,9 @@ import webProgramming.lab3v1.handlers.IOHandler;
 
 import java.util.Scanner;
 
+/**
+ * класс реализует интерфейс IOHandler и необходим для работы с консолью
+ */
 public class ConsoleHandler implements IOHandler {
     private final Scanner _scanner;
 

@@ -52,6 +52,11 @@ public class ShapesUI implements UserInterface {
         _currentShape = null;
     }
 
+    /**
+     * метод run выводит созданные фигуры в консоль после выполнения каждой команды,
+     * а также проверяет, не введена ли команда "q", с помощью которой совершается
+     * выход из цикла
+     */
     public void run() {
         char command;
         do {
@@ -70,18 +75,34 @@ public class ShapesUI implements UserInterface {
         _ioHandler.write("Работа завершена!");
     }
 
+    /**
+     * метод сеттер для поля _menu
+     * @param menu -
+     */
     public void setMenu(Menu menu) {
         this._menu = menu;
     }
 
+    /**
+     * геттер поля _shapeStorage
+     * @return _shapeStorage
+     */
     public List<Shape> getShapeStorage() {
         return _shapeStorage;
     }
 
+    /**
+     * геттер поля _ioHandler
+     * @return _ioHandler
+     */
     public IOHandler getIoHandler() {
         return _ioHandler;
     }
 
+    /**
+     * сеттер для поля _currentShape
+     * @param currentShape - некоторый объект класса Shape
+     */
     public void setCurrentShape(Shape currentShape) {
         this._currentShape = currentShape;
     }

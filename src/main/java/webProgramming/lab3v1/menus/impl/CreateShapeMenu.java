@@ -10,7 +10,15 @@ import webProgramming.lab3v1.userInterface.impl.ShapesUI;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * класс реализует интерфейс Menu и
+ * необходим для взаимодейсвтия с пользователем
+ */
 public class CreateShapeMenu implements Menu {
+    /**
+     * метод выводит возможные команды для создания фигур
+     * @return string - строка с возможными командами
+     */
     @Override
     public String getMenu() {
         return """
@@ -22,6 +30,11 @@ public class CreateShapeMenu implements Menu {
                 """;
     }
 
+    /**
+     * метод необходим для обработки команд, введённых пользователем
+     * @param shapesUI - объект класса ShapesUI
+     * @param command - команда, введённая пользователем
+     */
     @Override
     public void handleMenu(ShapesUI shapesUI, char command) {
         if (command == '1' || command == '2' || command == '3') {
@@ -30,7 +43,7 @@ public class CreateShapeMenu implements Menu {
             String shapeName = shapesUI.getIoHandler().read();
             shapesUI.getIoHandler().write("Введите цвет фигуры: ");
             String shapeColor = shapesUI.getIoHandler().read();
-            shapesUI.getIoHandler().write("Введите длины фигуры: ");
+            shapesUI.getIoHandler().write("Введите длины фигуры (через пробел): ");
             List<Double> sides = Arrays.stream(shapesUI.getIoHandler().read().split(" ")).map(Double::parseDouble).toList();
             switch (command) {
                 case '1' -> shape = Triangle.of(shapeName, shapeColor, sides);
@@ -48,6 +61,5 @@ public class CreateShapeMenu implements Menu {
         } else {
             throw new IllegalArgumentException("Некорректный ввод!");
         }
-
     }
 }

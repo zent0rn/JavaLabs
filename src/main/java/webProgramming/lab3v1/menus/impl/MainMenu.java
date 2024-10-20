@@ -4,7 +4,15 @@ import webProgramming.lab3v1.menus.Menu;
 import webProgramming.lab3v1.shapes.Shape;
 import webProgramming.lab3v1.userInterface.impl.ShapesUI;
 
+/**
+ * класс реализует интерфейс Menu и
+ * необходим для взаимодейсвтия с пользователем
+ */
 public class MainMenu implements Menu {
+    /**
+     * метод возвращает строку с возможными командами
+     * @return string - строка с возможными командами
+     */
     @Override
     public String getMenu() {
         return """
@@ -17,6 +25,11 @@ public class MainMenu implements Menu {
                 """;
     }
 
+    /**
+     * метод необходим для обработки команд, введённых пользователем
+     * @param shapesUI - объект класса ShapesUI
+     * @param command - команда, введённая пользователем
+     */
     @Override
     public void handleMenu(ShapesUI shapesUI, char command) {
         switch (command) {
@@ -25,7 +38,7 @@ public class MainMenu implements Menu {
             case '2' -> shapesUI.setMenu(new GetInfoMenu());
 
             case '3' -> shapesUI.getIoHandler().write("Средний периметр фигур с количеством сторон больше 5: " +
-                    Shape.getAveragePerimeterOfPolygon(shapesUI.getShapeStorage())
+                    Shape.getAveragePerimeterOfPolygon(shapesUI.getShapeStorage()) + "\n"
             );
 
             case '4' -> Shape.sortShapesBySquare(shapesUI.getShapeStorage());
@@ -33,7 +46,7 @@ public class MainMenu implements Menu {
                 shapesUI.getIoHandler().write("Введите название фигуры: ");
                 String shapeName = shapesUI.getIoHandler().read();
                 Shape foundShape = Shape.findShapeByName(shapesUI.getShapeStorage(), shapeName);
-                if(foundShape == null){
+                if (foundShape == null) {
                     throw new IllegalArgumentException("Фигура " + shapeName + " не найдена!");
                 }
                 shapesUI.getIoHandler().write("Введите новый цвет: ");

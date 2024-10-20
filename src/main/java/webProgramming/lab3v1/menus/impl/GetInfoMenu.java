@@ -6,7 +6,14 @@ import webProgramming.lab3v1.userInterface.impl.ShapesUI;
 
 import java.util.List;
 
+/**
+ * класс GetInfoMenu реализует интерфейс Menu и необходим для вывода информации о фигурах
+ */
 public class GetInfoMenu implements Menu {
+    /**
+     * метод выводит на консоль команды, которые могут быть выполнены
+     * @return string - строчка с командами
+     */
     @Override
     public String getMenu() {
         return """
@@ -18,6 +25,12 @@ public class GetInfoMenu implements Menu {
                 """;
     }
 
+    /**
+     * метод обрабатывает команды, введенные пользователем и
+     * выводит на экран результат их выполнения
+     * @param shapesUI - объект класса ShapesUI
+     * @param command - комманда, которую ввёл пользователь
+     */
     @Override
     public void handleMenu(ShapesUI shapesUI, char command) {
         switch (command) {
@@ -26,13 +39,13 @@ public class GetInfoMenu implements Menu {
                 String name = shapesUI.getIoHandler().read();
                 Shape foundShape = Shape.findShapeByName(shapesUI.getShapeStorage(), name);
                 if (foundShape != null) {
-                    shapesUI.getIoHandler().write(foundShape.getInfo());
+                    shapesUI.getIoHandler().write(foundShape.getInfo() + "\n");
                 }
             }
             case '2' -> {
                 List<Shape> shapes = shapesUI.getShapeStorage();
                 for (Shape shape : shapes) {
-                    shapesUI.getIoHandler().write(shape.getNameOfShape() + ": " + shape.getSquare());
+                    shapesUI.getIoHandler().write(shape.getNameOfShape() + ": " + shape.getSquare() + "\n");
                 }
             }
             case '3' -> shapesUI.getIoHandler().write(Shape.getAllShapesInfo(shapesUI.getShapeStorage()));
