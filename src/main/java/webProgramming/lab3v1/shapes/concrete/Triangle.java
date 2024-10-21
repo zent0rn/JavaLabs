@@ -66,7 +66,7 @@ public class Triangle extends Shape {
         double sum1 = a + b;
         double sum2 = a + c;
         double sum3 = b + c;
-        if (sum1 + sum2 <= sum3 || sum2 + sum3 <= sum1 || sum1 + sum3 <= sum2) {
+        if (a + b <= c || a + c <= b || b + c <= a) {
             throw new IllegalArgumentException("Сумма длин любых двух сторон должна быть больше длины третьей!");
         }
         if (a <= 0 || b <= 0 || c <= 0) {

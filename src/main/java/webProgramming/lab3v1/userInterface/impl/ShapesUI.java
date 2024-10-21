@@ -76,7 +76,7 @@ public class ShapesUI implements UserInterface {
                     }
                 }
             } catch (Exception e) {
-                _ioHandler.write(e.getMessage());
+                _ioHandler.writeLine(e.getMessage());
             }
         } while (true);
         _ioHandler.write("Работа завершена!");
