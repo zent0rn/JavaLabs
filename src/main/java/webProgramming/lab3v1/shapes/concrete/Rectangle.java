@@ -5,37 +5,40 @@ import webProgramming.lab3v1.shapes.Shape;
 import java.util.List;
 
 /**
- * класс-наследник абстрактного класса Shape
- * необходим для создания прямоугольника
+ * Класс-наследник абстрактного класса Shape
+ * необходим для создания объекта - прямоугольника
  */
 public class Rectangle extends Shape {
-    /** число сторон прямоугольника */
+    /**
+     * число сторон прямоугольника
+     */
     private static final int COUNT_SIDES = 4;
 
     /**
      * конструктор с параметрами для класса Rectangle
-     * @param nameOfShape - имя прямоугольника
-     * @param color - цвет прямоугольника
-     * @param lengthOfSides - длины сторон прямоугольника
+     *
+     * @param nameOfShape   имя прямоугольника
+     * @param color         цвет прямоугольника
+     * @param lengthOfSides длины сторон прямоугольника
      */
     public Rectangle(String nameOfShape, String color, List<Double> lengthOfSides) {
         super(nameOfShape, color, COUNT_SIDES, lengthOfSides);
     }
 
     /**
-     * данный статический метод вычисляет значения полей и
+     * Статический (фабричный) метод вычисляет значения полей и
      * проверяет их корректность, а затем возвращает созданный прямоугольник
-     * @param nameRectangle - имя прямоугольника
-     * @param color - цвет прямоугольника
-     * @param sides - длины сторон прямоугольника
-     * @return Rectangle(nameRectangle, color, List.of(height, width, height, width)) -
-     * прямоугольник с соответствующими параметрами
+     *
+     * @param nameRectangle имя прямоугольника
+     * @param color         цвет прямоугольника
+     * @param sides         длины сторон прямоугольника
+     * @return прямоугольник с соответствующими параметрами
      */
     public static Rectangle of(String nameRectangle, String color, List<Double> sides) {
         if (nameRectangle.isBlank()) {
             throw new IllegalArgumentException("Название не может быть пустым!");
         }
-        if(color.isBlank()){
+        if (color.isBlank()) {
             throw new IllegalArgumentException("Цвет не может быть пустым!");
         }
         if (sides.size() != 2) {
@@ -52,9 +55,9 @@ public class Rectangle extends Shape {
     }
 
     /**
-     * метод вычисляет площадь прямоугольника
-     * @return _lengthOfSides.get(0) * _lengthOfSides.get(1) -
-     * площадь прямоугольника
+     * Метод вычисляет площадь прямоугольника
+     *
+     * @return площадь прямоугольника
      */
     @Override
     public double calculateSquare() {
@@ -62,7 +65,8 @@ public class Rectangle extends Shape {
     }
 
     /**
-     * метод необходим для получения информации о полях данного прямоугольника
+     * Метод необходим для получения информации о полях данного прямоугольника
+     *
      * @return string - значения полей прямоугольника
      */
     @Override

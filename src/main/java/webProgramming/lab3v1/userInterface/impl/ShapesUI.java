@@ -18,14 +18,18 @@ import java.util.List;
  * классами геометрических фигур
  */
 public class ShapesUI implements UserInterface {
-    /** объект класса IOHandler */
+    /**
+     * Объект класса IOHandler позволяет взаимодействовать с потоками ввода/вывода
+     */
     private final IOHandler _ioHandler;
 
-    /** Список фигур */
+    /**
+     * Список - хранилище фигур
+     */
     private List<Shape> _shapeStorage;
 
     /**
-     * конструктор по умолчанию
+     * Конструктор по умолчанию
      */
     public ShapesUI() {
         _ioHandler = new ConsoleHandler();
@@ -33,8 +37,9 @@ public class ShapesUI implements UserInterface {
     }
 
     /**
-     * метод запускает пользовательский интерфейс:
-     * выводит на консоль возможные команды и обрабатывает их
+     * Метод запускает сессию взаимодействия с пользователем:
+     * выводит на консоль возможные команды, получает запросы пользователя и делегирует их выполнение
+     * специальным классам
      */
     public void run() {
         char command;
@@ -70,8 +75,7 @@ public class ShapesUI implements UserInterface {
                         _ioHandler.writeLine(Shape.editColor(_shapeStorage, shapeName, newColor));
                     }
                 }
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 _ioHandler.write(e.getMessage());
             }
         } while (true);
@@ -79,8 +83,8 @@ public class ShapesUI implements UserInterface {
     }
 
     /**
-     * метод выводит на консоль возможные команды,
-     * связанные с созданием фигур и обрабатывает их
+     * Метод выводит на консоль возможные команды,
+     * связанные с созданием фигур и добавляет созданные фигуры в хранилище
      */
     private void manageShapeCreating() {
         _ioHandler.write(
@@ -116,8 +120,8 @@ public class ShapesUI implements UserInterface {
     }
 
     /**
-     * метод выводит на консоль возможные команды,
-     * связанные с выводимой на экран информацией и обрабатывает их
+     * Метод выводит на консоль возможные команды,
+     * связанные с информацией о фигурах и вызывает методы для их выполнения
      */
     private void manageDataShowing() {
         _ioHandler.write(

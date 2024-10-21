@@ -4,34 +4,47 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * абстрактный класс Shape
+ * Абстрактный класс Shape
  * необходим для реализации фигур
  */
 public abstract class Shape {
-    /** имя фигуры */
+    /**
+     * Имя фигуры
+     */
     protected String _nameOfShape;
 
-    /** цвет фигуры */
+    /**
+     * Цвет фигуры
+     */
     protected String _color;
 
-    /** площадь фигуры */
+    /**
+     * Площадь фигуры
+     */
     protected final double _square;
 
-    /** периметр фигуры */
+    /**
+     * Периметр фигуры
+     */
     protected final double _perimeter;
 
-    /** количество сторон фигуры */
+    /**
+     * Количество сторон фигуры
+     */
     protected final int _countOfSides;
 
-    /** список с длинами сторон фигуры */
+    /**
+     * Список с длинами сторон фигуры
+     */
     protected final List<Double> _lengthOfSides;
 
     /**
-     * конструктор абстрактного класса Shape с параметрами
-     * @param nameOfShape - имя фигуры
-     * @param color - цвет фигуры
-     * @param countOfSides - число сторон фигуры
-     * @param lengthOfSides - длины сторон фигуры
+     * Конструктор абстрактного класса Shape с параметрами
+     *
+     * @param nameOfShape   имя фигуры
+     * @param color         цвет фигуры
+     * @param countOfSides  число сторон фигуры
+     * @param lengthOfSides длины сторон фигуры
      */
     public Shape(
             String nameOfShape,
@@ -48,13 +61,15 @@ public abstract class Shape {
     }
 
     /**
-     * абстрактный метод, впоследствии будет реализовываться как метод вычисления площади
-     * @return -
+     * Абстрактный метод вычисления площади фигуры
+     *
+     * @return - значение площади фигуры
      */
     public abstract double calculateSquare();
 
     /**
-     * метод вычисляет периметр некоторой фигуры
+     * Метод вычисляет периметр фигуры
+     *
      * @return perimeter - периметр фигуры
      */
     public double calculatePerimeter() {
@@ -66,8 +81,9 @@ public abstract class Shape {
     }
 
     /**
-     * метод необходим для получения площади фигур из списка фигур
-     * @param shapes - список фигур
+     * Метод необходим для получения площади фигур из списка фигур
+     *
+     * @param shapes список фигур
      * @return squares - список площадей фигур
      */
     public static List<Double> getSquares(List<Shape> shapes) {
@@ -79,9 +95,10 @@ public abstract class Shape {
     }
 
     /**
-     * метод вычисляет средний периметр фигур из списка
-     * @param shapes - список фигур
-     * @return sumOfPeremiters / count - средний периметр фигур
+     * Метод вычисляет средний периметр фигур, количество сторон которых больше 5
+     *
+     * @param shapes список фигур
+     * @return средний периметр фигур
      */
     public static double getAveragePerimeterOfPolygon(List<Shape> shapes) {
         int count = 0;
@@ -96,8 +113,9 @@ public abstract class Shape {
     }
 
     /**
-     * метод сортирует список фигур по возрастанию площади (метод пузырька)
-     * @param shapes - список фигур
+     * Метод сортирует список фигур по возрастанию площади (методом пузырька)
+     *
+     * @param shapes список фигур
      */
     public static void sortShapesBySquare(List<Shape> shapes) {
         for (int i = 0; i + 1 < shapes.size(); ++i) {
@@ -112,9 +130,10 @@ public abstract class Shape {
     }
 
     /**
-     * метод ищет в списке фигуру с определенным именем
-     * @param shapes - список фигур
-     * @param name - имя, по которому будет искаться фигура в списке
+     * Метод ищет в списке фигуру с определенным именем
+     *
+     * @param shapes список фигур
+     * @param name   имя, по которому будет искаться фигура в списке
      * @return shape - фигура с именем name
      */
     public static Shape findShapeByName(List<Shape> shapes, String name) {
@@ -127,9 +146,10 @@ public abstract class Shape {
     }
 
     /**
-     * метод необходим для получения информации о созданых фигурах
-     * @param storage - список созданных фигур
-     * @return stringBuilder.toString() - строчка с информацией о фигурах
+     * Метод необходим для получения информации о созданых фигурах
+     *
+     * @param storage список созданных фигур
+     * @return информация о всех фигурах из списка (тип, название, цвет, площадь и т. д.)
      */
     public static String getAllShapesInfo(List<Shape> storage) {
         StringBuilder stringBuilder = new StringBuilder();
@@ -140,14 +160,15 @@ public abstract class Shape {
     }
 
     /**
-     * абстрактный метод, который будет реализовываться в классах-наследниках
-     * для получения информации о фигуре
-     * @return
+     * Абстрактный метод для получения информации о фигуре
+     *
+     * @return информация о фигуре (тип, название, цвет, площадь и т.д.)
      */
     public abstract String getInfo();
 
     /**
-     * метод геттер для поля _nameOfShape
+     * Метод геттер для поля _nameOfShape
+     *
      * @return _nameOfShape - имя фигуры
      */
     public String getNameOfShape() {
@@ -156,6 +177,7 @@ public abstract class Shape {
 
     /**
      * метод геттер для поля _square
+     *
      * @return _square - площадь фигуры
      */
     public double getSquare() {
@@ -164,6 +186,7 @@ public abstract class Shape {
 
     /**
      * метод сеттер для поля _color
+     *
      * @param color - новый цвет фигуры
      */
     public void setColor(String color) {
@@ -171,16 +194,17 @@ public abstract class Shape {
     }
 
     /**
-     * метод необходим для редактирования цвета фигуры
-     * @param shapeStorage - список фигур, в котором будет
-     * идти поиск имени фигуры, цвет которой нужно поменять
-     * @param shapeName - имя фигуры
-     * @param newColor - новый цвет
-     * @return
+     * Метод необходим для редактирования цвета фигуры
+     *
+     * @param shapeStorage список фигур, в котором будет
+     *                     идти поиск имени фигуры, цвет которой нужно поменять
+     * @param shapeName    имя фигуры
+     * @param newColor     новый цвет
+     * @return результат изменения цвета
      */
-    public static String editColor(List<Shape> shapeStorage, String shapeName, String newColor){
+    public static String editColor(List<Shape> shapeStorage, String shapeName, String newColor) {
         Shape foundShape = Shape.findShapeByName(shapeStorage, shapeName);
-        if(foundShape == null){
+        if (foundShape == null) {
             throw new IllegalArgumentException("Фигура " + shapeName + " не найдена!");
         }
         foundShape.setColor(newColor);

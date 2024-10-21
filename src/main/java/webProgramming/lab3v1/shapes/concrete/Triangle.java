@@ -5,26 +5,33 @@ import webProgramming.lab3v1.shapes.Shape;
 import java.util.List;
 
 /**
- * класс-наследник абстрактного класса Shape
- * необходим для создания треугольника
+ * Класс-наследник абстрактного класса Shape
+ * необходим для создания объекта - треугольника
  */
 public class Triangle extends Shape {
-    /** число сторон треугольника */
+    /**
+     * Число сторон треугольника
+     */
     private static final int COUNT_SIDES = 3;
 
-    /** является ли треугольник равносторонним */
+    /**
+     * Логическая переменная, определяющая, является ли треугольник равносторонним
+     */
     private final boolean _isEquilateral;
 
-    /** является ли треугольник равнобедренным */
+    /**
+     * Логическая переменная, определяющая, является ли треугольник равнобедренным
+     */
     private final boolean _isIsosceles;
 
     /**
-     * конструктор с параметрами для класса Triangle
-     * @param nameOfShape - имя треугольника
-     * @param color - цвет треугольника
-     * @param lengthOfSides - длины сторон треугольника
-     * @param isIsosceles - является ли треугольник равнобедренным
-     * @param isEquilateral - является ли треугольник равносторонним
+     * Конструктор с параметрами для класса Triangle
+     *
+     * @param nameOfShape   имя треугольника
+     * @param color         цвет треугольника
+     * @param lengthOfSides длины сторон треугольника
+     * @param isIsosceles   является ли треугольник равнобедренным
+     * @param isEquilateral является ли треугольник равносторонним
      */
     private Triangle(String nameOfShape, String color, List<Double> lengthOfSides, boolean isIsosceles, boolean isEquilateral) {
         super(nameOfShape, color, COUNT_SIDES, lengthOfSides);
@@ -33,19 +40,19 @@ public class Triangle extends Shape {
     }
 
     /**
-     * данный статический метод вычисляет значения полей и
+     * Статический (фабричный) метод вычисляет значения полей и
      * проверяет их корректность, а затем возвращает созданный треугольник
-     * @param nameTriangle - имя треугольника
-     * @param color - цвет треугольника
-     * @param sides - список с длинами сторон треугольника
-     * @return new Triangle(nameTriangle, color, List.of(a, b, c), isIsosceles, isEquilateral) -
-     * треугольник с соотвествующими параметрами
+     *
+     * @param nameTriangle имя треугольника
+     * @param color        цвет треугольника
+     * @param sides        список с длинами сторон треугольника
+     * @return треугольник с соотвествующими параметрами
      */
     public static Triangle of(String nameTriangle, String color, List<Double> sides) {
         if (nameTriangle.isBlank()) {
             throw new IllegalArgumentException("Название не может быть пустым!");
         }
-        if(color.isBlank()){
+        if (color.isBlank()) {
             throw new IllegalArgumentException("Цвет не может быть пустым!");
         }
         if (sides.size() != 3) {
@@ -79,8 +86,9 @@ public class Triangle extends Shape {
     }
 
     /**
-     * метод необходим для вычисления площади треугольника
-     * @return Math.sqrt(p * (p - a) * (p - b) * (p - c)) - площадь треугольника
+     * Метод необходим для вычисления площади треугольника
+     *
+     * @return Площадь треугольника
      */
     @Override
     public double calculateSquare() {
@@ -94,7 +102,8 @@ public class Triangle extends Shape {
     }
 
     /**
-     * метод необходим для получения информации о полях данного треугольника
+     * Метод необходим для получения информации о полях данного треугольника
+     *
      * @return string - значения полей треугольника
      */
     @Override

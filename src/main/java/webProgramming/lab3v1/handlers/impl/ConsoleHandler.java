@@ -5,11 +5,13 @@ import webProgramming.lab3v1.handlers.IOHandler;
 import java.util.Scanner;
 
 public class ConsoleHandler implements IOHandler {
-    /** объект класса Scanner */
+    /**
+     * Объект класса Scanner хранит поток ввода
+     */
     private final Scanner _scanner;
 
     /**
-     * конструктор по умолчанию
+     * Конструктор по умолчанию
      */
     public ConsoleHandler() {
         _scanner = new Scanner(System.in);
@@ -17,8 +19,9 @@ public class ConsoleHandler implements IOHandler {
 
 
     /**
-     * метод считывает строчку
-     * @return _scanner.nextLine() - строчка
+     * Метод считывает данные из входного потока
+     *
+     * @return прочитанная строка
      */
     @Override
     public String read() {
@@ -26,7 +29,8 @@ public class ConsoleHandler implements IOHandler {
     }
 
     /**
-     * метод выводит на консоль строчку
+     * Метод выводит на консоль данные - объект типа String
+     *
      * @param string строка, которую необходимо вывести на консоль
      */
     @Override
@@ -35,9 +39,12 @@ public class ConsoleHandler implements IOHandler {
     }
 
     /**
-     * метод выводит на консоль строчку
+     * Метод выводит на консоль данные с добавлением переноса строки
+     *
      * @param string строка, которую необходимо вывести на консоль
      */
     @Override
-    public void writeLine(String string){System.out.println(string);}
+    public void writeLine(String string) {
+        System.out.println(string);
+    }
 }
