@@ -54,7 +54,11 @@ public class ShapesUI implements UserInterface {
                         [q] Выход
                         """);
                 _ioHandler.write("Выберите команду: ");
-                command = _ioHandler.read().charAt(0);
+                String toRead = _ioHandler.read();
+                if(toRead.length() != 1){
+                    throw new IllegalArgumentException("Некорректная команда!");
+                }
+                command = toRead.charAt(0);
                 if (command == 'q') {
                     break;
                 }
