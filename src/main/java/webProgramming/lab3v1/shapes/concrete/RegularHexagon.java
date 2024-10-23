@@ -2,17 +2,24 @@ package webProgramming.lab3v1.shapes.concrete;
 
 import webProgramming.lab3v1.shapes.Shape;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Класс-наследник абстрактного класса Shape
- * необходим для создания объекта - правильного шестиугольника
+ * Класс-наследник необходим для создания объекта - правильного шестиугольника
  */
 public class RegularHexagon extends Shape {
     /**
      * Число сторон шестиугольника
      */
     private static final int COUNT_SIDES = 6;
+
+    /**
+     * Конструктор по умолчанию
+     */
+    public RegularHexagon(){
+        super("", "", COUNT_SIDES, new ArrayList<>());
+    }
 
     /**
      * Конструктор с параметрами класса RegularHexagon
@@ -26,7 +33,7 @@ public class RegularHexagon extends Shape {
     }
 
     /**
-     * Статический (фабричный) метод вычисляет значения полей и
+     * Статический метод вычисляет значения полей и
      * проверяет их корректность, а затем возвращает созданный шестиугольник
      *
      * @param nameRegularHexagon имя шестиугольника

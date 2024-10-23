@@ -2,17 +2,24 @@ package webProgramming.lab3v1.shapes.concrete;
 
 import webProgramming.lab3v1.shapes.Shape;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Класс-наследник абстрактного класса Shape
- * необходим для создания объекта - прямоугольника
+ * Класс-наследник необходим для создания объекта - прямоугольника
  */
 public class Rectangle extends Shape {
     /**
      * число сторон прямоугольника
      */
     private static final int COUNT_SIDES = 4;
+
+    /**
+     * Конструктор по умолчанию
+     */
+    public Rectangle(){
+        super("", "", COUNT_SIDES, new ArrayList<>());
+    }
 
     /**
      * конструктор с параметрами для класса Rectangle
@@ -26,7 +33,7 @@ public class Rectangle extends Shape {
     }
 
     /**
-     * Статический (фабричный) метод вычисляет значения полей и
+     * Статический метод вычисляет значения полей и
      * проверяет их корректность, а затем возвращает созданный прямоугольник
      *
      * @param nameRectangle имя прямоугольника

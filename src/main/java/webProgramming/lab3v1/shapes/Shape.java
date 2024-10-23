@@ -4,10 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Абстрактный класс Shape
- * необходим для реализации фигур
+ * Класс необходим для реализации фигур
  */
 public abstract class Shape {
+    /**
+     * Список - хранилище фигур
+     */
+    public static List<Shape> shapes = new ArrayList<>();
+
     /**
      * Имя фигуры
      */
@@ -83,10 +87,9 @@ public abstract class Shape {
     /**
      * Метод необходим для получения площади фигур из списка фигур
      *
-     * @param shapes список фигур
      * @return squares - список площадей фигур
      */
-    public static List<Double> getSquares(List<Shape> shapes) {
+    public static List<Double> getSquares() {
         List<Double> squares = new ArrayList<>(shapes.size());
         for (int i = 0; i < shapes.size(); i++) {
             squares.set(i, shapes.get(i)._square);
@@ -97,10 +100,9 @@ public abstract class Shape {
     /**
      * Метод вычисляет средний периметр фигур, количество сторон которых больше 5
      *
-     * @param shapes список фигур
      * @return средний периметр фигур
      */
-    public static double getAveragePerimeterOfPolygon(List<Shape> shapes) {
+    public static double getAveragePerimeterOfPolygon() {
         int count = 0;
         double sumOfPeremiters = 0;
         for (Shape shape : shapes) {
@@ -109,15 +111,13 @@ public abstract class Shape {
                 sumOfPeremiters += shape._perimeter;
             }
         }
-        return sumOfPeremiters / count;
+        return (count == 0 ? 0.0 : sumOfPeremiters / count);
     }
 
     /**
      * Метод сортирует список фигур по возрастанию площади (методом пузырька)
-     *
-     * @param shapes список фигур
      */
-    public static void sortShapesBySquare(List<Shape> shapes) {
+    public static void sortShapesBySquare() {
         for (int i = 0; i + 1 < shapes.size(); ++i) {
             for (int j = 0; j + 1 < shapes.size() - i; ++j) {
                 if (shapes.get(j + 1)._square < shapes.get(j)._square) {
@@ -132,11 +132,10 @@ public abstract class Shape {
     /**
      * Метод ищет в списке фигуру с определенным именем
      *
-     * @param shapes список фигур
-     * @param name   имя, по которому будет искаться фигура в списке
+     * @param name имя, по которому будет искаться фигура в списке
      * @return shape - фигура с именем name
      */
-    public static Shape findShapeByName(List<Shape> shapes, String name) {
+    public static Shape findShapeByName(String name) {
         for (Shape shape : shapes) {
             if (shape._nameOfShape.equals(name)) {
                 return shape;
@@ -148,12 +147,11 @@ public abstract class Shape {
     /**
      * Метод необходим для получения информации о созданых фигурах
      *
-     * @param storage список созданных фигур
      * @return информация о всех фигурах из списка (тип, название, цвет, площадь и т. д.)
      */
-    public static String getAllShapesInfo(List<Shape> storage) {
+    public static String getAllShapesInfo() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (Shape shape : storage) {
+        for (Shape shape : shapes) {
             stringBuilder.append(shape.getInfo()).append('\n');
         }
         return stringBuilder.toString();
@@ -196,14 +194,12 @@ public abstract class Shape {
     /**
      * Метод необходим для редактирования цвета фигуры
      *
-     * @param shapeStorage список фигур, в котором будет
-     *                     идти поиск имени фигуры, цвет которой нужно поменять
-     * @param shapeName    имя фигуры
-     * @param newColor     новый цвет
+     * @param shapeName имя фигуры
+     * @param newColor  новый цвет
      * @return результат изменения цвета
      */
-    public static String editColor(List<Shape> shapeStorage, String shapeName, String newColor) {
-        Shape foundShape = Shape.findShapeByName(shapeStorage, shapeName);
+    public static String editColor(String shapeName, String newColor) {
+        Shape foundShape = Shape.findShapeByName(shapeName);
         if (foundShape == null) {
             throw new IllegalArgumentException("Фигура " + shapeName + " не найдена!");
         }

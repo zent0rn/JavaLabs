@@ -8,12 +8,11 @@ import webProgramming.lab3v1.shapes.concrete.RegularHexagon;
 import webProgramming.lab3v1.shapes.concrete.Triangle;
 import webProgramming.lab3v1.userInterface.UserInterface;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 /**
- * Класс ShapesUI позволяет
+ * Класс позволяет
  * взаимодействовать с пользователем для работы с
  * классами геометрических фигур
  */
@@ -24,16 +23,10 @@ public class ShapesUI implements UserInterface {
     private final IOHandler _ioHandler;
 
     /**
-     * Список - хранилище фигур
-     */
-    private List<Shape> _shapeStorage;
-
-    /**
      * Конструктор по умолчанию
      */
     public ShapesUI() {
         _ioHandler = new ConsoleHandler();
-        _shapeStorage = new ArrayList<>();
     }
 
     /**
@@ -55,7 +48,7 @@ public class ShapesUI implements UserInterface {
                         """);
                 _ioHandler.write("Выберите команду: ");
                 String toRead = _ioHandler.read();
-                if(toRead.length() != 1){
+                if (toRead.length() != 1) {
                     throw new IllegalArgumentException("Некорректная команда!");
                 }
                 command = toRead.charAt(0);
@@ -66,18 +59,19 @@ public class ShapesUI implements UserInterface {
                     case '1' -> manageShapeCreating();
                     case '2' -> manageDataShowing();
                     case '3' -> _ioHandler.writeLine("Средний периметр фигур с количеством сторон больше 5: "
-                            + Shape.getAveragePerimeterOfPolygon(_shapeStorage) + "\n");
+                            + Shape.getAveragePerimeterOfPolygon() + "\n");
                     case '4' -> {
-                        Shape.sortShapesBySquare(_shapeStorage);
-                        _ioHandler.writeLine(Shape.getAllShapesInfo(_shapeStorage));
+                        Shape.sortShapesBySquare();
+                        _ioHandler.writeLine(Shape.getAllShapesInfo());
                     }
                     case '5' -> {
                         _ioHandler.write("Введите название фигуры: ");
                         String shapeName = _ioHandler.read();
                         _ioHandler.write("Введите новый цвет: ");
                         String newColor = _ioHandler.read();
-                        _ioHandler.writeLine(Shape.editColor(_shapeStorage, shapeName, newColor));
+                        _ioHandler.writeLine(Shape.editColor(shapeName, newColor));
                     }
+                    default -> throw new RuntimeException("Некорректная команда!");
                 }
             } catch (Exception e) {
                 _ioHandler.writeLine(e.getMessage());
@@ -99,7 +93,11 @@ public class ShapesUI implements UserInterface {
                         """
         );
         _ioHandler.write("Выберите команду: ");
-        char command = _ioHandler.read().charAt(0);
+        String toRead = _ioHandler.read();
+        if (toRead.length() != 1) {
+            throw new IllegalArgumentException("Некорректная команда!");
+        }
+        char command = toRead.charAt(0);
         if (command == '1' || command == '2' || command == '3') {
             Shape shape = null;
             _ioHandler.write("Введите название фигуры: ");
@@ -113,8 +111,8 @@ public class ShapesUI implements UserInterface {
                 case '2' -> shape = Rectangle.of(shapeName, shapeColor, sides);
                 case '3' -> shape = RegularHexagon.of(shapeName, shapeColor, sides);
             }
-            if (Shape.findShapeByName(_shapeStorage, shapeName) == null) {
-                _shapeStorage.add(shape);
+            if (Shape.findShapeByName(shapeName) == null) {
+                Shape.shapes.add(shape);
             } else {
                 throw new IllegalArgumentException("Фигура с таким именем уже существует!\n");
             }
@@ -141,19 +139,19 @@ public class ShapesUI implements UserInterface {
             case '1' -> {
                 _ioHandler.write("Введите название фигуры: ");
                 String name = _ioHandler.read();
-                Shape foundShape = Shape.findShapeByName(_shapeStorage, name);
+                Shape foundShape = Shape.findShapeByName(name);
                 if (foundShape != null) {
-                    _ioHandler.write(foundShape.getInfo());
+                    _ioHandler.writeLine(foundShape.getInfo());
                 } else {
                     _ioHandler.write("Фигура не найдена!");
                 }
             }
             case '2' -> {
-                for (Shape shape : _shapeStorage) {
-                    _ioHandler.write(shape.getNameOfShape() + ": " + shape.getSquare());
+                for (Shape shape : Shape.shapes) {
+                    _ioHandler.writeLine(shape.getNameOfShape() + ": " + shape.getSquare());
                 }
             }
-            case '3' -> _ioHandler.write(Shape.getAllShapesInfo(_shapeStorage));
+            case '3' -> _ioHandler.write(Shape.getAllShapesInfo());
             default -> throw new IllegalArgumentException("Некорректный ввод!\n");
 
         }

@@ -2,11 +2,11 @@ package webProgramming.lab3v1.shapes.concrete;
 
 import webProgramming.lab3v1.shapes.Shape;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Класс-наследник абстрактного класса Shape
- * необходим для создания объекта - треугольника
+ * Класс-наследник необходим для создания объекта - треугольника
  */
 public class Triangle extends Shape {
     /**
@@ -25,6 +25,15 @@ public class Triangle extends Shape {
     private final boolean _isIsosceles;
 
     /**
+     * Конструктор по умолчанию
+     */
+    public Triangle(){
+        super("", "", COUNT_SIDES, new ArrayList<>());
+        _isIsosceles = false;
+        _isEquilateral = false;
+    }
+
+    /**
      * Конструктор с параметрами для класса Triangle
      *
      * @param nameOfShape   имя треугольника
@@ -40,7 +49,7 @@ public class Triangle extends Shape {
     }
 
     /**
-     * Статический (фабричный) метод вычисляет значения полей и
+     * Статический метод вычисляет значения полей и
      * проверяет их корректность, а затем возвращает созданный треугольник
      *
      * @param nameTriangle имя треугольника
