@@ -57,7 +57,7 @@ public class ShapesUI implements UserInterface {
                     case '3' -> _ioHandler.writeLine("Средний периметр фигур с количеством сторон больше 5: "
                             + Shape.getAveragePerimeterOfPolygon() + "\n");
                     case '4' -> {
-                        if(Shape.shapes.isEmpty()){
+                        if (Shape.shapes.isEmpty()) {
                             _ioHandler.write("Фигур нет");
                             break;
                         }
@@ -74,9 +74,9 @@ public class ShapesUI implements UserInterface {
                         Shape foundShape = Shape.findShapeByName(shapeName);
 
                         boolean editResult = Shape.editColor(foundShape, newColor);
-                        if(editResult){
+                        if (editResult) {
                             _ioHandler.write("Цвет фигуры изменен: " + foundShape.getInfo());
-                        }else{
+                        } else {
                             _ioHandler.write("Цвет фигуры не изменен!");
                         }
                     }
@@ -89,7 +89,7 @@ public class ShapesUI implements UserInterface {
         _ioHandler.write("Работа завершена!");
     }
 
-    private Character pickCommand(){
+    private Character pickCommand() {
         _ioHandler.write("Выберите команду: ");
         String toRead = _ioHandler.read();
         if (toRead.length() != 1) {
@@ -171,7 +171,7 @@ public class ShapesUI implements UserInterface {
                 }
             }
             case '2' -> {
-                if(Shape.shapes.isEmpty()){
+                if (Shape.shapes.isEmpty()) {
                     _ioHandler.write("Фигур нет!");
                     break;
                 }
@@ -182,9 +182,9 @@ public class ShapesUI implements UserInterface {
             case '3' -> {
                 String info = Shape.getAllShapesInfo();
 
-                if(info.isBlank()) {
+                if (info.isBlank()) {
                     _ioHandler.write("Фигур нет!");
-                }else {
+                } else {
                     _ioHandler.write(Shape.getAllShapesInfo());
                 }
             }
