@@ -35,7 +35,6 @@ public class ShapesUI implements UserInterface {
      * специальным классам
      */
     public void run() {
-        char command;
         do {
             try {
                 _ioHandler.write("""
@@ -47,11 +46,7 @@ public class ShapesUI implements UserInterface {
                         [q] Выход
                         """);
                 _ioHandler.write("Выберите команду: ");
-                String toRead = _ioHandler.read();
-                if (toRead.length() != 1) {
-                    throw new IllegalArgumentException("Некорректная команда!");
-                }
-                command = toRead.charAt(0);
+                char command = pickCommand();
                 if (command == 'q') {
                     break;
                 }
@@ -79,11 +74,20 @@ public class ShapesUI implements UserInterface {
                     }
                     default -> throw new RuntimeException("Некорректная команда!");
                 }
-            } catch (Exception e) {
+            } catch (RuntimeException e) {
                 _ioHandler.writeLine(e.getMessage());
             }
         } while (true);
         _ioHandler.write("Работа завершена!");
+    }
+
+    private Character pickCommand(){
+        _ioHandler.write("Выберите команду: ");
+        String toRead = _ioHandler.read();
+        if (toRead.length() != 1) {
+            throw new IllegalArgumentException("Некорректная команда!");
+        }
+        return toRead.charAt(0);
     }
 
     /**
@@ -98,12 +102,9 @@ public class ShapesUI implements UserInterface {
                         [3] Создать правильный шестиугольник
                         """
         );
-        _ioHandler.write("Выберите команду: ");
-        String toRead = _ioHandler.read();
-        if (toRead.length() != 1) {
-            throw new IllegalArgumentException("Некорректная команда!");
-        }
-        char command = toRead.charAt(0);
+
+        char command = pickCommand();
+
         if (command == '1' || command == '2' || command == '3') {
             Shape shape = null;
             _ioHandler.write("Введите название фигуры: ");
@@ -140,7 +141,9 @@ public class ShapesUI implements UserInterface {
                         """
         );
         _ioHandler.write("Выберите команду: ");
-        char command = _ioHandler.read().charAt(0);
+
+        char command = pickCommand();
+
         switch (command) {
             case '1' -> {
                 _ioHandler.write("Введите название фигуры: ");
@@ -159,7 +162,6 @@ public class ShapesUI implements UserInterface {
             }
             case '3' -> _ioHandler.write(Shape.getAllShapesInfo());
             default -> throw new IllegalArgumentException("Некорректный ввод!\n");
-
         }
     }
 }
