@@ -156,6 +156,10 @@ public class ShapesUI implements UserInterface {
                 }
             }
             case '2' -> {
+                if(Shape.shapes.isEmpty()){
+                    _ioHandler.write("Фигур нет!");
+                    break;
+                }
                 for (Shape shape : Shape.shapes) {
                     _ioHandler.writeLine(shape.getNameOfShape() + ": " + shape.getSquare());
                 }
