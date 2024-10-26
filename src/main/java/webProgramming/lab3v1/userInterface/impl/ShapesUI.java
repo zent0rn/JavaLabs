@@ -160,7 +160,14 @@ public class ShapesUI implements UserInterface {
                     _ioHandler.writeLine(shape.getNameOfShape() + ": " + shape.getSquare());
                 }
             }
-            case '3' -> _ioHandler.write(Shape.getAllShapesInfo());
+            case '3' -> {
+                String info = Shape.getAllShapesInfo();
+                if(info.isBlank()) {
+                    _ioHandler.write("Фигур нет!");
+                }else {
+                    _ioHandler.write(Shape.getAllShapesInfo());
+                }
+            }
             default -> throw new IllegalArgumentException("Некорректный ввод!\n");
         }
     }
