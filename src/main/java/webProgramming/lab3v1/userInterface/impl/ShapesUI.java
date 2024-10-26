@@ -50,6 +50,7 @@ public class ShapesUI implements UserInterface {
                 if (command == 'q') {
                     break;
                 }
+
                 switch (command) {
                     case '1' -> manageShapeCreating();
                     case '2' -> manageDataShowing();
@@ -62,9 +63,12 @@ public class ShapesUI implements UserInterface {
                     case '5' -> {
                         _ioHandler.write("Введите название фигуры: ");
                         String shapeName = _ioHandler.read();
+
                         _ioHandler.write("Введите новый цвет: ");
                         String newColor = _ioHandler.read();
+
                         Shape foundShape = Shape.findShapeByName(shapeName);
+
                         boolean editResult = Shape.editColor(foundShape, newColor);
                         if(editResult){
                             _ioHandler.write("Цвет фигуры изменен: " + foundShape.getInfo());
@@ -107,17 +111,22 @@ public class ShapesUI implements UserInterface {
 
         if (command == '1' || command == '2' || command == '3') {
             Shape shape = null;
+
             _ioHandler.write("Введите название фигуры: ");
             String shapeName = _ioHandler.read();
+
             _ioHandler.write("Введите цвет фигуры: ");
             String shapeColor = _ioHandler.read();
+
             _ioHandler.write("Введите длины фигуры: ");
             List<Double> sides = Arrays.stream(_ioHandler.read().split(" ")).map(Double::parseDouble).toList();
+
             switch (command) {
                 case '1' -> shape = Triangle.of(shapeName, shapeColor, sides);
                 case '2' -> shape = Rectangle.of(shapeName, shapeColor, sides);
                 case '3' -> shape = RegularHexagon.of(shapeName, shapeColor, sides);
             }
+
             if (Shape.findShapeByName(shapeName) == null) {
                 Shape.shapes.add(shape);
             } else {
@@ -148,7 +157,9 @@ public class ShapesUI implements UserInterface {
             case '1' -> {
                 _ioHandler.write("Введите название фигуры: ");
                 String name = _ioHandler.read();
+
                 Shape foundShape = Shape.findShapeByName(name);
+
                 if (foundShape != null) {
                     _ioHandler.writeLine(foundShape.getInfo());
                 } else {
@@ -166,6 +177,7 @@ public class ShapesUI implements UserInterface {
             }
             case '3' -> {
                 String info = Shape.getAllShapesInfo();
+
                 if(info.isBlank()) {
                     _ioHandler.write("Фигур нет!");
                 }else {
