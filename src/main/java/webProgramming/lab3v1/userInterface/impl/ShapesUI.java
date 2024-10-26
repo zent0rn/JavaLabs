@@ -69,7 +69,13 @@ public class ShapesUI implements UserInterface {
                         String shapeName = _ioHandler.read();
                         _ioHandler.write("Введите новый цвет: ");
                         String newColor = _ioHandler.read();
-                        _ioHandler.writeLine(Shape.editColor(shapeName, newColor));
+                        Shape foundShape = Shape.findShapeByName(shapeName);
+                        boolean editResult = Shape.editColor(foundShape, newColor);
+                        if(editResult){
+                            _ioHandler.write("Цвет фигуры изменен: " + foundShape.getInfo());
+                        }else{
+                            _ioHandler.write("Цвет фигуры не изменен!");
+                        }
                     }
                     default -> throw new RuntimeException("Некорректная команда!");
                 }

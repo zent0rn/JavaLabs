@@ -194,17 +194,15 @@ public abstract class Shape {
     /**
      * Метод необходим для редактирования цвета фигуры
      *
-     * @param shapeName имя фигуры
+     * @param shape фигура
      * @param newColor  новый цвет
-     * @return результат изменения цвета
+     * @return результат изменения цвета (true - цвет изменен, false - цвет не изменен)
      */
-    public static String editColor(String shapeName, String newColor) {
-        Shape foundShape = Shape.findShapeByName(shapeName);
-        if (foundShape == null) {
-            throw new IllegalArgumentException("Фигура " + shapeName + " не найдена!");
+    public static boolean editColor(Shape shape, String newColor) {
+        if (shape == null) {
+            return false;
         }
-        foundShape.setColor(newColor);
-        return "Фигура изменена: " + foundShape.getInfo();
-
+        shape.setColor(newColor);
+        return true;
     }
 }
