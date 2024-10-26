@@ -57,6 +57,10 @@ public class ShapesUI implements UserInterface {
                     case '3' -> _ioHandler.writeLine("Средний периметр фигур с количеством сторон больше 5: "
                             + Shape.getAveragePerimeterOfPolygon() + "\n");
                     case '4' -> {
+                        if(Shape.shapes.isEmpty()){
+                            _ioHandler.write("Фигур нет");
+                            break;
+                        }
                         Shape.sortShapesBySquare();
                         _ioHandler.writeLine(Shape.getAllShapesInfo());
                     }
