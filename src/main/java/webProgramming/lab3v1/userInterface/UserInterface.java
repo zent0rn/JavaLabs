@@ -6,7 +6,7 @@ package webProgramming.lab3v1.userInterface;
  */
 public interface UserInterface {
     /**
-     * метод, запускающий пользовательский интерфейс
+     * Запускает пользовательский интерфейс
      */
     void run();
 }

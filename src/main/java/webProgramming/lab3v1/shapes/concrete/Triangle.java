@@ -49,7 +49,7 @@ public class Triangle extends Shape {
     }
 
     /**
-     * Статический метод вычисляет значения полей и
+     * Вычисляет значения полей и
      * проверяет их корректность, а затем возвращает созданный треугольник
      *
      * @param nameTriangle имя треугольника
@@ -75,7 +75,7 @@ public class Triangle extends Shape {
         double sum1 = a + b;
         double sum2 = a + c;
         double sum3 = b + c;
-        if (a + b <= c || a + c <= b || b + c <= a) {
+        if (sum1 <= c || sum2 <= b || sum3 <= a) {
             throw new IllegalArgumentException("Сумма длин любых двух сторон должна быть больше длины третьей!");
         }
         if (a <= 0 || b <= 0 || c <= 0) {
@@ -95,7 +95,7 @@ public class Triangle extends Shape {
     }
 
     /**
-     * Метод необходим для вычисления площади треугольника
+     * Вычисляет площадь треугольника
      *
      * @return Площадь треугольника
      */
@@ -111,7 +111,7 @@ public class Triangle extends Shape {
     }
 
     /**
-     * Метод необходим для получения информации о полях данного треугольника
+     * Возвращает информацию о полях данного треугольника
      *
      * @return string - значения полей треугольника
      */

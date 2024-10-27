@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class Rectangle extends Shape {
     /**
-     * число сторон прямоугольника
+     * Число сторон прямоугольника
      */
     private static final int COUNT_SIDES = 4;
 
@@ -22,7 +22,7 @@ public class Rectangle extends Shape {
     }
 
     /**
-     * конструктор с параметрами для класса Rectangle
+     * Конструктор с параметрами для класса Rectangle
      *
      * @param nameOfShape   имя прямоугольника
      * @param color         цвет прямоугольника
@@ -62,7 +62,7 @@ public class Rectangle extends Shape {
     }
 
     /**
-     * Метод вычисляет площадь прямоугольника
+     * Вычисляет площадь прямоугольника
      *
      * @return площадь прямоугольника
      */
@@ -72,7 +72,7 @@ public class Rectangle extends Shape {
     }
 
     /**
-     * Метод необходим для получения информации о полях данного прямоугольника
+     * Возвращает информацию о полях данного прямоугольника
      *
      * @return string - значения полей прямоугольника
      */
