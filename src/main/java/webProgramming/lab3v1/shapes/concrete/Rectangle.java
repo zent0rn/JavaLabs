@@ -15,6 +15,16 @@ public class Rectangle extends Shape {
     private static final int COUNT_SIDES = 4;
 
     /**
+     * Число осей симметрии прямоугольника
+     */
+    private static final int _axisOfSymmetry = 2;
+
+    /**
+     * Сумма углов прямоугольника (в градусах)
+     */
+    private static final int _sumOfAngles = 360;
+
+    /**
      * Конструктор по умолчанию
      */
     public Rectangle(){
@@ -78,13 +88,9 @@ public class Rectangle extends Shape {
      */
     @Override
     public String getInfo() {
-        return "Rectangle{" +
-                "_nameOfShape='" + _nameOfShape + '\'' +
-                ", _color='" + _color + '\'' +
-                ", _square=" + _square +
-                ", _perimeter=" + _perimeter +
-                ", _countOfSides=" + _countOfSides +
-                ", _lengthOfSides=" + _lengthOfSides +
-                '}';
+        return "Rectangle{"
+                + "axisOfSymmetry=" + _axisOfSymmetry +
+                ", sumOfAngles=" + _sumOfAngles + ", " +
+                super.getInfo();
     }
 }

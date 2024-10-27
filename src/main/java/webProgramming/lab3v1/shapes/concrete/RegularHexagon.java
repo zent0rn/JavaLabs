@@ -15,6 +15,16 @@ public class RegularHexagon extends Shape {
     private static final int COUNT_SIDES = 6;
 
     /**
+     * Число осей симметрии шестиугольника
+     */
+    private static final int _axisOfSymmetry = 6;
+
+    /**
+     * Сумма углов шестиугольника (в градусах)
+     */
+    private static final int _sumOfAngles = 720;
+
+    /**
      * Конструктор по умолчанию
      */
     public RegularHexagon(){
@@ -73,12 +83,8 @@ public class RegularHexagon extends Shape {
     @Override
     public String getInfo() {
         return "RegularHexagon{" +
-                "_nameOfShape='" + _nameOfShape + '\'' +
-                ", _color='" + _color + '\'' +
-                ", _square=" + _square +
-                ", _perimeter=" + _perimeter +
-                ", _countOfSides=" + _countOfSides +
-                ", _lengthOfSides=" + _lengthOfSides +
-                '}';
+                "_axisOfSymmetry=" + _axisOfSymmetry +
+                ", _sumOfAngles=" + _sumOfAngles + ", " +
+                super.getInfo();
     }
 }

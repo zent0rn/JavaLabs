@@ -45,7 +45,6 @@ public class ShapesUI implements UserInterface {
                         [5] Изменить цвет фигуры
                         [q] Выход
                         """);
-                _ioHandler.write("Выберите команду: ");
                 char command = pickCommand();
                 if (command == 'q') {
                     break;
@@ -153,7 +152,6 @@ public class ShapesUI implements UserInterface {
                         [3] Вывести всю информацию о всех фигурах
                         """
         );
-        _ioHandler.write("Выберите команду: ");
 
         char command = pickCommand();
 

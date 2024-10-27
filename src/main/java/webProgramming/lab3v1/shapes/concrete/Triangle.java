@@ -15,6 +15,16 @@ public class Triangle extends Shape {
     private static final int COUNT_SIDES = 3;
 
     /**
+     * Число осей симметрии треугольника
+     */
+    private final int _axisOfSymmetry;
+
+    /**
+     * Сумма углов треугольника (в градусах)
+     */
+    private static final int _sumOfAngles = 180;
+
+    /**
      * Логическая переменная, определяющая, является ли треугольник равносторонним
      */
     private final boolean _isEquilateral;
@@ -29,6 +39,7 @@ public class Triangle extends Shape {
      */
     public Triangle(){
         super("", "", COUNT_SIDES, new ArrayList<>());
+        _axisOfSymmetry = 0;
         _isIsosceles = false;
         _isEquilateral = false;
     }
@@ -42,8 +53,9 @@ public class Triangle extends Shape {
      * @param isIsosceles   является ли треугольник равнобедренным
      * @param isEquilateral является ли треугольник равносторонним
      */
-    private Triangle(String nameOfShape, String color, List<Double> lengthOfSides, boolean isIsosceles, boolean isEquilateral) {
+    private Triangle(String nameOfShape, String color, List<Double> lengthOfSides, int axisOfSymmetry, boolean isIsosceles, boolean isEquilateral) {
         super(nameOfShape, color, COUNT_SIDES, lengthOfSides);
+        _axisOfSymmetry = axisOfSymmetry;
         _isIsosceles = isIsosceles;
         _isEquilateral = isEquilateral;
     }
@@ -81,17 +93,19 @@ public class Triangle extends Shape {
         if (a <= 0 || b <= 0 || c <= 0) {
             throw new IllegalArgumentException("Длина стороны должна быть положительной!");
         }
-
+        int axisOfSymmetry = 0;
         boolean isIsosceles = false;
         boolean isEquilateral = false;
         if (a == b || b == c || a == c) {
             isIsosceles = true;
+            axisOfSymmetry = 1;
         }
         if (b == c && a == c) {
             isEquilateral = true;
+            axisOfSymmetry = 2;
         }
 
-        return new Triangle(nameTriangle, color, List.of(a, b, c), isIsosceles, isEquilateral);
+        return new Triangle(nameTriangle, color, List.of(a, b, c), axisOfSymmetry, isIsosceles, isEquilateral);
     }
 
     /**
@@ -118,14 +132,10 @@ public class Triangle extends Shape {
     @Override
     public String getInfo() {
         return "Triangle{" +
-                "_isEquilateral=" + _isEquilateral +
-                ", _isIsosceles=" + _isIsosceles +
-                ", _nameOfShape='" + _nameOfShape + '\'' +
-                ", _color='" + _color + '\'' +
-                ", _square=" + _square +
-                ", _perimeter=" + _perimeter +
-                ", _countOfSides=" + _countOfSides +
-                ", _lengthOfSides=" + _lengthOfSides +
-                '}';
+                "_axisOfSymmetry=" + _axisOfSymmetry +
+                ", sumOfAngles=" + _sumOfAngles +
+                ", _isEquilateral=" + _isEquilateral +
+                ", _isIsosceles=" + _isIsosceles + ", " +
+                super.getInfo();
     }
 }

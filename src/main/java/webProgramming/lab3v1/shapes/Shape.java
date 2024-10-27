@@ -162,7 +162,15 @@ public abstract class Shape {
      *
      * @return информация о фигуре (тип, название, цвет, площадь и т.д.)
      */
-    public abstract String getInfo();
+    public String getInfo() {
+        return "_nameOfShape='" + _nameOfShape + '\'' +
+                ", _color='" + _color + '\'' +
+                ", _square=" + _square +
+                ", _perimeter=" + _perimeter +
+                ", _countOfSides=" + _countOfSides +
+                ", _lengthOfSides=" + _lengthOfSides +
+                '}';
+    }
 
     /**
      * Геттер для поля _nameOfShape
