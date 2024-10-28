@@ -15,14 +15,14 @@ public class RegularHexagon extends Shape {
     private static final int COUNT_SIDES = 6;
 
     /**
-     * Число осей симметрии шестиугольника
+     * Диагональ правильного шестиугольника
      */
-    private static final int _axisOfSymmetry = 6;
+    private final double _diagonal = super._lengthOfSides.get(0) * 2;
 
     /**
-     * Сумма углов шестиугольника (в градусах)
+     * Радиус описанной около шестиугольника окружности
      */
-    private static final int _sumOfAngles = 720;
+    private final double _radOfCircumscribedCircle = super._lengthOfSides.get(0);
 
     /**
      * Конструктор по умолчанию
@@ -83,8 +83,9 @@ public class RegularHexagon extends Shape {
     @Override
     public String getInfo() {
         return "RegularHexagon{" +
-                "_axisOfSymmetry=" + _axisOfSymmetry +
-                ", _sumOfAngles=" + _sumOfAngles + ", " +
+                "_diagonal=" + _diagonal +
+                "_radOfCircumscribedCircle=" + _radOfCircumscribedCircle +
+                 ", " +
                 super.getInfo();
     }
 }

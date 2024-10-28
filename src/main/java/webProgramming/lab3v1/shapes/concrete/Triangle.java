@@ -15,14 +15,14 @@ public class Triangle extends Shape {
     private static final int COUNT_SIDES = 3;
 
     /**
-     * Число осей симметрии треугольника
+     * Радиус вписанной в треугольник окружности
      */
-    private final int _axisOfSymmetry;
+    private final double _radOfCircumscribedCircle;
 
     /**
-     * Сумма углов треугольника (в градусах)
+     * Высота треугольника, проведенная к основанию
      */
-    private static final int _sumOfAngles = 180;
+    private final double _heightDrawnBase = (2*super._square) / super._lengthOfSides.get(1);
 
     /**
      * Логическая переменная, определяющая, является ли треугольник равносторонним
@@ -39,7 +39,7 @@ public class Triangle extends Shape {
      */
     public Triangle(){
         super("", "", COUNT_SIDES, new ArrayList<>());
-        _axisOfSymmetry = 0;
+        _radOfCircumscribedCircle = 0;
         _isIsosceles = false;
         _isEquilateral = false;
     }
@@ -53,9 +53,9 @@ public class Triangle extends Shape {
      * @param isIsosceles   является ли треугольник равнобедренным
      * @param isEquilateral является ли треугольник равносторонним
      */
-    private Triangle(String nameOfShape, String color, List<Double> lengthOfSides, int axisOfSymmetry, boolean isIsosceles, boolean isEquilateral) {
+    private Triangle(String nameOfShape, String color, List<Double> lengthOfSides, double radOfCircumscribedCircle, boolean isIsosceles, boolean isEquilateral) {
         super(nameOfShape, color, COUNT_SIDES, lengthOfSides);
-        _axisOfSymmetry = axisOfSymmetry;
+        _radOfCircumscribedCircle = radOfCircumscribedCircle;
         _isIsosceles = isIsosceles;
         _isEquilateral = isEquilateral;
     }
@@ -83,6 +83,7 @@ public class Triangle extends Shape {
         double a = sides.get(0);
         double b = sides.get(1);
         double c = sides.get(2);
+        double p = (a + b + c) / 2;
 
         double sum1 = a + b;
         double sum2 = a + c;
@@ -93,19 +94,18 @@ public class Triangle extends Shape {
         if (a <= 0 || b <= 0 || c <= 0) {
             throw new IllegalArgumentException("Длина стороны должна быть положительной!");
         }
-        int axisOfSymmetry = 0;
         boolean isIsosceles = false;
         boolean isEquilateral = false;
         if (a == b || b == c || a == c) {
             isIsosceles = true;
-            axisOfSymmetry = 1;
         }
         if (b == c && a == c) {
             isEquilateral = true;
-            axisOfSymmetry = 2;
-        }
 
-        return new Triangle(nameTriangle, color, List.of(a, b, c), axisOfSymmetry, isIsosceles, isEquilateral);
+        }
+        double radOfCircumscribedCircle = (a * b * c) / (4 * Math.sqrt(p * (p - a) * (p - b) * (p - c)));
+
+        return new Triangle(nameTriangle, color, List.of(a, b, c), radOfCircumscribedCircle, isIsosceles, isEquilateral);
     }
 
     /**
@@ -132,8 +132,8 @@ public class Triangle extends Shape {
     @Override
     public String getInfo() {
         return "Triangle{" +
-                "_axisOfSymmetry=" + _axisOfSymmetry +
-                ", sumOfAngles=" + _sumOfAngles +
+                "_radOfCircumscribedCircle=" + _radOfCircumscribedCircle +
+                ", _heightDrawnBase=" + _heightDrawnBase +
                 ", _isEquilateral=" + _isEquilateral +
                 ", _isIsosceles=" + _isIsosceles + ", " +
                 super.getInfo();

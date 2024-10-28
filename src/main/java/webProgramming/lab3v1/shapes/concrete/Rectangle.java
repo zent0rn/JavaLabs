@@ -4,6 +4,7 @@ import webProgramming.lab3v1.shapes.Shape;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.lang.Math;
 
 /**
  * Класс-наследник необходим для создания объекта - прямоугольника
@@ -15,14 +16,15 @@ public class Rectangle extends Shape {
     private static final int COUNT_SIDES = 4;
 
     /**
-     * Число осей симметрии прямоугольника
+     * Диагональ прямоугольника
      */
-    private static final int _axisOfSymmetry = 2;
+    private final double _diagonal = Math.sqrt(Math.pow(super._lengthOfSides.get(0), 2) +
+             Math.pow(super._lengthOfSides.get(1), 2));
 
     /**
-     * Сумма углов прямоугольника (в градусах)
+     * Радиус описанной около прямоугольника окружности
      */
-    private static final int _sumOfAngles = 360;
+    private final double _radOfCircumscribedCircle = _diagonal / 2;
 
     /**
      * Конструктор по умолчанию
@@ -89,8 +91,8 @@ public class Rectangle extends Shape {
     @Override
     public String getInfo() {
         return "Rectangle{"
-                + "axisOfSymmetry=" + _axisOfSymmetry +
-                ", sumOfAngles=" + _sumOfAngles + ", " +
+                + "_diagonal=" + _diagonal +
+                ", _radiusOfCircumscribedCircle=" + _radOfCircumscribedCircle + ", " +
                 super.getInfo();
     }
 }
