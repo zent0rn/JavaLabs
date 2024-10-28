@@ -6,23 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Класс-наследник необходим для создания объекта - треугольника
+ * Класс-наследник представляет геометрическую фигуру - треугольник
  */
 public class Triangle extends Shape {
-    /**
-     * Число сторон треугольника
-     */
-    private static final int COUNT_SIDES = 3;
-
     /**
      * Радиус вписанной в треугольник окружности
      */
     private final double _radOfCircumscribedCircle;
-
-    /**
-     * Высота треугольника, проведенная к основанию
-     */
-    private final double _heightDrawnBase = (2*super._square) / super._lengthOfSides.get(1);
 
     /**
      * Логическая переменная, определяющая, является ли треугольник равносторонним
@@ -37,7 +27,7 @@ public class Triangle extends Shape {
     /**
      * Конструктор по умолчанию
      */
-    public Triangle(){
+    public Triangle() {
         super("", "", COUNT_SIDES, new ArrayList<>());
         _radOfCircumscribedCircle = 0;
         _isIsosceles = false;
@@ -59,6 +49,40 @@ public class Triangle extends Shape {
         _isIsosceles = isIsosceles;
         _isEquilateral = isEquilateral;
     }
+
+    /**
+     * Вычисляет площадь треугольника
+     *
+     * @return Площадь треугольника
+     */
+    @Override
+    public double calculateSquare() {
+        double a = _lengthOfSides.get(0);
+        double b = _lengthOfSides.get(1);
+        double c = _lengthOfSides.get(2);
+
+        double p = (a + b + c) / 2;
+
+        return Math.sqrt(p * (p - a) * (p - b) * (p - c));
+    }
+
+    /**
+     * Возвращает информацию о полях данного треугольника
+     *
+     * @return string - значения полей треугольника
+     */
+    @Override
+    public String getInfo() {
+        return "Triangle{ " + super.getInfo() +
+                " _radOfCircumscribedCircle=" + _radOfCircumscribedCircle +
+                ", _isEquilateral=" + _isEquilateral +
+                ", _isIsosceles=" + _isIsosceles + "}";
+    }
+
+    /**
+     * Число сторон треугольника
+     */
+    private static final int COUNT_SIDES = 3;
 
     /**
      * Вычисляет значения полей и
@@ -94,6 +118,7 @@ public class Triangle extends Shape {
         if (a <= 0 || b <= 0 || c <= 0) {
             throw new IllegalArgumentException("Длина стороны должна быть положительной!");
         }
+
         boolean isIsosceles = false;
         boolean isEquilateral = false;
         if (a == b || b == c || a == c) {
@@ -103,39 +128,9 @@ public class Triangle extends Shape {
             isEquilateral = true;
 
         }
+
         double radOfCircumscribedCircle = (a * b * c) / (4 * Math.sqrt(p * (p - a) * (p - b) * (p - c)));
 
         return new Triangle(nameTriangle, color, List.of(a, b, c), radOfCircumscribedCircle, isIsosceles, isEquilateral);
-    }
-
-    /**
-     * Вычисляет площадь треугольника
-     *
-     * @return Площадь треугольника
-     */
-    @Override
-    public double calculateSquare() {
-        double a = _lengthOfSides.get(0);
-        double b = _lengthOfSides.get(1);
-        double c = _lengthOfSides.get(2);
-
-        double p = (a + b + c) / 2;
-
-        return Math.sqrt(p * (p - a) * (p - b) * (p - c));
-    }
-
-    /**
-     * Возвращает информацию о полях данного треугольника
-     *
-     * @return string - значения полей треугольника
-     */
-    @Override
-    public String getInfo() {
-        return "Triangle{" +
-                "_radOfCircumscribedCircle=" + _radOfCircumscribedCircle +
-                ", _heightDrawnBase=" + _heightDrawnBase +
-                ", _isEquilateral=" + _isEquilateral +
-                ", _isIsosceles=" + _isIsosceles + ", " +
-                super.getInfo();
     }
 }

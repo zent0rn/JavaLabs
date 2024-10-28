@@ -8,11 +8,6 @@ import java.util.List;
  */
 public abstract class Shape {
     /**
-     * Список - хранилище фигур
-     */
-    public static List<Shape> shapes = new ArrayList<>();
-
-    /**
      * Имя фигуры
      */
     protected String _nameOfShape;
@@ -65,7 +60,7 @@ public abstract class Shape {
     }
 
     /**
-     * Абстрактный метод вычисления площади фигуры
+     * Вычисляет площадь фигуры
      *
      * @return - значение площади фигуры
      */
@@ -130,34 +125,6 @@ public abstract class Shape {
     }
 
     /**
-     * Ищет в списке фигуру с определенным именем
-     *
-     * @param name имя, по которому будет искаться фигура в списке
-     * @return shape - фигура с именем name
-     */
-    public static Shape findShapeByName(String name) {
-        for (Shape shape : shapes) {
-            if (shape._nameOfShape.equals(name)) {
-                return shape;
-            }
-        }
-        return null;
-    }
-
-    /**
-     * Возвращает информацию о созданых фигурах
-     *
-     * @return информация о всех фигурах из списка (тип, название, цвет, площадь и т. д.)
-     */
-    public static String getAllShapesInfo() {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (Shape shape : shapes) {
-            stringBuilder.append(shape.getInfo()).append('\n');
-        }
-        return stringBuilder.toString();
-    }
-
-    /**
      * Возвращает информацию о фигуре
      *
      * @return информация о фигуре (тип, название, цвет, площадь и т.д.)
@@ -168,32 +135,31 @@ public abstract class Shape {
                 ", _square=" + _square +
                 ", _perimeter=" + _perimeter +
                 ", _countOfSides=" + _countOfSides +
-                ", _lengthOfSides=" + _lengthOfSides +
-                '}';
+                ", _lengthOfSides=" + _lengthOfSides;
     }
 
     /**
-     * Геттер для поля _nameOfShape
+     * Возвращает значение поля _nameOfShape
      *
-     * @return _nameOfShape - имя фигуры
+     * @return _nameOfShape имя фигуры
      */
     public String getNameOfShape() {
         return _nameOfShape;
     }
 
     /**
-     * Геттер для поля _square
+     * Возвращает значение поля _square
      *
-     * @return _square - площадь фигуры
+     * @return _square площадь фигуры
      */
     public double getSquare() {
         return _square;
     }
 
     /**
-     * Сеттер для поля _color
+     * Устанавливает новое значение для поля {@code _color}
      *
-     * @param color - новый цвет фигуры
+     * @param color новый цвет фигуры
      */
     public void setColor(String color) {
         this._color = color;
@@ -213,4 +179,37 @@ public abstract class Shape {
         shape.setColor(newColor);
         return true;
     }
+
+    /**
+     * Возвращает информацию о созданых фигурах
+     *
+     * @return информация о всех фигурах из списка (тип, название, цвет, площадь и т. д.)
+     */
+    public static String getAllShapesInfo() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Shape shape : shapes) {
+            stringBuilder.append(shape.getInfo()).append('\n');
+        }
+        return stringBuilder.toString();
+    }
+
+    /**
+     * Ищет в списке фигуру с определенным именем
+     *
+     * @param name имя, по которому будет искаться фигура в списке
+     * @return shape - фигура с именем name
+     */
+    public static Shape findShapeByName(String name) {
+        for (Shape shape : shapes) {
+            if (shape._nameOfShape.equals(name)) {
+                return shape;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Список - хранилище фигур
+     */
+    public static List<Shape> shapes = new ArrayList<>();
 }

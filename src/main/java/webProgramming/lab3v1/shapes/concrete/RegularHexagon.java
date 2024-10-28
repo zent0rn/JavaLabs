@@ -6,29 +6,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Класс-наследник необходим для создания объекта - правильного шестиугольника
+ * Класс-наследник представляет геометрическую фигуру - правильный шестиугольник
  */
 public class RegularHexagon extends Shape {
     /**
-     * Число сторон шестиугольника
+     * Большая диагональ правильного шестиугольника
      */
-    private static final int COUNT_SIDES = 6;
+    private final double _largerDiagonal;
 
     /**
-     * Диагональ правильного шестиугольника
+     * Меньшая диагональ правильного шестиугольника
      */
-    private final double _diagonal = super._lengthOfSides.get(0) * 2;
-
-    /**
-     * Радиус описанной около шестиугольника окружности
-     */
-    private final double _radOfCircumscribedCircle = super._lengthOfSides.get(0);
+    private final double _smallerDiagonal;
 
     /**
      * Конструктор по умолчанию
      */
-    public RegularHexagon(){
+    public RegularHexagon() {
         super("", "", COUNT_SIDES, new ArrayList<>());
+        _largerDiagonal = 0;
+        _smallerDiagonal = 0;
     }
 
     /**
@@ -38,9 +35,44 @@ public class RegularHexagon extends Shape {
      * @param color         цвет шестиугольника
      * @param lengthOfSides длины сторон шестиугольника
      */
-    public RegularHexagon(String nameOfShape, String color, List<Double> lengthOfSides) {
+    public RegularHexagon(String nameOfShape,
+                          String color,
+                          List<Double> lengthOfSides,
+                          double largerDiagonal,
+                          double smallerDiagonal
+    ) {
         super(nameOfShape, color, COUNT_SIDES, lengthOfSides);
+        _largerDiagonal = largerDiagonal;
+        _smallerDiagonal = smallerDiagonal;
     }
+
+    /**
+     * Вычисляет площадь шестиугольника
+     *
+     * @return площадь шестиугольника
+     */
+    @Override
+    public double calculateSquare() {
+        return (3 * Math.pow(_lengthOfSides.getFirst(), 2) * Math.sqrt(3) / 2);
+    }
+
+    /**
+     * Возвращает информацию о полях данного шестиугольника
+     *
+     * @return string - значения полей шестиугольника
+     */
+    @Override
+    public String getInfo() {
+        return "RegularHexagon{ " + super.getInfo() +
+                " _diagonal=" + _largerDiagonal +
+                "_radOfCircumscribedCircle=" + _smallerDiagonal +
+                "}";
+    }
+
+    /**
+     * Число сторон шестиугольника
+     */
+    private static final int COUNT_SIDES = 6;
 
     /**
      * Вычисляет значения полей и
@@ -62,30 +94,15 @@ public class RegularHexagon extends Shape {
             throw new IllegalArgumentException("Для правильного пятиугольника необходима длина только одной стороны!");
         }
         double side = sides.getFirst();
-        return new RegularHexagon(nameRegularHexagon, color, List.of(side, side, side, side, side, side));
-    }
 
-    /**
-     * Вычисляет площадь шестиугольника
-     *
-     * @return площадь шестиугольника
-     */
-    @Override
-    public double calculateSquare() {
-        return (3 * Math.pow(_lengthOfSides.getFirst(), 2) * Math.sqrt(3) / 2);
-    }
-
-    /**
-     * Возвращает информацию о полях данного шестиугольника
-     *
-     * @return string - значения полей шестиугольника
-     */
-    @Override
-    public String getInfo() {
-        return "RegularHexagon{" +
-                "_diagonal=" + _diagonal +
-                "_radOfCircumscribedCircle=" + _radOfCircumscribedCircle +
-                 ", " +
-                super.getInfo();
+        double largerDiagonal = side * 2;
+        double smallerDiagonal = side * Math.sqrt(3);
+        return new RegularHexagon(
+                nameRegularHexagon,
+                color,
+                List.of(side, side, side, side, side, side),
+                largerDiagonal,
+                smallerDiagonal
+        );
     }
 }

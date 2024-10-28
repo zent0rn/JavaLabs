@@ -7,30 +7,26 @@ import java.util.List;
 import java.lang.Math;
 
 /**
- * Класс-наследник необходим для создания объекта - прямоугольника
+ * Класс-наследник представляет геометрическую фигуру - прямоугольник
  */
 public class Rectangle extends Shape {
     /**
-     * Число сторон прямоугольника
-     */
-    private static final int COUNT_SIDES = 4;
-
-    /**
      * Диагональ прямоугольника
      */
-    private final double _diagonal = Math.sqrt(Math.pow(super._lengthOfSides.get(0), 2) +
-             Math.pow(super._lengthOfSides.get(1), 2));
+    private final double _diagonal;
 
     /**
-     * Радиус описанной около прямоугольника окружности
+     * Прямоугольник - квадрат
      */
-    private final double _radOfCircumscribedCircle = _diagonal / 2;
+    private final boolean _isSquare;
 
     /**
      * Конструктор по умолчанию
      */
     public Rectangle(){
         super("", "", COUNT_SIDES, new ArrayList<>());
+        _diagonal = 0;
+        _isSquare = false;
     }
 
     /**
@@ -40,13 +36,42 @@ public class Rectangle extends Shape {
      * @param color         цвет прямоугольника
      * @param lengthOfSides длины сторон прямоугольника
      */
-    public Rectangle(String nameOfShape, String color, List<Double> lengthOfSides) {
+    public Rectangle(String nameOfShape, String color, List<Double> lengthOfSides, double diagonal, boolean isSquare) {
         super(nameOfShape, color, COUNT_SIDES, lengthOfSides);
+        _diagonal = diagonal;
+        _isSquare = isSquare;
     }
 
     /**
-     * Статический метод вычисляет значения полей и
-     * проверяет их корректность, а затем возвращает созданный прямоугольник
+     * Вычисляет площадь прямоугольника
+     *
+     * @return площадь прямоугольника
+     */
+    @Override
+    public double calculateSquare() {
+        return _lengthOfSides.get(0) * _lengthOfSides.get(1);
+    }
+
+    /**
+     * Возвращает информацию о полях данного прямоугольника
+     *
+     * @return string - значения полей прямоугольника
+     */
+    @Override
+    public String getInfo() {
+        return "Rectangle{ " + super.getInfo()
+                + " _diagonal=" + _diagonal +
+                ", _isSquare=" + _isSquare + "}";
+    }
+
+    /**
+     * Число сторон прямоугольника
+     */
+    private static final int COUNT_SIDES = 4;
+
+    /**
+     * Вычисляет значения полей и проверяет их корректность,
+     * а затем возвращает созданный прямоугольник
      *
      * @param nameRectangle имя прямоугольника
      * @param color         цвет прямоугольника
@@ -70,29 +95,11 @@ public class Rectangle extends Shape {
         if (height <= 0 || width <= 0) {
             throw new IllegalArgumentException("Длина и ширина прямоугольника должны быть положительными!");
         }
-        return new Rectangle(nameRectangle, color, List.of(height, width, height, width));
-    }
 
-    /**
-     * Вычисляет площадь прямоугольника
-     *
-     * @return площадь прямоугольника
-     */
-    @Override
-    public double calculateSquare() {
-        return _lengthOfSides.get(0) * _lengthOfSides.get(1);
-    }
+        double diagonal = Math.sqrt(Math.pow(sides.get(0), 2) + Math.pow(sides.get(1), 2));
 
-    /**
-     * Возвращает информацию о полях данного прямоугольника
-     *
-     * @return string - значения полей прямоугольника
-     */
-    @Override
-    public String getInfo() {
-        return "Rectangle{"
-                + "_diagonal=" + _diagonal +
-                ", _radiusOfCircumscribedCircle=" + _radOfCircumscribedCircle + ", " +
-                super.getInfo();
+        boolean isSquare = (height == width);
+
+        return new Rectangle(nameRectangle, color, List.of(height, width, height, width), diagonal, isSquare);
     }
 }
