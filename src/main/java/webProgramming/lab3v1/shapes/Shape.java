@@ -4,34 +4,46 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * абстрактный класс Shape
- * необходим для реализации фигур
+ * Класс необходим для реализации фигур
  */
 public abstract class Shape {
-    /** имя фигуры */
+    /**
+     * Имя фигуры
+     */
     protected String _nameOfShape;
 
-    /** цвет фигуры */
+    /**
+     * Цвет фигуры
+     */
     protected String _color;
 
-    /** площадь фигуры */
+    /**
+     * Площадь фигуры
+     */
     protected final double _square;
 
-    /** периметр фигуры */
+    /**
+     * Периметр фигуры
+     */
     protected final double _perimeter;
 
-    /** количество сторон фигуры */
+    /**
+     * Количество сторон фигуры
+     */
     protected final int _countOfSides;
 
-    /** список с длинами сторон фигуры */
+    /**
+     * Список с длинами сторон фигуры
+     */
     protected final List<Double> _lengthOfSides;
 
     /**
-     * конструктор абстрактного класса Shape с параметрами
-     * @param nameOfShape - имя фигуры
-     * @param color - цвет фигуры
-     * @param countOfSides - число сторон фигуры
-     * @param lengthOfSides - длины сторон фигуры
+     * Конструктор с параметрами
+     *
+     * @param nameOfShape   имя фигуры
+     * @param color         цвет фигуры
+     * @param countOfSides  число сторон фигуры
+     * @param lengthOfSides длины сторон фигуры
      */
     public Shape(
             String nameOfShape,
@@ -48,13 +60,15 @@ public abstract class Shape {
     }
 
     /**
-     * абстрактный метод, впоследствии будет реализовываться как метод вычисления площади
-     * @return -
+     * Вычисляет площадь фигуры
+     *
+     * @return - значение площади фигуры
      */
     public abstract double calculateSquare();
 
     /**
-     * метод вычисляет периметр некоторой фигуры
+     * Вычисляет периметр фигуры
+     *
      * @return perimeter - периметр фигуры
      */
     public double calculatePerimeter() {
@@ -66,11 +80,11 @@ public abstract class Shape {
     }
 
     /**
-     * метод необходим для получения площади фигур из списка фигур
-     * @param shapes - список фигур
+     * Возвращает площади фигур из списка фигур
+     *
      * @return squares - список площадей фигур
      */
-    public static List<Double> getSquares(List<Shape> shapes) {
+    public static List<Double> getSquares() {
         List<Double> squares = new ArrayList<>(shapes.size());
         for (int i = 0; i < shapes.size(); i++) {
             squares.set(i, shapes.get(i)._square);
@@ -79,11 +93,11 @@ public abstract class Shape {
     }
 
     /**
-     * метод вычисляет средний периметр фигур из списка
-     * @param shapes - список фигур
-     * @return sumOfPeremiters / count - средний периметр фигур
+     * Вычисляет средний периметр фигур, количество сторон которых больше 5
+     *
+     * @return средний периметр фигур
      */
-    public static double getAveragePerimeterOfPolygon(List<Shape> shapes) {
+    public static double getAveragePerimeterOfPolygon() {
         int count = 0;
         double sumOfPeremiters = 0;
         for (Shape shape : shapes) {
@@ -92,14 +106,13 @@ public abstract class Shape {
                 sumOfPeremiters += shape._perimeter;
             }
         }
-        return sumOfPeremiters / count;
+        return (count == 0 ? 0.0 : sumOfPeremiters / count);
     }
 
     /**
-     * метод сортирует список фигур по возрастанию площади (метод пузырька)
-     * @param shapes - список фигур
+     * Сортирует список фигур по возрастанию площади (методом пузырька)
      */
-    public static void sortShapesBySquare(List<Shape> shapes) {
+    public static void sortShapesBySquare() {
         for (int i = 0; i + 1 < shapes.size(); ++i) {
             for (int j = 0; j + 1 < shapes.size() - i; ++j) {
                 if (shapes.get(j + 1)._square < shapes.get(j)._square) {
@@ -112,12 +125,81 @@ public abstract class Shape {
     }
 
     /**
-     * метод ищет в списке фигуру с определенным именем
-     * @param shapes - список фигур
-     * @param name - имя, по которому будет искаться фигура в списке
+     * Возвращает информацию о фигуре
+     *
+     * @return информация о фигуре (тип, название, цвет, площадь и т.д.)
+     */
+    public String getInfo() {
+        return "_nameOfShape='" + _nameOfShape + '\'' +
+                ", _color='" + _color + '\'' +
+                ", _square=" + _square +
+                ", _perimeter=" + _perimeter +
+                ", _countOfSides=" + _countOfSides +
+                ", _lengthOfSides=" + _lengthOfSides;
+    }
+
+    /**
+     * Возвращает значение поля _nameOfShape
+     *
+     * @return _nameOfShape имя фигуры
+     */
+    public String getNameOfShape() {
+        return _nameOfShape;
+    }
+
+    /**
+     * Возвращает значение поля _square
+     *
+     * @return _square площадь фигуры
+     */
+    public double getSquare() {
+        return _square;
+    }
+
+    /**
+     * Устанавливает новое значение для поля {@code _color}
+     *
+     * @param color новый цвет фигуры
+     */
+    public void setColor(String color) {
+        this._color = color;
+    }
+
+    /**
+     * Редактирует цвет фигуры
+     *
+     * @param shape фигура
+     * @param newColor  новый цвет
+     * @return результат изменения цвета (true - цвет изменен, false - цвет не изменен)
+     */
+    public static boolean editColor(Shape shape, String newColor) {
+        if (shape == null) {
+            return false;
+        }
+        shape.setColor(newColor);
+        return true;
+    }
+
+    /**
+     * Возвращает информацию о созданых фигурах
+     *
+     * @return информация о всех фигурах из списка (тип, название, цвет, площадь и т. д.)
+     */
+    public static String getAllShapesInfo() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Shape shape : shapes) {
+            stringBuilder.append(shape.getInfo()).append('\n');
+        }
+        return stringBuilder.toString();
+    }
+
+    /**
+     * Ищет в списке фигуру с определенным именем
+     *
+     * @param name имя, по которому будет искаться фигура в списке
      * @return shape - фигура с именем name
      */
-    public static Shape findShapeByName(List<Shape> shapes, String name) {
+    public static Shape findShapeByName(String name) {
         for (Shape shape : shapes) {
             if (shape._nameOfShape.equals(name)) {
                 return shape;
@@ -127,77 +209,7 @@ public abstract class Shape {
     }
 
     /**
-     * метод необходим для получения информации о созданых фигурах
-     * @param storage - список созданных фигур
-     * @return stringBuilder.toString() - строчка с информацией о фигурах
+     * Список - хранилище фигур
      */
-    public static String getAllShapesInfo(List<Shape> storage) {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (Shape shape : storage) {
-            stringBuilder.append(shape.getInfo()).append('\n');
-        }
-        return stringBuilder.toString();
-    }
-
-    /**
-     * абстрактный метод, который будет реализовываться в классах-наследниках
-     * @return
-     */
-    public abstract String getInfo();
-
-    /**
-     * метод геттер для поля _nameOfShape
-     * @return _nameOfShape - имя фигуры
-     */
-    public String getNameOfShape() {
-        return _nameOfShape;
-    }
-
-    /**
-     * метод геттер для поля _square
-     * @return _square - площадь фигуры
-     */
-    public double getSquare() {
-        return _square;
-    }
-
-    /**
-     * метод геттер для поля _perimeter
-     * @return _perimeter - периметр фигуры
-     */
-    public double getPerimeter() {
-        return _perimeter;
-    }
-
-    /**
-     * метод геттер для поля _countOfSides
-     * @return _countOfSides - число сторон фигуры
-     */
-    public int getCountOfSides() {
-        return _countOfSides;
-    }
-
-    /**
-     * метод геттер для поля _lengthOfSides
-     * @return _lengthOfSides - список со сторонами фигуры
-     */
-    public List<Double> getLengthOfSides() {
-        return _lengthOfSides;
-    }
-
-    /**
-     * метод сеттер для поля _nameOfShape
-     * @param _nameOfShape - новое имя фигуры
-     */
-    public void setNameOfShape(String _nameOfShape) {
-        this._nameOfShape = _nameOfShape;
-    }
-
-    /**
-     * метод сеттер для поля _color
-     * @param color - новый цвет фигуры
-     */
-    public void setColor(String color) {
-        this._color = color;
-    }
+    public static List<Shape> shapes = new ArrayList<>();
 }

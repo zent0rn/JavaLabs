@@ -2,109 +2,191 @@ package webProgramming.lab3v1.userInterface.impl;
 
 import webProgramming.lab3v1.handlers.IOHandler;
 import webProgramming.lab3v1.handlers.impl.ConsoleHandler;
-import webProgramming.lab3v1.menus.Menu;
-import webProgramming.lab3v1.menus.impl.MainMenu;
 import webProgramming.lab3v1.shapes.Shape;
+import webProgramming.lab3v1.shapes.concrete.Rectangle;
+import webProgramming.lab3v1.shapes.concrete.RegularHexagon;
+import webProgramming.lab3v1.shapes.concrete.Triangle;
 import webProgramming.lab3v1.userInterface.UserInterface;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-/*
-[1] Создать фигуру
-    [1.1] Создать треугольник
-    [1.2] Создать прямоугольник
-    [1.3] Создать правильный шестиугольник
-        [1.3.1] Введите название
-        [1.3.2] Введите длину стороны
-[2] Вывести информацию
-    [2.1] Вывести информацию о фигуре
-        [2.1.2] Введите название фигуры
-    [2.2] Вывести информацию о площадях фигур
-    [2.3] Вывести всю информацию о всех фигурах
-[3] Определить средний размер периметра фигур с количеством сторон больше 5
-[4] Упорядочить массив по возрастанию площади
-[5] Изменить свойство фигуры
-    [5.1] Изменить название фигуры
-[q] Выход
- */
 
 /**
- * Класс ShapesUI позволяет
+ * Класс позволяет
  * взаимодействовать с пользователем для работы с
  * классами геометрических фигур
  */
 public class ShapesUI implements UserInterface {
+    /**
+     * Объект класса IOHandler позволяет взаимодействовать с потоками ввода/вывода
+     */
     private final IOHandler _ioHandler;
 
-    private List<Shape> _shapeStorage;
-
-    private Menu _menu;
-
-    private Shape _currentShape;
-
     /**
-     * конструктор по умолчанию
+     * Конструктор по умолчанию
      */
     public ShapesUI() {
         _ioHandler = new ConsoleHandler();
-        _shapeStorage = new ArrayList<>();
-        _menu = new MainMenu();
-        _currentShape = null;
     }
 
     /**
-     * метод run выводит созданные фигуры в консоль после выполнения каждой команды,
-     * а также проверяет, не введена ли команда "q", с помощью которой совершается
-     * выход из цикла
+     * Запускает сессию взаимодействия с пользователем:
+     * выводит на консоль возможные команды, получает запросы пользователя и делегирует их выполнение
+     * специальным классам
      */
     public void run() {
-        char command;
         do {
-            _ioHandler.write("Фигуры: \n");
-            _ioHandler.write(Shape.getAllShapesInfo(_shapeStorage));
-            _ioHandler.write(_menu.getMenu());
+            try {
+                _ioHandler.write("""
+                        [1] Создать фигуру
+                        [2] Вывести информацию
+                        [3] Определить средний размер периметра фигур с количеством сторон больше 5
+                        [4] Упорядочить массив по возрастанию площади
+                        [5] Изменить цвет фигуры
+                        [q] Выход
+                        """);
+                char command = pickCommand();
+                if (command == 'q') {
+                    break;
+                }
 
-            _ioHandler.write("Введите команду: ");
-            command = _ioHandler.read().charAt(0);
-            if (command == 'q') {
-                break;
+                switch (command) {
+                    case '1' -> manageShapeCreating();
+                    case '2' -> manageDataShowing();
+                    case '3' -> _ioHandler.writeLine("Средний периметр фигур с количеством сторон больше 5: "
+                            + Shape.getAveragePerimeterOfPolygon() + "\n");
+                    case '4' -> {
+                        if (Shape.shapes.isEmpty()) {
+                            _ioHandler.write("Фигур нет");
+                            break;
+                        }
+                        Shape.sortShapesBySquare();
+                        _ioHandler.writeLine(Shape.getAllShapesInfo());
+                    }
+                    case '5' -> {
+                        _ioHandler.write("Введите название фигуры: ");
+                        String shapeName = _ioHandler.read();
+
+                        _ioHandler.write("Введите новый цвет: ");
+                        String newColor = _ioHandler.read();
+
+                        Shape foundShape = Shape.findShapeByName(shapeName);
+
+                        boolean editResult = Shape.editColor(foundShape, newColor);
+                        if (editResult) {
+                            _ioHandler.write("Цвет фигуры изменен: " + foundShape.getInfo());
+                        } else {
+                            _ioHandler.write("Цвет фигуры не изменен!");
+                        }
+                    }
+                    default -> throw new RuntimeException("Некорректная команда!");
+                }
+            } catch (RuntimeException e) {
+                _ioHandler.writeLine(e.getMessage());
             }
-
-            _menu.handleMenu(this, command);
         } while (true);
         _ioHandler.write("Работа завершена!");
     }
 
-    /**
-     * метод сеттер для поля _menu
-     * @param menu -
-     */
-    public void setMenu(Menu menu) {
-        this._menu = menu;
+    private Character pickCommand() {
+        _ioHandler.write("Выберите команду: ");
+        String toRead = _ioHandler.read();
+        if (toRead.length() != 1) {
+            throw new IllegalArgumentException("Некорректная команда!");
+        }
+        return toRead.charAt(0);
     }
 
     /**
-     * геттер поля _shapeStorage
-     * @return _shapeStorage
+     * Выводит на консоль возможные команды,
+     * связанные с созданием фигур и добавляет созданные фигуры в хранилище
      */
-    public List<Shape> getShapeStorage() {
-        return _shapeStorage;
+    private void manageShapeCreating() {
+        _ioHandler.write(
+                """
+                        [1] Создать треугольник
+                        [2] Создать прямоугольник
+                        [3] Создать правильный шестиугольник
+                        """
+        );
+
+        char command = pickCommand();
+
+        if (command == '1' || command == '2' || command == '3') {
+            Shape shape = null;
+
+            _ioHandler.write("Введите название фигуры: ");
+            String shapeName = _ioHandler.read();
+
+            _ioHandler.write("Введите цвет фигуры: ");
+            String shapeColor = _ioHandler.read();
+
+            _ioHandler.write("Введите длины фигуры: ");
+            List<Double> sides = Arrays.stream(_ioHandler.read().split(" ")).map(Double::parseDouble).toList();
+
+            switch (command) {
+                case '1' -> shape = Triangle.of(shapeName, shapeColor, sides);
+                case '2' -> shape = Rectangle.of(shapeName, shapeColor, sides);
+                case '3' -> shape = RegularHexagon.of(shapeName, shapeColor, sides);
+            }
+
+            if (Shape.findShapeByName(shapeName) == null) {
+                Shape.shapes.add(shape);
+            } else {
+                throw new IllegalArgumentException("Фигура с таким именем уже существует!\n");
+            }
+        } else {
+            throw new IllegalArgumentException("Некорректный ввод!\n");
+        }
     }
 
     /**
-     * геттер поля _ioHandler
-     * @return _ioHandler
+     * Выводит на консоль возможные команды,
+     * связанные с информацией о фигурах и вызывает методы для их выполнения
      */
-    public IOHandler getIoHandler() {
-        return _ioHandler;
-    }
+    private void manageDataShowing() {
+        _ioHandler.write(
+                """
+                        [1] Вывести информацию о фигуре
+                        [2] Вывести информацию о площадях фигур
+                        [3] Вывести всю информацию о всех фигурах
+                        """
+        );
 
-    /**
-     * сеттер для поля _currentShape
-     * @param currentShape - некоторый объект класса Shape
-     */
-    public void setCurrentShape(Shape currentShape) {
-        this._currentShape = currentShape;
-    }
+        char command = pickCommand();
 
+        switch (command) {
+            case '1' -> {
+                _ioHandler.write("Введите название фигуры: ");
+                String name = _ioHandler.read();
+
+                Shape foundShape = Shape.findShapeByName(name);
+
+                if (foundShape != null) {
+                    _ioHandler.writeLine(foundShape.getInfo());
+                } else {
+                    _ioHandler.write("Фигура не найдена!");
+                }
+            }
+            case '2' -> {
+                if (Shape.shapes.isEmpty()) {
+                    _ioHandler.write("Фигур нет!");
+                    break;
+                }
+                for (Shape shape : Shape.shapes) {
+                    _ioHandler.writeLine(shape.getNameOfShape() + ": " + shape.getSquare());
+                }
+            }
+            case '3' -> {
+                String info = Shape.getAllShapesInfo();
+
+                if (info.isBlank()) {
+                    _ioHandler.write("Фигур нет!");
+                } else {
+                    _ioHandler.write(Shape.getAllShapesInfo());
+                }
+            }
+            default -> throw new IllegalArgumentException("Некорректный ввод!\n");
+        }
+    }
 }

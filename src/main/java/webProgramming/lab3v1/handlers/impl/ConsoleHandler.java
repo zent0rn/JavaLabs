@@ -8,26 +8,46 @@ import java.util.Scanner;
  * класс реализует интерфейс IOHandler и необходим для работы с консолью
  */
 public class ConsoleHandler implements IOHandler {
+    /**
+     * Объект класса Scanner хранит поток ввода
+     */
     private final Scanner _scanner;
 
     /**
-     * конструктор по умолчанию
+     * Конструктор по умолчанию
      */
     public ConsoleHandler() {
         _scanner = new Scanner(System.in);
     }
 
 
+    /**
+     * Считывает данные из входного потока
+     *
+     * @return прочитанная строка
+     */
     @Override
     public String read() {
         return _scanner.nextLine();
     }
 
+    /**
+     * Выводит на консоль данные - объект типа String
+     *
+     * @param string строка, которую необходимо вывести на консоль
+     */
     @Override
     public void write(String string) {
         System.out.print(string);
     }
 
+    /**
+     * Выводит на консоль данные с добавлением переноса строки
+     *
+     * @param string строка, которую необходимо вывести на консоль
+     */
     @Override
-    public void writeLine(String string){System.out.println(string);}
+    public void writeLine(String string) {
+        System.out.println(string);
+    }
 }
