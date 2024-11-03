@@ -60,7 +60,7 @@ public class Rectangle extends Shape {
     @Override
     public String getInfo() {
         return "Rectangle{ " + super.getInfo()
-                + " _diagonal=" + _diagonal +
+                + ", _diagonal=" + _diagonal +
                 ", _isSquare=" + _isSquare + "}";
     }
 

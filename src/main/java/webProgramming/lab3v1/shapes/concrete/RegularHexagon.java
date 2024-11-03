@@ -64,8 +64,8 @@ public class RegularHexagon extends Shape {
     @Override
     public String getInfo() {
         return "RegularHexagon{ " + super.getInfo() +
-                " _diagonal=" + _largerDiagonal +
-                "_radOfCircumscribedCircle=" + _smallerDiagonal +
+                ", _diagonal=" + _largerDiagonal +
+                ", _radOfCircumscribedCircle=" + _smallerDiagonal +
                 "}";
     }
 

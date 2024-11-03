@@ -74,7 +74,7 @@ public class Triangle extends Shape {
     @Override
     public String getInfo() {
         return "Triangle{ " + super.getInfo() +
-                " _radOfCircumscribedCircle=" + _radOfCircumscribedCircle +
+                ", _radOfCircumscribedCircle=" + _radOfCircumscribedCircle +
                 ", _isEquilateral=" + _isEquilateral +
                 ", _isIsosceles=" + _isIsosceles + "}";
     }
