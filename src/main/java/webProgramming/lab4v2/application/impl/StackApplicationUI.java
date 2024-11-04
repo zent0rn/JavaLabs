@@ -1,6 +1,7 @@
 package webProgramming.lab4v2.application.impl;
 
 import lombok.Getter;
+import lombok.SneakyThrows;
 import webProgramming.lab4v2.application.ApplicationUI;
 import webProgramming.lab4v2.io.IOHandler;
 import webProgramming.lab4v2.stack.MyStack;
@@ -8,8 +9,12 @@ import webProgramming.lab4v2.io.impl.IOHandlerImpl;
 
 import java.io.*;
 import java.nio.file.FileSystems;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Iterator;
+import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Stream;
 
 /**
  *
@@ -17,26 +22,36 @@ import java.util.NoSuchElementException;
 @Getter
 public class StackApplicationUI implements ApplicationUI {
     private IOHandler _consoleHandler;
-    private IOHandler _fileHandler;
+    private Path pathToFile;
 
-    private MyStack myStack;
+    private final MyStack myStack;
 
     public StackApplicationUI(){
+        myStack = new MyStack();
         _consoleHandler = new IOHandlerImpl();
-        _fileHandler = new IOHandlerImpl();
+        pathToFile = DEFAULT_FILE_PATH;
     }
 
-    public StackApplicationUI(IOHandler consoleHandler, IOHandler fileHandler){
+    public StackApplicationUI(IOHandler consoleHandler, Path path){
+        this();
         _consoleHandler = consoleHandler;
-        _fileHandler = fileHandler;
+        pathToFile = path;
     }
 
     @Override
     public void run() throws IOException {
-        String str = _fileHandler.read();
-        myStack = new MyStack();
-        _consoleHandler.write(str);
+        try(Stream<String> stringStream = Files.lines(pathToFile)){
+            stringStream.forEach(myStack::push);
+        }
 
+        _consoleHandler.write("Размер стека: " + myStack.getSize() + '\n');
+        _consoleHandler.write("Наибольшая строка: " + myStack.getLargestValue() + '\n');
+
+        try(FileWriter fileWriter = new FileWriter(pathToFile.toFile())){
+            for(String string: myStack.getAllData()){
+                fileWriter.write(string + '\n');
+            }
+        }
     }
 
     private static final Path DEFAULT_FILE_PATH = Path.of(FileSystems.getDefault().getPath(".").toAbsolutePath()

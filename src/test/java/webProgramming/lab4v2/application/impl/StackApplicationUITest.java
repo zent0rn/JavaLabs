@@ -5,7 +5,9 @@ import org.junit.jupiter.api.Test;
 import webProgramming.lab4v2.io.IOHandler;
 import webProgramming.lab4v2.io.impl.IOHandlerImpl;
 
-import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
 
@@ -21,7 +23,6 @@ class StackApplicationUITest {
         applicationUI = new StackApplicationUI();
 
         assertNotNull(applicationUI.get_consoleHandler());
-        assertNotNull(applicationUI.get_fileHandler());
     }
 
     @Test
@@ -30,37 +31,24 @@ class StackApplicationUITest {
         IOHandler console = new IOHandlerImpl(System.in, System.out);
         Path path = Path.of(FileSystems.getDefault().getPath(".").toAbsolutePath()
                 + "/src/main/resources/fileForLab4.txt");
-        IOHandler file = new IOHandlerImpl(
-                new FileInputStream(path.toFile()),
-                new FileOutputStream(path.toFile())
-        );
 
-        applicationUI = new StackApplicationUI(console, file);
+        applicationUI = new StackApplicationUI(console, path);
 
         assertNotNull(applicationUI.get_consoleHandler());
-        assertNotNull(applicationUI.get_fileHandler());
     }
 
     @Test
     @DisplayName("Метод run работает")
     void ensureRunWorks() throws IOException {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        IOHandler console = new IOHandlerImpl(System.in, System.out);
+        IOHandler console = new IOHandlerImpl(System.in, byteArrayOutputStream);
         Path path = Path.of(FileSystems.getDefault().getPath(".").toAbsolutePath()
-                + "/src/test/java/webProgramming/lab4v2/testFile.txt");
-        IOHandler file = new IOHandlerImpl(
-                new FileInputStream(path.toFile()),
-                byteArrayOutputStream
-        );
-
+                + "/src/test/java/webProgramming/lab4v2/application/impl/testFile.txt");
+        applicationUI = new StackApplicationUI(console, path);
         applicationUI.run();
 
-        assertEquals(3, applicationUI.getMyStack().getSize());
-        assertEquals("string 33", applicationUI.getMyStack().getLargestValue());
-        assertEquals("""
-                string 33
-                str 2
-                string 1
-                """, byteArrayOutputStream.toString());
+        String[] actualConsoleOutput = byteArrayOutputStream.toString().split("\n");
+        assertEquals("Размер стека: 3", actualConsoleOutput[0]);
+        assertEquals("Наибольшая строка: string 33", actualConsoleOutput[1]);
     }
 }
