@@ -11,12 +11,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 class MyStackTest {
-    private MyStack<String> myStack;
+    private MyStack myStack;
 
     @Test
     @DisplayName("Конструктор по умолчанию работает корректно")
     void ensureDefaultConstructorWorks(){
-        myStack = new MyStack<>();
+        myStack = new MyStack();
 
         assertNotNull(myStack.getStack());
     }
@@ -24,7 +24,7 @@ class MyStackTest {
     @Test
     @DisplayName("Конструктор с параметрами работает корректно")
     void ensureParameterizedConstructorWorks(){
-        myStack = new MyStack<>(List.of("a", "b", "c"));
+        myStack = new MyStack(List.of("a", "b", "c"));
 
         assertNotNull(myStack.getStack());
     }
@@ -33,7 +33,7 @@ class MyStackTest {
     @DisplayName("Метод top работает корректно")
     void ensureTopMethodWorks(){
         String expected = "c";
-        myStack = new MyStack<>(List.of("a", "b", "c"));
+        myStack = new MyStack(List.of("a", "b", "c"));
 
         String actual = myStack.top();
 
@@ -44,7 +44,7 @@ class MyStackTest {
     @DisplayName("Метод push работает корректно")
     void ensurePushMethodWorks(){
         String expected = "a";
-        myStack = new MyStack<>();
+        myStack = new MyStack();
 
         myStack.push("a");
         String actual = myStack.top();
@@ -56,7 +56,7 @@ class MyStackTest {
     @DisplayName("Метод pop работает корректно")
     void ensurePopMethodWorks(){
         String expected = "b";
-        myStack = new MyStack<>(List.of("a", "b", "c"));
+        myStack = new MyStack(List.of("a", "b", "c"));
 
         myStack.pop();
         String actual = myStack.top();
@@ -67,7 +67,7 @@ class MyStackTest {
     @Test
     @DisplayName("Метод pop выбрасывает исколючение, если стек пуст")
     void ensurePopThrowsExceptionIfStackIsEmpty(){
-        myStack = new MyStack<>();
+        myStack = new MyStack();
 
         assertThrows(EmptyStackException.class, () -> myStack.pop());
     }
@@ -75,7 +75,7 @@ class MyStackTest {
     @Test
     @DisplayName("Метод getAllData работает корректно")
     void ensureGetAllDataWorks(){
-        myStack = new MyStack<>(List.of("a", "b", "c"));
+        myStack = new MyStack(List.of("a", "b", "c"));
         List<String> expected = List.of("c", "b", "a");
 
         List<String> actual = myStack.getAllData();
@@ -86,7 +86,7 @@ class MyStackTest {
     @Test
     @DisplayName("Значение largestValue устанавливается корректно")
     void ensureLargestValueIsSetCorrectly(){
-        myStack = new MyStack<>(List.of("aaa", "b", "cc"));
+        myStack = new MyStack(List.of("aaa", "b", "cc"));
         String expectedLargestValue = "aaa";
 
         String actualLargestValue = myStack.getLargestValue();
@@ -97,7 +97,7 @@ class MyStackTest {
     @Test
     @DisplayName("Значение largestValue изменяется корректно")
     void ensureLargestValueIsChangedCorrectly(){
-        myStack = new MyStack<>(List.of("aaa", "b", "cc"));
+        myStack = new MyStack(List.of("aaa", "b", "cc"));
 
         myStack.push("dddd");
         String expectedLargestValue = "dddd";
@@ -110,7 +110,7 @@ class MyStackTest {
     @DisplayName("Метод getSize работает корректно")
     void ensureGetSizeWorks(){
         int expectedSize = 3;
-        myStack = new MyStack<>(List.of("aaa", "b", "cc"));
+        myStack = new MyStack(List.of("aaa", "b", "cc"));
 
         int actualSize = myStack.getSize();
 
@@ -120,17 +120,17 @@ class MyStackTest {
     @Test
     @DisplayName("Итератор работает корректно")
     void ensureIteratorWorks(){
-        myStack = new MyStack<>(List.of("a", "b", "c"));
+        myStack = new MyStack(List.of("a", "b", "c"));
         Iterator<String> iterator = myStack.iterator();
 
         assertThat(iterator.hasNext()).isTrue();
-        assertEquals("c", iterator.next());
+        assertEquals("a", iterator.next());
 
         assertThat(iterator.hasNext()).isTrue();
         assertEquals("b", iterator.next());
 
         assertThat(iterator.hasNext()).isTrue();
-        assertEquals("a", iterator.next());
+        assertEquals("c", iterator.next());
 
         assertThat(iterator.hasNext()).isFalse();
     }

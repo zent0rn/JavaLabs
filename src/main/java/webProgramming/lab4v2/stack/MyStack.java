@@ -2,64 +2,130 @@ package webProgramming.lab4v2.stack;
 
 import lombok.Getter;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Stack;
+import java.lang.String;
 
+/**
+ * Представление базового стека с типом данных String
+ */
 @Getter
-public class MyStack<T> implements Iterable<T>{
-    private T largestValue;
-    private Stack<T> stack;
+public class MyStack implements Iterable<String>{
+    private String largestValue;
+    private Stack<String> stack;
 
+    /**
+     * Конструктор по умолчанию
+     */
     public MyStack(){
-
+        stack = new Stack<>();
     }
 
-    public MyStack(List<T> data){
-
+    /**
+     * Конструктор с параметрами
+     * @param data список данных типа String
+     */
+    public MyStack(List<String> data){
+        stack = new Stack<>();
+        for(String t : data) {
+            stack.push(t);
+        }
     }
 
-    public void push(T data){
-
+    /**
+     * Добавляет элемент на вершину стека
+     * @param data некоторая строка
+     */
+    public void push(String data){
+        stack.push(data);
     }
 
-    public void pop(){
-
+    /**
+     * Удаляет и возвращает элемент из вершины стека
+     * @return элемент из вершины стека
+     */
+    public String pop(){
+        return stack.pop();
     }
 
-    public T top(){
-        return null;
+    /**
+     * Возвращает элемент на вершине стека
+     * @return элемент на вершине стека
+     */
+    public String top(){
+        return stack.getLast();
     }
 
-    public List<T> getAllData(){
-        return List.of();
+    /**
+     * Возвращает все элементы из стека в виде списка String
+     * @return список со строками
+     */
+    public List<String> getAllData(){
+        List<String> data = new ArrayList<>();
+        int i = 0;
+        while (i <= stack.size() + 1) {
+            data.add(stack.pop());
+            i++;
+        }
+        return data;
     }
 
-    public T getLargestValue(){
-        return null;
+    /**
+     * Возвращает самую длинную строку из стека
+     * @return самая длинная строка из стека
+     */
+    public String getLargestValue() {
+        String largest = "";
+        while (!this.stack.isEmpty()) {
+            String current = (String) this.pop();
+            if (current.length() > largest.length()) {
+                largest = current;
+            }
+        }
+        return largest;
     }
 
+    /**
+     * Возвращает размер стека
+     * @return размер стека
+     */
     public int getSize(){
-        return -1;
+        return stack.size();
     }
 
+    /**
+     * Итератор для стека
+     * @return итератор
+     */
     @Override
-    public Iterator<T> iterator() {
-        Iterator<T> iter = new Iterator<>() {
+    public Iterator<String> iterator() {
+        Iterator<String> iter = new Iterator<>() {
+            Iterator<String> iterator = stack.iterator();
             @Override
             public boolean hasNext() {
-                return false;
+                return iterator.hasNext();
             }
 
             @Override
-            public T next() {
-                return null;
+            public String next() {
+                return iterator.next();
             }
         };
         return iter;
     }
 
-    public static MyStack<String> getStringStack(List<String> data){
-        return new MyStack<>();
+    /**
+     * Возвращает стек, который создаётся на основе списка со строками
+     * @param data список со строками
+     * @return стек из строк
+     */
+    public static MyStack getStringStack(List<String> data){
+        MyStack stack = new MyStack();
+        for (String datum : data) {
+            stack.push(datum);
+        }
+        return stack;
     }
 }
