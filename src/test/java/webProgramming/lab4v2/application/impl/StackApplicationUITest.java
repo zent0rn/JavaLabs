@@ -5,10 +5,7 @@ import org.junit.jupiter.api.Test;
 import webProgramming.lab4v2.io.IOHandler;
 import webProgramming.lab4v2.io.impl.IOHandlerImpl;
 
-import java.io.ByteArrayOutputStream;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import java.io.*;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
 
@@ -23,8 +20,8 @@ class StackApplicationUITest {
     void ensureDefaultConstructorWorks() {
         applicationUI = new StackApplicationUI();
 
-        assertNotNull(applicationUI.getConsoleHandler());
-        assertNotNull(applicationUI.getFileHandler());
+        assertNotNull(applicationUI.get_consoleHandler());
+        assertNotNull(applicationUI.get_fileHandler());
     }
 
     @Test
@@ -40,13 +37,13 @@ class StackApplicationUITest {
 
         applicationUI = new StackApplicationUI(console, file);
 
-        assertNotNull(applicationUI.getConsoleHandler());
-        assertNotNull(applicationUI.getFileHandler());
+        assertNotNull(applicationUI.get_consoleHandler());
+        assertNotNull(applicationUI.get_fileHandler());
     }
 
     @Test
     @DisplayName("Метод run работает")
-    void ensureRunWorks() throws FileNotFoundException {
+    void ensureRunWorks() throws IOException {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         IOHandler console = new IOHandlerImpl(System.in, System.out);
         Path path = Path.of(FileSystems.getDefault().getPath(".").toAbsolutePath()
