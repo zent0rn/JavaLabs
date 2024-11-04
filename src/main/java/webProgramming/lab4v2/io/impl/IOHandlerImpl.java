@@ -47,10 +47,18 @@ public class IOHandlerImpl implements IOHandler {
         this.outputStream = new PrintStream(outputStream, true, StandardCharsets.UTF_8);
     }
 
+    /**
+     * Выводит строчку с помощью потока вывода
+     * @param data сообщение для вывода
+     */
     public void write(String data) {
         outputStream.print(data);
     }
 
+    /**
+     * Считывает строчку из потока ввода
+     * @return считанная строчка
+     */
     public String read() {
         return inputStream.nextLine();
     }
