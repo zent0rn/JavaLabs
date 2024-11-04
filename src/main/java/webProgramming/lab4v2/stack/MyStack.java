@@ -10,8 +10,8 @@ import java.util.Stack;
 /**
  * Представление базового стека с типом данных String
  */
+@Getter
 public class MyStack implements Iterable<String> {
-    @Getter
     private final Stack<String> stack;
 
     /**
@@ -36,7 +36,7 @@ public class MyStack implements Iterable<String> {
     /**
      * Добавляет элемент на вершину стека
      *
-     * @param data некоторая строка
+     * @param data элемент, добавляемый в стек
      */
     public void push(String data) {
         stack.push(data);
@@ -121,7 +121,7 @@ public class MyStack implements Iterable<String> {
     }
 
     /**
-     * Возвращает стек, который создаётся на основе списка со строками
+     * Создать стек на основе списка со строками
      *
      * @param data список со строками
      * @return стек из строк
