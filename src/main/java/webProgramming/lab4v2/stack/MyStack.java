@@ -120,10 +120,10 @@ public class MyStack {
     }
 
     /**
-     * Создать стек на основе списка со строками
+     * Создать стек на основе списка с объектами класса MyString
      *
-     * @param data список со строками
-     * @return стек из строк
+     * @param data список с объектами класса MyString
+     * @return стек
      */
     public static MyStack getStringStack(List<MyString> data) {
         MyStack stack = new MyStack();

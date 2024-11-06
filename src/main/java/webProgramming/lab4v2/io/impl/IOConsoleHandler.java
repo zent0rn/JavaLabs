@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * IOHandlerImpl позволяет взаимодействовать с консолью
+ * IOConsoleHandler позволяет взаимодействовать с консолью
  * Класс основан на использовании объектов Scanner и PrintStream,
  * которые используют стандартные потоки System.in и System.out или
  * переданные пользователем потоки ввода/вывода
