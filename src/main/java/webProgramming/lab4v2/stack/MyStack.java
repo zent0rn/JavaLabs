@@ -1,6 +1,7 @@
 package webProgramming.lab4v2.stack;
 
 import lombok.Getter;
+import webProgramming.lab4v2.data.MyString;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -11,9 +12,8 @@ import java.util.Stack;
  * Представление базового стека с типом данных String
  */
 @Getter
-public class MyStack implements Iterable<String> {
-    private final Stack<String> stack;
-
+public class MyStack {
+    private final Stack<MyString> stack;
     /**
      * Конструктор по умолчанию
      */
@@ -38,7 +38,7 @@ public class MyStack implements Iterable<String> {
      *
      * @param data элемент, добавляемый в стек
      */
-    public void push(String data) {
+    public void push(MyString data) {
         stack.push(data);
     }
 
@@ -47,7 +47,7 @@ public class MyStack implements Iterable<String> {
      *
      * @return элемент из вершины стека
      */
-    public String pop() {
+    public MyString pop() {
         return stack.pop();
     }
 
@@ -56,7 +56,7 @@ public class MyStack implements Iterable<String> {
      *
      * @return элемент на вершине стека
      */
-    public String top() {
+    public MyString top() {
         return stack.getLast();
     }
 
@@ -65,8 +65,8 @@ public class MyStack implements Iterable<String> {
      *
      * @return список со строками
      */
-    public List<String> getAllData() {
-        List<String> data = new ArrayList<>();
+    public List<MyString> getAllData() {
+        List<MyString> data = new ArrayList<>();
         while (!stack.empty()) {
             data.add(stack.pop());
         }
@@ -78,11 +78,11 @@ public class MyStack implements Iterable<String> {
      *
      * @return самая длинная строка из стека
      */
-    public String getLargestValue() {
-        String largest = null;
-        for (String current : stack) {
-            if (largest == null || largest.length() < current.length() ||
-                    (largest.length() == current.length() && largest.compareTo(current) < 0)) {
+    public MyString getLargestValue() {
+        MyString largest = null;
+        for (MyString current : stack) {
+            if (largest == null || largest.getSize() < current.getSize() ||
+                    (largest.getSize() == current.getSize() && largest.getValue().compareTo(current.getValue()) < 0)) {
                 largest = current;
             }
         }
@@ -103,10 +103,9 @@ public class MyStack implements Iterable<String> {
      *
      * @return итератор
      */
-    @Override
-    public Iterator<String> iterator() {
+    public Iterator<MyString> iterator() {
         return new Iterator<>() {
-            final Iterator<String> iterator = stack.iterator();
+            final Iterator<MyString> iterator = stack.iterator();
 
             @Override
             public boolean hasNext() {
@@ -114,7 +113,7 @@ public class MyStack implements Iterable<String> {
             }
 
             @Override
-            public String next() {
+            public MyString next() {
                 return iterator.next();
             }
         };
@@ -126,11 +125,12 @@ public class MyStack implements Iterable<String> {
      * @param data список со строками
      * @return стек из строк
      */
-    public static MyStack getStringStack(List<String> data) {
+    public static MyStack getStringStack(List<MyString> data) {
         MyStack stack = new MyStack();
-        for (String datum : data) {
+        for (MyString datum : data) {
             stack.push(datum);
         }
         return stack;
     }
+
 }

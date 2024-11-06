@@ -2,16 +2,15 @@ package webProgramming.lab4v2.application.impl;
 
 import lombok.Getter;
 import webProgramming.lab4v2.application.ApplicationUI;
+import webProgramming.lab4v2.data.MyString;
 import webProgramming.lab4v2.io.IOHandler;
-import webProgramming.lab4v2.io.impl.IOHandlerImpl;
+import webProgramming.lab4v2.io.impl.IOConsoleHandler;
+import webProgramming.lab4v2.io.impl.IOFileHandler;
 import webProgramming.lab4v2.stack.MyStack;
 
-import java.io.FileWriter;
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.stream.Stream;
+import java.util.List;
 
 /**
  * Пользовательский интерфейс, позволяющий взаимодействовать
@@ -22,38 +21,29 @@ public class StackApplicationUI implements ApplicationUI {
     /**
      * Объект класса IOHandler, содержащий потоки ввода/вывода для консоли
      */
-    private IOHandler _consoleHandler;
+    private final IOHandler _consoleHandler;
 
     /**
-     * Путь к файлу
+     * Объект класса IOHandler, содержащий поток ввода/вывода для файла
      */
-    private Path pathToFile;
-
-    /**
-     * Объект класса MyStack - контейнер, обрабатывающий
-     * входящие строки
-     */
-    private final MyStack myStack;
+    private final IOHandler _fileHandler;
 
     /**
      * Конструктор по умолчанию
      */
-    public StackApplicationUI() {
-        myStack = new MyStack();
-        _consoleHandler = new IOHandlerImpl();
-        pathToFile = DEFAULT_FILE_PATH;
+    public StackApplicationUI() throws FileNotFoundException {
+        _consoleHandler = new IOConsoleHandler();
+        _fileHandler = new IOFileHandler();
     }
 
     /**
      * Конструктор с параметрами
      *
      * @param consoleHandler объект класса IOHandler для работы с потоком ввода/вывода
-     * @param path           путь к файлу
      */
-    public StackApplicationUI(IOHandler consoleHandler, Path path) {
-        this();
+    public StackApplicationUI(IOHandler consoleHandler, IOHandler fileHandler) throws FileNotFoundException {
         _consoleHandler = consoleHandler;
-        pathToFile = path;
+        _fileHandler = fileHandler;
     }
 
     /**
@@ -65,23 +55,19 @@ public class StackApplicationUI implements ApplicationUI {
      */
     @Override
     public void run() throws IOException {
-        try (Stream<String> stringStream = Files.lines(pathToFile)) {
-            stringStream.forEach(myStack::push);
+        List<MyString> myStringList = MyString.getMyStrings(_fileHandler.readLines());
+
+        MyStack myStack = MyStack.getStringStack(myStringList);
+        if (myStack.getSize() == 0) {
+            _consoleHandler.write("Файл пуст");
+            return;
         }
 
         _consoleHandler.write("Размер стека: " + myStack.getSize() + '\n');
-        _consoleHandler.write("Наибольшая строка: " + myStack.getLargestValue() + '\n');
+        _consoleHandler.write("Наибольшая строка: " + myStack.getLargestValue().getValue() + '\n');
 
-        try (FileWriter fileWriter = new FileWriter(pathToFile.toFile())) {
-            for (String string : myStack.getAllData()) {
-                fileWriter.write(string + '\n');
-            }
-        }
+        _fileHandler.writeLines(MyString.getValues(myStack.getAllData()));
     }
 
-    /**
-     * Путь к файлу по умолчанию
-     */
-    private static final Path DEFAULT_FILE_PATH = Path.of(FileSystems.getDefault().getPath(".").toAbsolutePath()
-            + "/src/main/resources/fileForLab4.txt");
+
 }
