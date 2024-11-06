@@ -26,9 +26,9 @@ public class MyStack {
      *
      * @param data список данных типа String
      */
-    public MyStack(List<String> data) {
+    public MyStack(List<MyString> data) {
         stack = new Stack<>();
-        for (String t : data) {
+        for (MyString t : data) {
             stack.push(t);
         }
     }
